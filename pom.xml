@@ -14,7 +14,7 @@
   <packaging>pom</packaging>
 
   <name>fund-transfer</name>
-  <description>Fund-transfer Service for Outwit.inc unified lotto gaming platform</description>
+  <description>Fund-transfer service for Outwit.inc unified lotto gaming platform</description>
 
   <modules>
     <module>core</module>
