@@ -1,4 +1,4 @@
-package ft.domain;
+package ft.spec.model;
 
 /**
  * TODO

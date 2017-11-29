@@ -1,4 +1,4 @@
-package ft.domain;
+package ft.spec.model;
 
 import java.util.Date;
 
@@ -24,9 +24,16 @@ public abstract class Entity {
 
     /**
      * <pre>
-     * Entity belongs to which business object(organization,person,platform,etc.)
+     * Entity belongs to which business object(organization,user,platform,etc.)
      * "bt" stands for "Belongs To"
      * </pre>
      */
     protected Object bt;
+
+    /**
+     * <pre>
+     * Deleted state of the entity
+     * </pre>
+     */
+    protected Boolean deleted;
 }

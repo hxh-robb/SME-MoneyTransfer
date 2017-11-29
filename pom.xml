@@ -17,6 +17,7 @@
   <description>Fund-transfer service for Outwit.inc unified lotto gaming platform</description>
 
   <modules>
+    <module>spec</module>
     <module>core</module>
   </modules>
 </project>
