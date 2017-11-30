@@ -3,10 +3,11 @@ package ft.spec.service;
 /**
  * Service operation result
  */
-public class Result {
+public final class Result {
 
     /**
      * Result code
+     * @see Code
      */
     private int code;
 
@@ -35,7 +36,14 @@ public class Result {
      * Common result code
      */
     public interface Code {
+        /**
+         * Success result code
+         */
         int SUCCESS = 0;
-        int UNKNOW = 0xFFFF;
+
+        /**
+         * Unknown error result code
+         */
+        int UNKNOWN = 0xFFFF;
     }
 }

@@ -9,29 +9,31 @@ import ft.spec.model.Metadata;
 public interface MetadataService {
     /**
      * Return the list of supported fund account types
-     * @return Supported fund account types
+     * @param subject The operator
+     * @param catalog Catalog filter
+     * @return
      */
-    Metadata[] list(String catalog);
+    Metadata[] list(String subject, String catalog);
 
     /**
      * Create new metadata
-     * @param metadata
+     * @param subject The operator
+     * @param metadata Metadata
      * @return
-     * @see Code
      */
-    Result create(Metadata metadata);
+    Result create(String subject, Metadata metadata);
 
     /**
      * Delete specific metadata
-     * @param catalog
-     * @param name
+     * @param subject The operator
+     * @param catalog Catalog of the metadata which to be deleted
+     * @param name  Name of the metadata which to be deleted
      * @return
-     * @see Code
      */
-    Result delete(String catalog, String name);
+    Result delete(String subject, String catalog, String name);
 
     /**
-     * Result code of metadata service
+     * Metadata service result code
      */
     interface Code extends Result.Code {
         // TODO

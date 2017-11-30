@@ -1,7 +1,7 @@
 package ft.spec.service;
 
 /**
- * Deposit service
+ * TODO
  */
 public interface DepositService {
 }

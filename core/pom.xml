@@ -31,6 +31,18 @@
 			<version>0.0.1</version>
 		</dependency>
 
+		<!--<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.5.0</version>
+		</dependency>-->
+
+		<dependency>
+			<groupId>org.mongodb.morphia</groupId>
+			<artifactId>morphia</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -89,6 +101,5 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
 
 </project>
