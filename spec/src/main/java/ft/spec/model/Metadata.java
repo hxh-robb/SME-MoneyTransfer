@@ -3,7 +3,13 @@ package ft.spec.model;
 /**
  * Metadata base class
  */
-public abstract class Metadata {
+public class Metadata {
+
+    /**
+     * Limit the constructor to subclasses only, force subclasses to specific the catalog
+     * @param catalog
+     */
+    public Metadata() {}
 
     /**
      * Limit the constructor to subclasses only, force subclasses to specific the catalog
@@ -18,7 +24,7 @@ public abstract class Metadata {
      * Catalog of the metadata entry
      * </pre>
      */
-    protected final String catalog;
+    protected String catalog;
 
     /**
      * <pre>
@@ -82,5 +88,9 @@ public abstract class Metadata {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void setCatalog(String catalog) {
+        this.catalog = catalog;
     }
 }

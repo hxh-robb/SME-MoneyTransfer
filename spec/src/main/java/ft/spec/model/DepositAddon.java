@@ -9,7 +9,7 @@ public class DepositAddon extends Metadata {
      * Constructor of Addon
      * </pre>
      */
-    protected DepositAddon() {
+    public DepositAddon() {
         super("FundAccountType"); // Specify the metadata catalog
     }
 
