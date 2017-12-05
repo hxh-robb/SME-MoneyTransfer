@@ -21,7 +21,7 @@ public class CoreApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		mongodb();
+		// mongodb();
 	}
 
 	// TODO MongoDB.Morphia
