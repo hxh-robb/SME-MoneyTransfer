@@ -8,6 +8,11 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @see <a href="https://github.com/mongodb/morphia/blob/76aa6ce28bcf63bfa8c1d1fe6f50fab71c259e8a/morphia/src/test/java/org/mongodb/morphia/ext/ExternalMapperExtTest.java">
+ * MongoDB Morphia mapping trick
+ * </a>
+ */
 public class CloneMapper {
     private final Mapper mapper;
 

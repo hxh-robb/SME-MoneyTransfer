@@ -10,7 +10,7 @@ public class DepositAddon extends Metadata {
      * </pre>
      */
     public DepositAddon() {
-        super("FundAccountType"); // Specify the metadata catalog
+        super(CATALOG.FUND_ACCOUNT_TYPE); // Specify the metadata catalog
     }
 
     /**
@@ -153,5 +153,19 @@ public class DepositAddon extends Metadata {
                     return mode;
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DepositAddon{" +
+                "mode=" + mode +
+                ", type=" + type +
+                ", content=" + content +
+                ", catalog=" + catalog +
+                ", name=" + name +
+                ", description=" + description +
+                ", value=" + value +
+                ", enabled=" + enabled +
+                '}';
     }
 }

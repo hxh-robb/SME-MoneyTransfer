@@ -1,0 +1,9 @@
+mongodb:
+  address: "10.63.57.26:27017"
+  username: "todo"
+  password: "todo"
+
+logging:
+  pattern:
+    console: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
+    #file: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"

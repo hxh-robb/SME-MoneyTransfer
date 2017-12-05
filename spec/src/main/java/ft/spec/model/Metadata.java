@@ -7,13 +7,13 @@ public class Metadata {
 
     /**
      * Limit the constructor to subclasses only, force subclasses to specific the catalog
-     * @param catalog
      */
     public Metadata() {}
 
     /**
      * Limit the constructor to subclasses only, force subclasses to specific the catalog
      * @param catalog
+     * @see CATALOG
      */
     protected Metadata(String catalog) {
         this.catalog = catalog;
@@ -23,6 +23,7 @@ public class Metadata {
      * <pre>
      * Catalog of the metadata entry
      * </pre>
+     * @see CATALOG
      */
     protected String catalog;
 
@@ -92,5 +93,31 @@ public class Metadata {
 
     public void setCatalog(String catalog) {
         this.catalog = catalog;
+    }
+
+    @Override
+    public String toString() {
+        return "Metadata{" +
+                "catalog=" + catalog +
+                ", name=" + name +
+                ", description=" + description +
+                ", value=" + value +
+                ", enabled=" + enabled +
+                '}';
+    }
+
+    /**
+     * Metadata catalog constants
+     */
+    interface CATALOG {
+        /**
+         * Undefined catalog
+         */
+        String UNDEFINED = "UNDEFINED";
+
+        /**
+         * Fund account type catalog
+         */
+        String FUND_ACCOUNT_TYPE = "FundAccountType";
     }
 }
