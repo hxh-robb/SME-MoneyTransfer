@@ -15,7 +15,7 @@ import org.mongodb.morphia.mapping.MappedField;
 @Entity(value = "metadatas", noClassnameStored = true)
 @Indexes(
     @Index(value = "metadata_unique_index",
-        fields = { @Field("catalog"), @Field("name") },
+        fields = { @Field("catalog"), @Field("name"), @Field("value") },
         options = @IndexOptions(unique = true) )
 )
 @Converters(MetadataSkeleton.DepositAddonEnumConverter.class)
