@@ -1,5 +1,6 @@
 package ft;
 
+import ft.repo.MetadataDAO;
 import ft.spec.model.DepositAddon;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
@@ -12,8 +13,11 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 public class CoreApplication implements CommandLineRunner {
+//	@Autowired
+//	private Datastore datastore;
+
 	@Autowired
-	private Datastore datastore;
+	private MetadataDAO dao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CoreApplication.class, args);
@@ -21,14 +25,14 @@ public class CoreApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// mongodb();
+		mongodb();
 	}
 
 	// TODO MongoDB.Morphia
 	private void mongodb(){
 
 		/*Morphia morphia = new Morphia();
-
+;
 		final Mapper mapper = morphia.getMapper();
 		final CloneMapper helper = new CloneMapper(mapper);
 
@@ -57,7 +61,35 @@ public class CoreApplication implements CommandLineRunner {
 		simple.setType(DepositAddon.Type.JAVA);
 		datastore.save(simple);*/
 
-		Query<?> query = datastore.createQuery(DepositAddon.class);
-		System.out.println(query.asList());
+		/*Query<?> query = datastore.createQuery(DepositAddon.class);
+		System.out.println(query.asList());*/
+
+		// MetadataDAO.Filter f = new MetadataDAO.Filter();
+		MetadataDAO.DepositAddonFilter f = new MetadataDAO.DepositAddonFilter();
+
+		DepositAddon addon = new DepositAddon();
+		addon.setName("Test");
+		addon.setMode(DepositAddon.Mode.INTERMEDIARY);
+		addon.setType(DepositAddon.Type.JAVA);
+		addon.setDescription("Pseudo addon");
+		addon.setValue("-1");
+		addon.setContent("ft.addon.PseudoAddon");
+		// dao.create(addon);
+
+		// f.name = addon.getName();
+		// f.catalog = addon.getCatalog();
+		// f.mode = DepositAddon.Mode.BANK;
+		f.type = DepositAddon.Type.JAVA;
+		/*
+		DepositAddon update = new DepositAddon();
+		update.setDescription("Fake addon");
+		update.setContent("ft.addon.FakeAddon");
+		update.setValue("-99");
+		update.setEnabled(false);
+		// dao.update(f, update);
+		// dao.delete(f);
+		*/
+
+		System.out.println(dao.list(f));
 	}
 }

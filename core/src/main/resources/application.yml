@@ -1,5 +1,6 @@
 mongodb:
-  address: "10.63.57.26:27017"
+  #address: "10.63.57.26:27017"
+  address: "127.0.0.1:27017"
   username: "todo"
   password: "todo"
 

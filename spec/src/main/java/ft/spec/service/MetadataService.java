@@ -12,6 +12,7 @@ public interface MetadataService {
      * @param subject The operator
      * @param catalog Catalog filter
      * @return
+     * @see ft.spec.model.Metadata.CATALOG
      */
     Metadata[] list(String subject, String catalog);
 

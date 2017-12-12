@@ -16,15 +16,16 @@ public interface DAO<T,F> {
 
     /**
      * Update data
+     * @param filter
      * @param data
      */
-    void update(T data);
+    void update(F filter, T data);
 
     /**
      * Delete data
-     * @param id
+     * @param filter
      */
-    void delete(Object id);
+    void delete(F filter);
 
     /**
      * List data
