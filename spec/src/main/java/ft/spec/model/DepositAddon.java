@@ -30,6 +30,13 @@ public class DepositAddon extends Metadata {
 
     /**
      * <pre>
+     * Fund account fields specification
+     * </pre>
+     */
+    private String spec;
+
+    /**
+     * <pre>
      * Addon content
      * </pre>
      */
@@ -49,6 +56,14 @@ public class DepositAddon extends Metadata {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 
     public String getContent() {
@@ -158,14 +173,14 @@ public class DepositAddon extends Metadata {
     @Override
     public String toString() {
         return "DepositAddon{" +
-                "mode=" + mode +
-                ", type=" + type +
-                ", content=" + content +
-                ", catalog=" + catalog +
-                ", name=" + name +
-                ", description=" + description +
-                ", value=" + value +
-                ", enabled=" + enabled +
-                '}';
+            "mode=" + mode +
+            ", type=" + type +
+            ", content=" + content +
+            ", catalog=" + catalog +
+            ", name=" + name +
+            ", description=" + description +
+            ", value=" + value +
+            ", enabled=" + enabled +
+        '}';
     }
 }

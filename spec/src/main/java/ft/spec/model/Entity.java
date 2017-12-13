@@ -35,5 +35,5 @@ public abstract class Entity {
      * Deleted state of the entity
      * </pre>
      */
-    protected Boolean deleted;
+    protected Boolean de;
 }

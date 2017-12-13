@@ -3,8 +3,10 @@ package ft.boot;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import ft.repo.mongodb.skeleton.CloneMapper;
+import ft.repo.mongodb.skeleton.FundAccountSkeleton;
 import ft.repo.mongodb.skeleton.MetadataSkeleton;
 import ft.spec.model.DepositAddon;
+import ft.spec.model.FundAccount;
 import ft.spec.model.Metadata;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -45,6 +47,10 @@ public class MongoDBConfiguration {
         // DepositAddon
         helper.map(MetadataSkeleton.class, DepositAddon.class);
         mapper.getMappedClass(DepositAddon.class).update();
+
+        // FundAccount
+        helper.map(FundAccountSkeleton.class, FundAccount.class);
+        mapper.getMappedClass(FundAccount.class).update();
 
         // Common mapper setting
         mapper.getOptions().setStoreNulls(true);

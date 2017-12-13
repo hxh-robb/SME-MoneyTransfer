@@ -17,30 +17,6 @@ public class MongoMetadataDAO extends MongoDAOHelper<Metadata> implements Metada
     @Autowired
     private Datastore mongodb;
 
-    private Query generateQuery(Datastore mongodb, Filter f) {
-        if( f instanceof DepositAddonFilter ) {
-            Query<DepositAddon> q = mongodb.createQuery(DepositAddon.class);
-            fillQuery(q, f);
-            return q;
-        } else {
-            Query<Metadata> q = mongodb.createQuery(Metadata.class);
-            fillQuery(q, f);
-            return q;
-        }
-    }
-
-    private void fillQuery( Query q, Filter f){
-        if( null != f.catalog ) q.field("catalog").equal(f.catalog);
-        if( null != f.name ) q.field("name").equal(f.name);
-
-        if( f instanceof DepositAddonFilter ) {
-            q.getEntityClass();
-            DepositAddonFilter daf = (DepositAddonFilter)f;
-            if( null != daf.mode ) q.field("mode").equal(daf.mode);
-            if( null != daf.type ) q.field("type").equal(daf.type);
-        }
-    }
-
     @Override
     public void create(Metadata data) {
         mongodb.save(data);
@@ -74,5 +50,40 @@ public class MongoMetadataDAO extends MongoDAOHelper<Metadata> implements Metada
         Query<Metadata> q = generateQuery(mongodb,filter);
 
         return q.asList();
+    }
+
+    /**
+     * Generate morphia query object
+     * @param mongodb MongoDB datasotre
+     * @param f The filter
+     * @return
+     */
+    private Query generateQuery(Datastore mongodb, Filter f) {
+        if( f instanceof DepositAddonFilter ) {
+            Query<DepositAddon> q = mongodb.createQuery(DepositAddon.class);
+            fillQuery(q, f);
+            return q;
+        } else {
+            Query<Metadata> q = mongodb.createQuery(Metadata.class);
+            fillQuery(q, f);
+            return q;
+        }
+    }
+
+    /**
+     * Fill filter to morphia query object
+     * @param q
+     * @param f
+     */
+    private void fillQuery( Query q, Filter f){
+        if( null != f.catalog ) q.field("catalog").equal(f.catalog);
+        if( null != f.name ) q.field("name").equal(f.name);
+
+        if( f instanceof DepositAddonFilter ) {
+            q.getEntityClass();
+            DepositAddonFilter daf = (DepositAddonFilter)f;
+            if( null != daf.mode ) q.field("mode").equal(daf.mode);
+            if( null != daf.type ) q.field("type").equal(daf.type);
+        }
     }
 }

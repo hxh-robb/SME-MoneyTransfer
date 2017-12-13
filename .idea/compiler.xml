@@ -12,8 +12,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="core" target="1.8" />
-      <module name="fund-transfer" target="1.5" />
-      <module name="spec" target="1.5" />
+      <module name="fund-transfer" target="1.8" />
+      <module name="spec" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
