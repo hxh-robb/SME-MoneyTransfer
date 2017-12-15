@@ -4,7 +4,6 @@ package ft.spec.service;
  * Service operation result
  */
 public final class Result {
-
     /**
      * Result code
      * @see Code
@@ -15,6 +14,10 @@ public final class Result {
      * Result message
      */
     private String msg;
+
+    public Result() {
+        code = Code.UNKNOWN;
+    }
 
     public int getCode() {
         return code;
@@ -45,5 +48,13 @@ public final class Result {
          * Unknown error result code
          */
         int UNKNOWN = 0xFFFF;
+    }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                '}';
     }
 }

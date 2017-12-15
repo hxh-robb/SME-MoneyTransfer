@@ -9,5 +9,7 @@ public interface FundAccountDAO extends DAO<FundAccount, FundAccountDAO.Filter> 
     /**
      * FundAccount filter
      */
-    class Filter { }
+    class Filter extends DAO.Filter {
+        // TODO
+    }
 }

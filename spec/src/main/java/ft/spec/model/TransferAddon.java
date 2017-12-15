@@ -1,29 +1,29 @@
 package ft.spec.model;
 
 /**
- * Deposit addon
+ * Transfer addon(Deposit and Withdrawal)
  */
-public class DepositAddon extends Metadata {
+public class TransferAddon extends Metadata {
     /**
      * <pre>
      * Constructor of Addon
      * </pre>
      */
-    public DepositAddon() {
+    public TransferAddon() {
         super(CATALOG.FUND_ACCOUNT_TYPE); // Specify the metadata catalog
     }
 
     /**
      * <pre>
-     * Deposit mode
-     * This will define how addon participates in the deposit business process
+     * Transfer mode
+     * This will define how addon participates in the deposit and withdrawal business process
      * </pre>
      */
     private Mode mode;
 
     /**
      * <pre>
-     * Addon type
+     * Addon running type
      * </pre>
      */
     private Type type;
@@ -121,7 +121,7 @@ public class DepositAddon extends Metadata {
     }
 
     /**
-     * Deposit mode enum
+     * Transfer mode enum
      */
     public enum Mode {
         /**
@@ -129,14 +129,21 @@ public class DepositAddon extends Metadata {
          * Traditional deposit slip that contain bank account information
          * </pre>
          */
-        BANK(0),
+        BANK_DEPOSIT(0x0000),
 
         /**
          * <pre>
          * Deposit slip represented as a HTML form which will auto-submit to third-party financial intermediaries
          * </pre>
          */
-        INTERMEDIARY(1)
+        INTERMEDIARY_DEPOSIT(0x0001),
+
+        /**
+         * <pre>
+         * TODO
+         * </pre>
+         */
+        MANUAL_WITHDRAWAL(0xFF01),
 
         ;
 
@@ -172,15 +179,16 @@ public class DepositAddon extends Metadata {
 
     @Override
     public String toString() {
-        return "DepositAddon{" +
+        return "TransferAddon{" +
             "mode=" + mode +
             ", type=" + type +
+            ", spec=" + spec +
             ", content=" + content +
             ", catalog=" + catalog +
             ", name=" + name +
             ", description=" + description +
             ", value=" + value +
-            ", enabled=" + enabled +
+//            ", enabled=" + enabled +
         '}';
     }
 }

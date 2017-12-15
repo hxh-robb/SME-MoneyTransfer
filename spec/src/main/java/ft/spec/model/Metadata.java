@@ -3,12 +3,14 @@ package ft.spec.model;
 /**
  * Metadata base class
  */
-public class Metadata {
+public class Metadata extends Entity {
 
     /**
      * Limit the constructor to subclasses only, force subclasses to specific the catalog
      */
-    public Metadata() {}
+    public Metadata() {
+        super();
+    }
 
     /**
      * Limit the constructor to subclasses only, force subclasses to specific the catalog
@@ -16,6 +18,7 @@ public class Metadata {
      * @see CATALOG
      */
     protected Metadata(String catalog) {
+        this();
         this.catalog = catalog;
     }
 
@@ -48,12 +51,12 @@ public class Metadata {
      */
     protected String value;
 
-    /**
-     * <pre>
-     * Whether or not the metadata entry is enabled
-     * </pre>
-     */
-    protected Boolean enabled = true;
+//    /**
+//     * <pre>
+//     * Whether or not the metadata entry is enabled
+//     * </pre>
+//     */
+//    protected Boolean enabled = true;
 
     public String getName() {
         return name;
@@ -83,13 +86,13 @@ public class Metadata {
         return catalog;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
+//    public Boolean getEnabled() {
+//        return enabled;
+//    }
+//
+//    public void setEnabled(Boolean enabled) {
+//        this.enabled = enabled;
+//    }
 
     public void setCatalog(String catalog) {
         this.catalog = catalog;
@@ -102,14 +105,14 @@ public class Metadata {
                 ", name=" + name +
                 ", description=" + description +
                 ", value=" + value +
-                ", enabled=" + enabled +
+//                ", enabled=" + enabled +
                 '}';
     }
 
     /**
      * Metadata catalog constants
      */
-    interface CATALOG {
+    public interface CATALOG {
         /**
          * Undefined catalog
          */

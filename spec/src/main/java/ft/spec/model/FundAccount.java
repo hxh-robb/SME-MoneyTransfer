@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Fund account
  */
-public class FundAccount {
+public class FundAccount extends Entity {
     /**
      * Fund account name
      */
@@ -23,7 +23,7 @@ public class FundAccount {
     /**
      * Fund account type
      * @see ft.spec.model.Metadata.CATALOG#FUND_ACCOUNT_TYPE
-     * @see DepositAddon#value
+     * @see TransferAddon#value
      */
     private String type;
 

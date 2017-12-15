@@ -2,10 +2,11 @@ package ft;
 
 import ft.repo.FundAccountDAO;
 import ft.repo.MetadataDAO;
-import ft.spec.model.DepositAddon;
+import ft.spec.model.TransferAddon;
 import ft.spec.model.FundAccount;
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.query.Query;
+import ft.spec.service.MetadataService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,11 +19,14 @@ public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private Datastore datastore;
 
-	@Autowired
-	private MetadataDAO metadataDao;
+//	@Autowired
+//	private MetadataDAO metadataDao;
+
+//	@Autowired
+//	private FundAccountDAO fundAccountDao;
 
 	@Autowired
-	private FundAccountDAO fundAccountDao;
+	private MetadataService metadataService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CoreApplication.class, args);
@@ -30,8 +34,8 @@ public class CoreApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// mongodb_metadata();
-		mongodb_fund_account();
+		mongodb_metadata();
+		// mongodb_fund_account();
 	}
 
 	private void mongodb_fund_account(){
@@ -40,7 +44,7 @@ public class CoreApplication implements CommandLineRunner {
 		account.setType("1");
 		account.set("partnerID", "Outwit");
 
-		fundAccountDao.create(account);
+		// fundAccountDao.create(account);
 	}
 
 	// TODO MongoDB.Morphia
@@ -55,9 +59,9 @@ public class CoreApplication implements CommandLineRunner {
 		helper.map(MetadataSkeleton.class, Metadata.class);
 		mapper.getMappedClass(Metadata.class).update();
 
-		// DepositAddon
-		helper.map(MetadataSkeleton.class, DepositAddon.class);
-		mapper.getMappedClass(DepositAddon.class).update();
+		// TransferAddon
+		helper.map(MetadataSkeleton.class, TransferAddon.class);
+		mapper.getMappedClass(TransferAddon.class).update();
 
 		// Common mapper setting
 		mapper.getOptions().setStoreNulls(true);
@@ -65,38 +69,44 @@ public class CoreApplication implements CommandLineRunner {
 		Datastore datastore = morphia.createDatastore(new MongoClient(), "outwit-FT");
 		datastore.ensureIndexes();*/
 
-		/*DepositAddon hnapay = new DepositAddon();
+		/*TransferAddon hnapay = new TransferAddon();
 		hnapay.setName("Hnapay");
-		hnapay.setMode(DepositAddon.Mode.INTERMEDIARY);
-		hnapay.setType(DepositAddon.Type.PYTHON);
-		datastore.save(hnapay);
-		DepositAddon simple = new DepositAddon();
-		simple.setName("Simple");
-		simple.setMode(DepositAddon.Mode.BANK);
-		simple.setType(DepositAddon.Type.JAVA);
-		datastore.save(simple);*/
+		hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
+		hnapay.setType(TransferAddon.Type.PYTHON);
+		LoggerFactory.getLogger(CoreApplication.class).info("Add Hnapay:{}", metadataService.create("robb",hnapay));
 
-		/*Query<?> query = datastore.createQuery(DepositAddon.class);
+		TransferAddon simple = new TransferAddon();
+		simple.setName("Simple");
+		simple.setMode(TransferAddon.Mode.BANK_DEPOSIT);
+		simple.setType(TransferAddon.Type.JAVA);
+		LoggerFactory.getLogger(CoreApplication.class).info("Add Simple:{}", metadataService.create("robb",simple));*/
+
+//		MetadataDAO.Filter filter = new MetadataDAO.Filter();
+//		filter.id = simple.getId();
+		String simple = "c75307ab-eaad-4756-bc04-562be0e4d125";
+		LoggerFactory.getLogger(CoreApplication.class).info("Delete Simple:{}",metadataService.delete("robb",simple));
+
+		/*Query<?> query = datastore.createQuery(TransferAddon.class);
 		System.out.println(query.asList());*/
 
-		// MetadataDAO.Filter f = new MetadataDAO.Filter();
-		MetadataDAO.DepositAddonFilter f = new MetadataDAO.DepositAddonFilter();
-
-		DepositAddon addon = new DepositAddon();
-		addon.setName("Test");
-		addon.setMode(DepositAddon.Mode.INTERMEDIARY);
-		addon.setType(DepositAddon.Type.JAVA);
-		addon.setDescription("Pseudo addon");
-		addon.setValue("-1");
-		addon.setContent("ft.addon.PseudoAddon");
-		metadataDao.create(addon);
+//		// MetadataDAO.Filter f = new MetadataDAO.Filter();
+//		MetadataDAO.DepositAddonFilter f = new MetadataDAO.DepositAddonFilter();
+//
+//		TransferAddon addon = new TransferAddon();
+//		addon.setName("Test");
+//		addon.setMode(TransferAddon.Mode.INTERMEDIARY);
+//		addon.setType(TransferAddon.Type.JAVA);
+//		addon.setDescription("Pseudo addon");
+//		addon.setValue("-1");
+//		addon.setContent("ft.addon.PseudoAddon");
+//		metadataDao.create(addon);
 
 		// f.name = addon.getName();
 		// f.catalog = addon.getCatalog();
-		// f.mode = DepositAddon.Mode.BANK;
-		// f.type = DepositAddon.Type.JAVA;
+		// f.mode = TransferAddon.Mode.BANK;
+		// f.type = TransferAddon.Type.JAVA;
 		/*
-		DepositAddon update = new DepositAddon();
+		TransferAddon update = new TransferAddon();
 		update.setDescription("Fake addon");
 		update.setContent("ft.addon.FakeAddon");
 		update.setValue("-99");
@@ -104,6 +114,6 @@ public class CoreApplication implements CommandLineRunner {
 		// dao.update(f, update);
 		*/
 		// dao.delete(f);
-		System.out.println(metadataDao.list(f));
+		// System.out.println(metadataDao.list(f));
 	}
 }

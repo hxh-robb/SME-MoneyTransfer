@@ -1,6 +1,6 @@
 package ft.repo.mongodb.skeleton;
 
-import ft.spec.model.DepositAddon;
+import ft.spec.model.TransferAddon;
 import ft.spec.model.Metadata;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.converters.SimpleValueConverter;
@@ -12,13 +12,13 @@ import org.mongodb.morphia.mapping.MappedField;
  * MongoDB Morphia mapping trick
  * </a>
  */
-@Entity(value = "metadatas", noClassnameStored = true)
-@Indexes(
-    @Index(value = "metadata_unique_index",
-        fields = { @Field("catalog"), @Field("name"), @Field("value") },
-        options = @IndexOptions(unique = true) )
-)
-@Converters(MetadataSkeleton.DepositAddonEnumConverter.class)
+@Entity(value = "metadata", noClassnameStored = true)
+//@Indexes(
+//    @Index(value = "metadata_unique_index",
+//        fields = { @Field("catalog"), @Field("name"), @Field("value") },
+//        options = @IndexOptions(unique = true) )
+//)
+@Converters(MetadataSkeleton.TransferAddonEnumConverter.class)
 public class MetadataSkeleton extends Metadata {
     @Id
     private String id;
@@ -27,9 +27,9 @@ public class MetadataSkeleton extends Metadata {
         super(catalog);
     }
 
-    public static final class DepositAddonEnumConverter extends TypeConverter implements SimpleValueConverter {
-        public DepositAddonEnumConverter() {
-            super(DepositAddon.Mode.class, DepositAddon.Type.class);
+    public static final class TransferAddonEnumConverter extends TypeConverter implements SimpleValueConverter {
+        public TransferAddonEnumConverter() {
+            super(TransferAddon.Mode.class, TransferAddon.Type.class);
         }
 
         @Override
@@ -39,10 +39,10 @@ public class MetadataSkeleton extends Metadata {
             }
 
 
-            if (DepositAddon.Mode.class.equals(optionalExtraInfo.getField().getType()))
-                return DepositAddon.Mode.of((Integer)fromDBObject);
-            else if (DepositAddon.Type.class.equals(optionalExtraInfo.getField().getType()))
-                return DepositAddon.Type.of((Integer)fromDBObject);
+            if (TransferAddon.Mode.class.equals(optionalExtraInfo.getField().getType()))
+                return TransferAddon.Mode.of((Integer)fromDBObject);
+            else if (TransferAddon.Type.class.equals(optionalExtraInfo.getField().getType()))
+                return TransferAddon.Type.of((Integer)fromDBObject);
             else
                 return null;
         }
@@ -53,10 +53,10 @@ public class MetadataSkeleton extends Metadata {
                 return null;
             }
 
-            if (value instanceof DepositAddon.Mode)
-                return ((DepositAddon.Mode)value).getValue();
-            else if (value instanceof DepositAddon.Type)
-                return ((DepositAddon.Type)value).getValue();
+            if (value instanceof TransferAddon.Mode)
+                return ((TransferAddon.Mode)value).getValue();
+            else if (value instanceof TransferAddon.Type)
+                return ((TransferAddon.Type)value).getValue();
             else
                 return null;
         }

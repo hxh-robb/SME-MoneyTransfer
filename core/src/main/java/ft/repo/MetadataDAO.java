@@ -1,16 +1,18 @@
 package ft.repo;
 
-import ft.spec.model.DepositAddon;
+import ft.spec.model.TransferAddon;
 import ft.spec.model.Metadata;
 
 /**
  * Metadata DAO
  */
 public interface MetadataDAO extends DAO<Metadata, MetadataDAO.Filter> {
+
     /**
      * Metadata filter
      */
-    class Filter {
+    class Filter extends DAO.Filter {
+
         /**
          * @see Metadata.CATALOG
          */
@@ -25,8 +27,11 @@ public interface MetadataDAO extends DAO<Metadata, MetadataDAO.Filter> {
     /**
      * Deposit addon filter
      */
-    final class DepositAddonFilter extends Filter {
-        public DepositAddon.Mode mode;
-        public DepositAddon.Type type;
+    final class TransferAddonFilter extends Filter {
+        public TransferAddonFilter(){
+            this.catalog = Metadata.CATALOG.FUND_ACCOUNT_TYPE;
+        }
+        public TransferAddon.Mode mode;
+        public TransferAddon.Type type;
     }
 }
