@@ -1,5 +1,7 @@
 package ft.spec.model;
 
+import java.text.MessageFormat;
+
 /**
  * Metadata base class
  */
@@ -12,13 +14,17 @@ public class Metadata extends Entity {
         super();
     }
 
+    public Metadata(boolean init, String catalog) {
+        super(init);
+        this.catalog = catalog;
+    }
+
     /**
      * Limit the constructor to subclasses only, force subclasses to specific the catalog
      * @param catalog
      * @see CATALOG
      */
     protected Metadata(String catalog) {
-        this();
         this.catalog = catalog;
     }
 
@@ -51,13 +57,6 @@ public class Metadata extends Entity {
      */
     protected String value;
 
-//    /**
-//     * <pre>
-//     * Whether or not the metadata entry is enabled
-//     * </pre>
-//     */
-//    protected Boolean enabled = true;
-
     public String getName() {
         return name;
     }
@@ -86,27 +85,22 @@ public class Metadata extends Entity {
         return catalog;
     }
 
-//    public Boolean getEnabled() {
-//        return enabled;
-//    }
-//
-//    public void setEnabled(Boolean enabled) {
-//        this.enabled = enabled;
-//    }
-
     public void setCatalog(String catalog) {
         this.catalog = catalog;
     }
 
     @Override
     public String toString() {
-        return "Metadata{" +
-                "catalog=" + catalog +
+        return toString(true);
+    }
+
+    protected String toString(boolean complete) {
+        String fields =  super.toString(false) +
+                ", catalog=" + catalog +
                 ", name=" + name +
                 ", description=" + description +
-                ", value=" + value +
-//                ", enabled=" + enabled +
-                '}';
+                ", value=" + value ;
+        return complete ? MessageFormat.format("Metadata'{'{0}'}'", fields) : fields;
     }
 
     /**

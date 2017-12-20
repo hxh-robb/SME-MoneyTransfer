@@ -10,7 +10,7 @@ public class TransferAddon extends Metadata {
      * </pre>
      */
     public TransferAddon() {
-        super(CATALOG.FUND_ACCOUNT_TYPE); // Specify the metadata catalog
+        super(true, CATALOG.FUND_ACCOUNT_TYPE); // Specify the metadata catalog
     }
 
     /**
@@ -180,15 +180,11 @@ public class TransferAddon extends Metadata {
     @Override
     public String toString() {
         return "TransferAddon{" +
-            "mode=" + mode +
+            super.toString(false) +
+            ", mode=" + mode +
             ", type=" + type +
             ", spec=" + spec +
             ", content=" + content +
-            ", catalog=" + catalog +
-            ", name=" + name +
-            ", description=" + description +
-            ", value=" + value +
-//            ", enabled=" + enabled +
         '}';
     }
 }

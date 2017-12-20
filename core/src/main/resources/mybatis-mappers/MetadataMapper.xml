@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MetadataMapper">
+    <resultMap id="Metadata" type="Metadata">
+        <id property="id" column="id"/>
+        <result property="ts" column="ts"/>
+        <result property="de" column="de"/>
+
+        <result property="catalog" column="catalog"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="value" column="value"/>
+
+        <discriminator javaType="string" column="catalog">
+            <case value="FundAccountType" resultMap="TransferAddon"/>
+        </discriminator>
+    </resultMap>
+
+    <resultMap id="TransferAddon" type="TransferAddon" extends="Metadata" autoMapping="false">
+        <result property="mode" column="mode" typeHandler="TransferAddonMode" />
+        <result property="type" column="type" typeHandler="TransferAddonType" />
+        <result property="spec" column="spec" />
+        <result property="content" column="content"/>
+    </resultMap>
+
+    <sql id="MetadataColumns">
+        name, catalog, description, value
+    </sql>
+
+    <sql id="TransferAddonColumns">
+        column_get(fields, 'mode' as int) as mode,
+        column_get(fields, 'type' as int) as type,
+        column_get(fields, 'spec' as char) as spec,
+        column_get(fields, 'content' as char) as content
+    </sql>
+
+    <select id="list" resultMap="Metadata">
+        select
+            <include refid="Common.EntityColumns" />,
+            <include refid="MetadataColumns" />,
+            <include refid="TransferAddonColumns"/>
+        from
+            metadata
+        <where><![CDATA[
+            de <> 1,
+
+        ]]></where>
+    </select>
+
+    <insert id="create">
+        insert into metadata (
+            id,
+            <include refid="MetadataColumns" />
+            <trim prefix=",">
+                <if test="mode != null or type != null or spec != null or content != null">
+                    fields
+                </if>
+            </trim>
+        ) values (
+            #{id}, #{name}, #{catalog}, #{description}, #{value}
+            <trim prefix=",">
+                <if test="mode != null or type != null or spec != null or content != null">
+                    <trim prefix="column_create(" suffixOverrides="," suffix=")">
+                        <if test="mode != null">
+                            'mode', #{mode, typeHandler=TransferAddonMode},
+                        </if>
+                        <if test="type != null">
+                            'type', #{type, typeHandler=TransferAddonType},
+                        </if>
+                        <if test="spec != null">
+                            'spec', #{spec},
+                        </if>
+                        <if test="content != null">
+                            'content', #{content},
+                        </if>
+                    </trim>
+                </if>
+            </trim>
+        )
+    </insert>
+</mapper>

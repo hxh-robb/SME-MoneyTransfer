@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class MetadataBiz implements MetadataService {
 
-    @Autowired
+    // @Autowired
     private MetadataDAO dao;
 
 //    @Override

@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
  * Configuration for MongoDB
  * @see <a href="https://github.com/xeraa/morphia-demo/blob/master/src/main/java/net/xeraa/morphia_demo/config/MongoDB.java">Morphia settings</a>
  */
-@Configuration
+//@Configuration
 public class MongoDBConfiguration {
 
 

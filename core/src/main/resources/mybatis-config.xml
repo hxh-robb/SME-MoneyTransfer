@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--<settings>
+        <setting name="autoMappingBehavior" value="NONE"/>
+    </settings>-->
+
+    <typeAliases>
+        <typeAlias type="ft.repo.mariadb.TransferAddonModeHandler" alias="TransferAddonMode" />
+        <typeAlias type="ft.repo.mariadb.TransferAddonTypeHandler" alias="TransferAddonType" />
+        <typeAlias type="ft.repo.MetadataDAO$TransferAddonFilter" alias="TransferAddonFilter" />
+        <typeAlias type="ft.repo.MetadataDAO$Filter" alias="MetadataFilter" />
+        <package name="ft.spec.model"/>
+    </typeAliases>
+</configuration>

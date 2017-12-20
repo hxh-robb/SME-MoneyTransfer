@@ -1,5 +1,6 @@
 package ft.spec.model;
 
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,13 +9,21 @@ import java.util.UUID;
  */
 public abstract class Entity {
     /**
-     * Initialize common fields
+     * Construct an entity instance
      */
     protected Entity() {
-        this.id = UUID.randomUUID().toString(); // generate random unique id
-        this.ts = new Date();
-//        this.bt = null;
-        this.de = false;
+        this(false);
+    }
+
+    /**
+     * Initialize common fields
+     */
+    protected Entity(boolean init) {
+        if( init ) {
+            this.id = UUID.randomUUID().toString(); // generate random unique id
+            this.ts = new Date();
+            this.de = false;
+        }
     }
 
     /**
@@ -78,5 +87,17 @@ public abstract class Entity {
 
     public void setDe(Boolean de) {
         this.de = de;
+    }
+
+    @Override
+    public String toString() {
+        return toString(true);
+    }
+
+    protected String toString(boolean complete) {
+         String fields = "id='" + id + '\'' +
+                ", ts=" + ts +
+                ", de=" + de ;
+        return complete ? MessageFormat.format("Entity'{'{0'}'}", fields) : fields;
     }
 }

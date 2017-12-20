@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+// @Repository
 public class MongoFundAccountDAO extends MongoDAOHelper<FundAccount, FundAccountDAO.Filter> implements FundAccountDAO {
 
     @Autowired

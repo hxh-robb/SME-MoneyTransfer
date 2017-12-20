@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+// @Repository
 public class MongoMetadataDAO extends MongoDAOHelper<Metadata,MetadataDAO.Filter> implements MetadataDAO {
 
     @Autowired

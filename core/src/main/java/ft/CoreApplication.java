@@ -2,6 +2,7 @@ package ft;
 
 import ft.repo.FundAccountDAO;
 import ft.repo.MetadataDAO;
+import ft.repo.mariadb.MybatisMetadataDAO;
 import ft.spec.model.TransferAddon;
 import ft.spec.model.FundAccount;
 import ft.spec.service.MetadataService;
@@ -25,8 +26,11 @@ public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private FundAccountDAO fundAccountDao;
 
+//	@Autowired
+//	private MetadataService metadataService;
+
 	@Autowired
-	private MetadataService metadataService;
+	private MybatisMetadataDAO test;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CoreApplication.class, args);
@@ -34,8 +38,25 @@ public class CoreApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		mongodb_metadata();
+		// mongodb_metadata();
 		// mongodb_fund_account();
+		mybatis_test();
+	}
+
+	private void mybatis_test() {
+		MetadataDAO.Filter filter = new MetadataDAO.Filter();
+		filter.name = "ABCD";
+		System.out.println(test.list(filter));
+
+//		TransferAddon addon = new TransferAddon();
+//		addon.setName("Bank");
+//		addon.setDescription("银行转账");
+//		addon.setValue("0");
+//		addon.setMode(TransferAddon.Mode.BANK_DEPOSIT);
+//		addon.setType(TransferAddon.Type.JAVA);
+//		addon.setSpec("TODO");
+//		addon.setContent("TODO");
+//		test.create(addon);
 	}
 
 	private void mongodb_fund_account(){
@@ -83,8 +104,8 @@ public class CoreApplication implements CommandLineRunner {
 
 //		MetadataDAO.Filter filter = new MetadataDAO.Filter();
 //		filter.id = simple.getId();
-		String simple = "c75307ab-eaad-4756-bc04-562be0e4d125";
-		LoggerFactory.getLogger(CoreApplication.class).info("Delete Simple:{}",metadataService.delete("robb",simple));
+//		String simple = "c75307ab-eaad-4756-bc04-562be0e4d125";
+//		LoggerFactory.getLogger(CoreApplication.class).info("Delete Simple:{}",metadataService.delete("robb",simple));
 
 		/*Query<?> query = datastore.createQuery(TransferAddon.class);
 		System.out.println(query.asList());*/
