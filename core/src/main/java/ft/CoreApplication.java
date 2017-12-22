@@ -3,6 +3,7 @@ package ft;
 import ft.repo.FundAccountDAO;
 import ft.repo.MetadataDAO;
 import ft.repo.mariadb.MybatisMetadataDAO;
+import ft.spec.model.Metadata;
 import ft.spec.model.TransferAddon;
 import ft.spec.model.FundAccount;
 import ft.spec.service.MetadataService;
@@ -44,19 +45,47 @@ public class CoreApplication implements CommandLineRunner {
 	}
 
 	private void mybatis_test() {
-		MetadataDAO.Filter filter = new MetadataDAO.Filter();
-		filter.name = "ABCD";
-		System.out.println(test.list(filter));
+		MetadataDAO.Filter filter = null;
+		filter = new MetadataDAO.Filter();
+		filter.name = "Hnapay";
 
-//		TransferAddon addon = new TransferAddon();
-//		addon.setName("Bank");
-//		addon.setDescription("银行转账");
-//		addon.setValue("0");
-//		addon.setMode(TransferAddon.Mode.BANK_DEPOSIT);
-//		addon.setType(TransferAddon.Type.JAVA);
-//		addon.setSpec("TODO");
-//		addon.setContent("TODO");
-//		test.create(addon);
+		// MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
+		// filter.mode = TransferAddon.Mode.INTERMEDIARY_DEPOSIT;
+		// filter.value = "0";
+		// System.out.println(test.list(filter));
+
+		/*filter.id = "077f4dbf-51b7-41a4-b3a3-fd96cf61ba24";
+		// TransferAddon addon = new TransferAddon();
+		Metadata addon = new Metadata();
+		addon.setDescription("Test - 测试修改");
+		System.out.println(test.update(filter,addon));*/
+
+		System.out.println(test.delete(filter));
+
+		TransferAddon bank = new TransferAddon();
+        bank.setName("Bank");
+        bank.setDescription("银行卡支付");
+        bank.setValue("0");
+        bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
+        bank.setType(TransferAddon.Type.JAVA);
+        bank.setSpec("TODO");
+        bank.setContent("TODO");
+        System.out.println(test.create(bank));
+        TransferAddon hnapay = new TransferAddon();
+        hnapay.setName("Hnapay");
+        hnapay.setDescription("新生支付");
+        hnapay.setValue("1");
+        hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
+        hnapay.setType(TransferAddon.Type.PYTHON);
+        hnapay.setSpec("TODO");
+        hnapay.setContent("TODO");
+        System.out.println(test.create(hnapay));
+
+		/*MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
+		filter.name = "I am filter";
+		TransferAddon addon = new TransferAddon();
+		addon.setName("I am addon");
+		test.update(filter,addon);*/
 	}
 
 	private void mongodb_fund_account(){

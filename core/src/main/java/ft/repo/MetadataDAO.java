@@ -22,6 +22,11 @@ public interface MetadataDAO extends DAO<Metadata, MetadataDAO.Filter> {
          * Metadata name
          */
         public String name;
+
+        /**
+         * Metadata value
+         */
+        public String value;
     }
 
     /**
