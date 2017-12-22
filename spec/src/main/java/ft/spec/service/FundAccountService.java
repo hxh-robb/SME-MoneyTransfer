@@ -2,10 +2,12 @@ package ft.spec.service;
 
 import ft.spec.model.FundAccount;
 
+import java.io.Serializable;
+
 /**
  * TODO
  */
-public interface FundAccountService {
+public interface FundAccountService extends Serializable {
 
     /**
      * Create new fund account

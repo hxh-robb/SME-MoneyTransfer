@@ -1,9 +1,11 @@
 package ft.spec.service;
 
+import java.io.Serializable;
+
 /**
  * Service operation result
  */
-public final class Result {
+public final class Result implements Serializable {
     /**
      * Result code
      * @see Code

@@ -14,8 +14,7 @@ import java.util.Map;
 /**
  * MetadataDAO implementation for MariaDB
  */
-@Repository
-// @Mapper // Auto Render Mybatis Mapper
+@Repository // @Mapper // Auto Render Mybatis Mapper
 public class MybatisMetadataDAO implements MetadataDAO {
     private SqlSession sqlSession;
     private Logger LOG = LoggerFactory.getLogger(MybatisMetadataDAO.class);
@@ -27,7 +26,7 @@ public class MybatisMetadataDAO implements MetadataDAO {
     @Override
     public boolean create(Metadata data) {
         try {
-            sqlSession.insert("create", data);
+            sqlSession.insert("MetadataMapper.create", data);
             return true;
         } catch (Throwable throwable) {
             LOG.error("Create metadata error", throwable);
@@ -41,7 +40,7 @@ public class MybatisMetadataDAO implements MetadataDAO {
             Map<String, Object> param = new HashMap<>();
             param.put("filter", filter);
             param.put("data", data);
-            return sqlSession.update("update", param);
+            return sqlSession.update("MetadataMapper.update", param);
         } catch (Throwable throwable) {
             LOG.error("Update metadata error", throwable);
             return -1;
@@ -52,7 +51,7 @@ public class MybatisMetadataDAO implements MetadataDAO {
     public int delete(Filter filter) {
         try {
             // return sqlSession.update("update", param);
-            return sqlSession.delete("delete", filter);
+            return sqlSession.delete("MetadataMapper.delete", filter);
         } catch (Throwable throwable) {
             LOG.error("Delete metadata error", throwable);
             return -1;
@@ -62,7 +61,7 @@ public class MybatisMetadataDAO implements MetadataDAO {
     @Override
     public <E extends Metadata> List<E> list(Filter filter) {
         try {
-            return sqlSession.selectList("list", filter);
+            return sqlSession.selectList("MetadataMapper.list", filter);
         } catch (Throwable throwable) {
             LOG.error("List metadata error", throwable);
             return null;

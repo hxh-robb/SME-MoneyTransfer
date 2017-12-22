@@ -1,12 +1,16 @@
 package ft.spec.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Fund account
  */
-public class FundAccount extends Entity {
+public class FundAccount extends SemiStructuredEntity {
+    /**
+     * Initialize fund account
+     */
+    public FundAccount() {
+        super(true);
+    }
+
     /**
      * Fund account name
      */
@@ -22,7 +26,6 @@ public class FundAccount extends Entity {
 
     /**
      * Fund account type
-     * @see ft.spec.model.Metadata.CATALOG#FUND_ACCOUNT_TYPE
      * @see TransferAddon#value
      */
     private String type;
@@ -36,39 +39,21 @@ public class FundAccount extends Entity {
     }
 
     /**
-     * dynamic fields
+     * Fund transfer option icon image URL
      */
-    private final Map<String, Object> fields = new HashMap<>();
+    private String icon;
 
-    /**
-     * set data
-     * @param data
-     */
-    public void set(Map<String, Object> data) {
-        fields.clear();
-        fields.putAll(data);
+    public String getIcon() {
+        return icon;
     }
 
-    /**
-     * set value
-     * @param field
-     * @param value
-     */
-    public void set(String field, Object value) {
-        if( "type".equals(field) ) {
-            setType(String.valueOf(value));
-            return;
-        }
-
-        if( null == value ) {
-            fields.remove(field);
-        }
-        fields.put(field, value);
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     // TODO:additional business logical fields
 
-    //    /**
+//    /**
 //     * Transfer fee
 //     */
 //    protected Double fee;

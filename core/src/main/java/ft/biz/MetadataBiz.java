@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class MetadataBiz implements MetadataService {
 
-    // @Autowired
+    @Autowired
     private MetadataDAO dao;
 
 //    @Override
@@ -80,6 +80,7 @@ public class MetadataBiz implements MetadataService {
     @Override
     public List<TransferAddon> supportedTransferAddons(String subject) {
         MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
+        filter.catalog = Metadata.CATALOG.FUND_ACCOUNT_TYPE;
         filter.de = false;
         return dao.list(filter);
     }

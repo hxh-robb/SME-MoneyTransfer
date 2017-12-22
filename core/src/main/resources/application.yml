@@ -1,5 +1,8 @@
 spring:
   datasource:
+    name: ft
+    schema: classpath:database/schema.sql
+    initialization-mode: always
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/ft

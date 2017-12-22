@@ -1,5 +1,6 @@
 package ft.spec.model;
 
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -7,7 +8,7 @@ import java.util.UUID;
 /**
  * Entity base class
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
     /**
      * Construct an entity instance
      */

@@ -3,12 +3,13 @@ package ft.spec.service;
 import ft.spec.model.TransferAddon;
 import ft.spec.model.Metadata;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Metadata service
  */
-public interface MetadataService {
+public interface MetadataService extends Serializable {
 //    /**
 //     * Return the list of supported fund account types
 //     * @param subject The operator

@@ -32,6 +32,7 @@ public class TransferAddon extends Metadata {
      * <pre>
      * Fund account fields specification
      * </pre>
+     * @see <a href="http://brutusin.org/json-forms/">Specification format</a>
      */
     private String spec;
 
@@ -143,7 +144,7 @@ public class TransferAddon extends Metadata {
          * TODO
          * </pre>
          */
-        MANUAL_WITHDRAWAL(0xFF01),
+        MANUAL_WITHDRAWAL(0x0010),
 
         ;
 

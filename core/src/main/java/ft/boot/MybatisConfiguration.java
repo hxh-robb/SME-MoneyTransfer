@@ -3,6 +3,7 @@ package ft.boot;
 import ft.repo.DAO;
 import ft.spec.model.Entity;
 import ft.spec.model.Metadata;
+import ft.spec.model.SemiStructuredEntity;
 import org.apache.ibatis.ognl.*;
 import org.springframework.context.annotation.Configuration;
 

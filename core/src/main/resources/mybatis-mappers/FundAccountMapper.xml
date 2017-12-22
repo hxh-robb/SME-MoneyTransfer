@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundAccountMapper">
+    <insert id="create">
+        <bind name="fields" value="unstructuredFields" />
+        insert into fund_account (
+            id,
+            name, type, icon,
+            fields
+        ) values (
+            #{id},
+            #{name}, #{type}, #{icon}
+            <trim prefix=",">
+                <if test="fields != null and !fields.isEmpty()">
+                    <trim prefix="column_create(" suffixOverrides="," suffix=")">
+                        <foreach index="field" item="value" collection="fields.entrySet()">
+                            #{field}, #{value}
+                        </foreach>
+                    </trim>
+                </if>
+            </trim>
+        )
+    </insert>
+</mapper>
