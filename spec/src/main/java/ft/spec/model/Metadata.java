@@ -34,7 +34,7 @@ public class Metadata extends Entity {
      * </pre>
      * @see CATALOG
      */
-    protected String catalog;
+    protected String catalog = CATALOG.UNDEFINED;
 
     /**
      * <pre>

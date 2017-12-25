@@ -44,6 +44,6 @@ public interface DAO<T extends Entity, F extends DAO.Filter> {
      */
     class Filter {
         public String id;
-        public Boolean de;
+        public Boolean de = false;
     }
 }

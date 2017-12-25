@@ -1,5 +1,7 @@
 package ft.spec.model;
 
+import java.util.Map;
+
 /**
  * Fund account
  */
@@ -65,4 +67,30 @@ public class FundAccount extends SemiStructuredEntity {
 //    public void setFee(Double fee) {
 //        this.fee = fee;
 //    }
+
+    @Override
+    public String toString() {
+        return "FundAccount{" +
+            super.toString(false) +
+            ", name='" + name + '\'' +
+            ", type='" + type + '\'' +
+            ", icon='" + icon + '\'' +
+            ", fields=" + unstructuredFields +
+        '}';
+    }
+
+    /**
+     * Adaptive setter for mybatis mapping
+     * @param map
+     */
+    public void setFields(Map<String, Object> map) {
+        set(map);
+    }
+
+    /**
+     * Adaptive getter for mybatis mapping
+     */
+    public Map<String, Object> getFields() {
+        return unstructuredFields;
+    }
 }

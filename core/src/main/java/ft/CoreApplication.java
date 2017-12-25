@@ -1,5 +1,6 @@
 package ft;
 
+import ft.repo.DAO;
 import ft.repo.FundAccountDAO;
 import ft.repo.MetadataDAO;
 import ft.repo.mariadb.MybatisMetadataDAO;
@@ -22,8 +23,8 @@ public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private Datastore datastore;
 
-//	@Autowired
-//	private MetadataDAO metadataDao;
+	@Autowired
+	private MetadataDAO metadataDao;
 
 	@Autowired
 	private FundAccountDAO fundAccountDao;
@@ -42,24 +43,18 @@ public class CoreApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// mongodb_metadata();
 		// mongodb_fund_account();
-		// mybatis_test();
-        System.out.println(fundAccountDao);
-        FundAccount account = new FundAccount();
-        account.setName("新生");
-        account.setType("1");
-        account.set("Godnn", "NNII");
-        fundAccountDao.create(account);
+		mybatis_test();
     }
 
-//	private void mybatis_test() {
-//		MetadataDAO.Filter filter = null;
-//		//filter = new MetadataDAO.Filter();
-//		//filter.name = "Hnapay";
-//
-//		// MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
-//		// filter.mode = TransferAddon.Mode.INTERMEDIARY_DEPOSIT;
-//		// filter.value = "0";
-//		// System.out.println(test.list(filter));
+	private void mybatis_test() {
+		/*MetadataDAO.Filter filter = null;
+		filter = new MetadataDAO.Filter();
+		filter.name = "Hnapay";
+
+		// filter = new MetadataDAO.TransferAddonFilter();
+		// filter.mode = TransferAddon.Mode.BANK_DEPOSIT;
+		// filter.value = "0";
+        System.out.println(metadataDao.list(filter));*/
 //
 //		/*filter.id = "077f4dbf-51b7-41a4-b3a3-fd96cf61ba24";
 //		// TransferAddon addon = new TransferAddon();
@@ -77,7 +72,7 @@ public class CoreApplication implements CommandLineRunner {
 //        bank.setType(TransferAddon.Type.JAVA);
 //        bank.setSpec("TODO");
 //        bank.setContent("TODO");
-//        System.out.println(test.create(bank));
+//        System.out.println(metadataDao.create(bank));
 //        TransferAddon hnapay = new TransferAddon();
 //        hnapay.setName("Hnapay");
 //        hnapay.setDescription("新生支付");
@@ -86,14 +81,33 @@ public class CoreApplication implements CommandLineRunner {
 //        hnapay.setType(TransferAddon.Type.PYTHON);
 //        hnapay.setSpec("TODO");
 //        hnapay.setContent("TODO");
-//        System.out.println(test.create(hnapay));
-//
-//		/*MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
-//		filter.name = "I am filter";
-//		TransferAddon addon = new TransferAddon();
-//		addon.setName("I am addon");
-//		test.update(filter,addon);*/
-//	}
+//        System.out.println(metadataDao.create(hnapay));
+
+		/*MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
+		filter.name = "Simple";
+		TransferAddon addon = new TransferAddon();
+		addon.setDescription("Test");
+		addon.setContent("Some script here");
+        System.out.println(metadataDao.update(filter,addon));*/
+
+        FundAccount account = new FundAccount();
+        account.setName("新生7-13");
+        account.setType("1");
+        account.set("Godnn", "NNII");
+        account.set("GodAnn", "NN中文SII");
+        fundAccountDao.create(account);
+
+        FundAccountDAO.Filter filter = null;
+        filter = new FundAccountDAO.Filter();
+        filter.name = "新生7-12";
+        // System.out.println(fundAccountDao.list(filter));
+        // fundAccountDao.delete(filter);
+        FundAccount data = new FundAccount();
+        data.set("MerchantPass", "OutwitPass");
+        data.set("MerchantID","DDU");
+        data.setDe(true);
+        fundAccountDao.update(filter, data);
+	}
 
 //	private void mongodb_fund_account(){
 //		FundAccount account = new FundAccount();

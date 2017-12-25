@@ -11,5 +11,7 @@ public interface FundAccountDAO extends DAO<FundAccount, FundAccountDAO.Filter> 
      */
     class Filter extends DAO.Filter {
         // TODO
+        public String name;
+        public String type;
     }
 }

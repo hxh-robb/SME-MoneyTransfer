@@ -50,7 +50,7 @@
         </if> </where>
     </sql>
 
-    <select id="list" parameterType="map" resultMap="Metadata">
+    <select id="list" resultMap="Metadata">
         <bind name="filter" value="_parameter" />
         select
             <include refid="Common.EntityColumns" />,
@@ -86,19 +86,23 @@
         update metadata
         <set>
             <!-- Entity updatable field -->
-            <if test="data.de != null"> de = #{data.de} </if>
+            <if test="data.de != null"> de = #{data.de}, </if>
 
             <!-- Metadata updatable fields -->
-            <if test="data.name != null"> name = #{data.name} </if>
-            <if test="data.catalog != null"> catalog = #{data.catalog} </if>
-            <if test="data.description != null"> description = #{data.description} </if>
-            <if test="data.value != null"> value = #{data.value} </if>
+            <if test="data.name != null"> name = #{data.name}, </if>
+            <if test="data.catalog != null"> catalog = #{data.catalog}, </if>
+            <if test="data.description != null"> description = #{data.description}, </if>
+            <if test="data.value != null"> value = #{data.value}, </if>
 
-            <!-- TransferAddon updatable fields -->
-            <if test="data.mode != null"> mode = #{mode} </if>
-            <if test="data.type != null"> type = #{type} </if>
-            <if test="data.spec != null"> spec = #{spec} </if>
-            <if test="data.content != null"> content = #{value} </if>
+            <if test="data.mode != null or data.type != null or data.spec != null or data.content != null">
+                <!-- TransferAddon updatable fields -->
+                <trim prefix="fields = column_add(fields," suffixOverrides="," suffix=")">
+                    <if test="data.mode != null"> 'mode', #{data.mode, typeHandler=TransferAddonMode}, </if>
+                    <if test="data.type != null"> 'type', #{data.type, typeHandler=TransferAddonType}, </if>
+                    <if test="data.spec != null"> 'spec', #{data.spec}, </if>
+                    <if test="data.content != null"> 'content', #{data.content}, </if>
+                </trim>
+            </if>
         </set>
         <include refid="MetadataFilter"/>
     </update>

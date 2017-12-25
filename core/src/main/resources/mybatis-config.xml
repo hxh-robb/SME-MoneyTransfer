@@ -11,8 +11,11 @@
     <typeAliases>
         <typeAlias type="ft.repo.mariadb.TransferAddonModeHandler" alias="TransferAddonMode" />
         <typeAlias type="ft.repo.mariadb.TransferAddonTypeHandler" alias="TransferAddonType" />
-        <typeAlias type="ft.repo.MetadataDAO$TransferAddonFilter" alias="TransferAddonFilter" />
-        <typeAlias type="ft.repo.MetadataDAO$Filter" alias="MetadataFilter" />
+        <!--<typeAlias type="ft.repo.MetadataDAO$TransferAddonFilter" alias="TransferAddonFilter" />
+        <typeAlias type="ft.repo.MetadataDAO$Filter" alias="MetadataFilter" />-->
+
+        <typeAlias type="ft.repo.mariadb.JsonHandler" alias="Json" />
+
         <package name="ft.spec.model"/>
     </typeAliases>
 

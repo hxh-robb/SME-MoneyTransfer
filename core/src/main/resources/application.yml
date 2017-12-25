@@ -22,6 +22,9 @@ mybatis:
 #  password: "todo"
 
 logging:
+#  level:
+#    MetadataMapper: DEBUG
+#    FundAccountMapper: DEBUG
   pattern:
     console: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
-    #file: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
+#    file: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"

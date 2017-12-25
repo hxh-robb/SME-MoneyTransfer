@@ -99,6 +99,6 @@ public abstract class Entity implements Serializable {
          String fields = "id='" + id + '\'' +
                 ", ts=" + ts +
                 ", de=" + de ;
-        return complete ? MessageFormat.format("Entity'{'{0'}'}", fields) : fields;
+        return complete ? MessageFormat.format("Entity'{'{0}'}'}", fields) : fields;
     }
 }
