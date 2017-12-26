@@ -1,6 +1,7 @@
 package ft.repo.mongodb;
 
 import ft.repo.FundAccountDAO;
+import ft.spec.model.DepositOption;
 import ft.spec.model.FundAccount;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
@@ -58,4 +59,8 @@ public class MongoFundAccountDAO extends MongoDAOHelper<FundAccount, FundAccount
         return q;
     }
 
+    @Override
+    public List<DepositOption> listDepositOptions(Filter filter) {
+        return null;
+    }
 }

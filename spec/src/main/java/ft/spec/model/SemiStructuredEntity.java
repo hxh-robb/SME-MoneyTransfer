@@ -5,6 +5,7 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -16,22 +17,31 @@ public class SemiStructuredEntity extends Entity {
 //        super();
 //        collectStructuredFields();
 //    }
+    protected final Object struct;
 
     /**
      * Force sub-class to call this constructor
      * @param init
      */
-    public SemiStructuredEntity(boolean init) {
-        super(init);
-        collectStructuredFields();
+    public SemiStructuredEntity(boolean init, Object struct) {
+        super(init); this.struct = struct;
+        collectStructuredFields(null == struct ? this : struct);
     }
 
-    private void collectStructuredFields(){
+    private void collectStructuredFields(Object struct){
         try {
-            BeanInfo info = Introspector.getBeanInfo(this.getClass());
+            BeanInfo info = Introspector.getBeanInfo(struct.getClass());
             PropertyDescriptor[] descriptors = info.getPropertyDescriptors();
             for (PropertyDescriptor descriptor:descriptors) {
-                structuredFields.put(descriptor.getName(), descriptor);
+                structuredFields.put(descriptor.getName(), new Tuple(struct, descriptor));
+            }
+
+            if( struct != this ) {
+                BeanInfo entityInfo = Introspector.getBeanInfo(this.getClass());
+                PropertyDescriptor[] entityDescriptors = entityInfo.getPropertyDescriptors();
+                for (PropertyDescriptor descriptor:entityDescriptors) {
+                    structuredFields.put(descriptor.getName(), new Tuple(this, descriptor));
+                }
             }
         } catch (IntrospectionException e) {
             // Ignore error
@@ -39,9 +49,21 @@ public class SemiStructuredEntity extends Entity {
     }
 
     /**
+     * 2-tuples
+     */
+    private static final class Tuple {
+        public Tuple(Object instance, PropertyDescriptor descriptor) {
+            this.instance = instance;
+            this.descriptor = descriptor;
+        }
+        public Object instance;
+        public PropertyDescriptor descriptor;
+    }
+
+    /**
      * structured fields cache
      */
-    private final Map<String, PropertyDescriptor> structuredFields = new ConcurrentHashMap<>();
+    private final Map<String, Tuple> structuredFields = new ConcurrentHashMap<>();
 
     /**
      * dynamic fields
@@ -53,13 +75,15 @@ public class SemiStructuredEntity extends Entity {
      * @param field
      * @param value
      */
-    public void set(String field, Object value) {
-        PropertyDescriptor descriptor = structuredFields.get(field);
-        if( null != descriptor && null != descriptor.getWriteMethod() ) {
+    public final void set(String field, Object value) {
+        Tuple tuple = structuredFields.get(field);
+        Method setter;
+        if( null != tuple && null != tuple.descriptor && null != ( setter = tuple.descriptor.getWriteMethod()) ) {
             try {
-                Method setter = descriptor.getWriteMethod();
-                setter.invoke(this, value);
-                return;
+                if( ( setter.getModifiers() & Modifier.FINAL ) == 0 ) { // ignore final setter
+                    setter.invoke(tuple.instance, value);
+                    return;
+                }
             } catch (Throwable throwable) {
                 // Ignore error, use unstructuredFields to store the field and value
             }
@@ -76,7 +100,7 @@ public class SemiStructuredEntity extends Entity {
      * set value
      * @param map
      */
-    public void set(Map<String, Object> map) {
+    public final void set(Map<String, Object> map) {
         if( null == map || map.isEmpty() ) {
             return;
         }
@@ -91,13 +115,15 @@ public class SemiStructuredEntity extends Entity {
      * @param field
      * @return
      */
-    public <T> T get(String field) {
-        PropertyDescriptor descriptor = structuredFields.get(field);
-        Method getter = null;
-        if( null != descriptor && null != (getter = descriptor.getReadMethod()) ) {
+    public final <T> T get(String field) {
+        Tuple tuple = structuredFields.get(field);
+        Method getter;
+        if( null != tuple && null != tuple.descriptor && null != (getter = tuple.descriptor.getReadMethod()) ) {
             try {
-                T value = (T)getter.invoke(this);
-                if( null != value ) return value;
+                if( ( getter.getModifiers() & Modifier.FINAL ) == 0 ) { // ignore final getter
+                    T value = (T) getter.invoke(tuple.instance);
+                    if (null != value) return value;
+                }
             } catch (Throwable throwable) {
                 // Ignore error, get value from unstructuredFields
             }

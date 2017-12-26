@@ -18,6 +18,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
+import java.util.List;
+
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 public class CoreApplication implements CommandLineRunner {
 //	@Autowired
@@ -47,6 +49,10 @@ public class CoreApplication implements CommandLineRunner {
     }
 
 	private void mybatis_test() {
+	    /*List<TransferAddon> result = metadataService.supportedTransferAddons(null);
+        System.out.println(result.size());
+        System.out.println(result);*/
+
 		/*MetadataDAO.Filter filter = null;
 		filter = new MetadataDAO.Filter();
 		filter.name = "Hnapay";
@@ -55,14 +61,33 @@ public class CoreApplication implements CommandLineRunner {
 		// filter.mode = TransferAddon.Mode.BANK_DEPOSIT;
 		// filter.value = "0";
         System.out.println(metadataDao.list(filter));*/
-//
-//		/*filter.id = "077f4dbf-51b7-41a4-b3a3-fd96cf61ba24";
-//		// TransferAddon addon = new TransferAddon();
-//		Metadata addon = new Metadata();
-//		addon.setDescription("Test - 测试修改");
-//		System.out.println(test.update(filter,addon));*/
-//
-//		System.out.println(test.delete(filter));
+
+
+		/*if( !result.isEmpty() ) {
+            TransferAddon addon = null;
+//            addon = result.get(0);
+//            addon = new TransferAddon();
+
+//            addon.setName("新生");
+//            addon.setValue("1");
+//            addon.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
+//            addon.setType(TransferAddon.Type.PYTHON);
+//            addon.setDescription(addon.getDescription() + "|修改测试 - Test MetadataService");
+//            addon.setContent("Some script will be written");
+//            addon.setSpec("Wait for me");
+
+//            System.out.println(metadataService.update(null, addon));
+//            System.out.println(metadataService.delete(null, null));
+//            System.out.println(metadataService.create(null, addon));
+        }*/
+
+
+		/*filter.id = "077f4dbf-51b7-41a4-b3a3-fd96cf61ba24";
+		// TransferAddon addon = new TransferAddon();
+		Metadata addon = new Metadata();
+		addon.setDescription("Test - 测试修改");
+		System.out.println(test.update(filter,addon));
+		System.out.println(test.delete(filter));*/
 //
 //		TransferAddon bank = new TransferAddon();
 //        bank.setName("Bank");
@@ -90,23 +115,24 @@ public class CoreApplication implements CommandLineRunner {
 		addon.setContent("Some script here");
         System.out.println(metadataDao.update(filter,addon));*/
 
-        FundAccount account = new FundAccount();
-        account.setName("新生7-13");
-        account.setType("1");
+        /*FundAccount account = new FundAccount();
+        account.getInfo().setName("新生7-15");
+        account.getInfo().setType("1");
         account.set("Godnn", "NNII");
         account.set("GodAnn", "NN中文SII");
-        fundAccountDao.create(account);
+        fundAccountDao.create(account);*/
 
-        FundAccountDAO.Filter filter = null;
+        /*FundAccountDAO.Filter filter = null;
         filter = new FundAccountDAO.Filter();
-        filter.name = "新生7-12";
-        // System.out.println(fundAccountDao.list(filter));
+        filter.name = "新生7-15";
+        System.out.println(fundAccountDao.list(filter));
+//        System.out.println(fundAccountDao.listDepositOptions(filter));
         // fundAccountDao.delete(filter);
-        FundAccount data = new FundAccount();
-        data.set("MerchantPass", "OutwitPass");
-        data.set("MerchantID","DDU");
-        data.setDe(true);
-        fundAccountDao.update(filter, data);
+//        FundAccount data = new FundAccount();
+//        data.set("MerchantPass", "OutwitPass");
+//        data.set("MerchantID","DDU");
+//        data.setDe(true);
+//        fundAccountDao.update(filter, data);*/
 	}
 
 //	private void mongodb_fund_account(){

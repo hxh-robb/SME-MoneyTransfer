@@ -8,15 +8,25 @@
         <result property="ts" column="ts"/>
         <result property="de" column="de"/>
 
-        <result property="name" column="name"/>
-        <result property="type" column="type"/>
-        <result property="icon" column="icon"/>
+        <result property="info.name" column="name"/>
+        <result property="info.icon" column="icon"/>
 
+        <result property="type" column="type"/>
         <result property="fields" column="fields" typeHandler="Json"/>
+
+        <discriminator column="info" javaType="int">
+            <case value="1" resultMap="DepositOption"/>
+        </discriminator>
+    </resultMap>
+
+    <resultMap id="DepositOption" type="DepositOption" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
     </resultMap>
 
     <sql id="FundAccountColumns">
-        convert( column_json(fields) using utf8 ) as fields
+        name, type, icon, convert( column_json(fields) using utf8 ) as fields
     </sql>
 
     <sql id="FundAccountFilter" >
@@ -34,11 +44,11 @@
     <insert id="create">
         insert into fund_account (
             id,
-            name, type, icon,
+            name, icon, type,
             fields
         ) values (
             #{id},
-            #{name}, #{type}, #{icon}
+            #{info.name}, #{info.icon}, #{type}
             <trim prefix=",">
                 <if test="!fields.isEmpty()">
                     <trim prefix="column_create(" suffixOverrides="," suffix=")">
@@ -62,11 +72,12 @@
             <!-- Entity updatable field -->
             <if test="data.de != null"> de = #{data.de}, </if>
 
-            <!-- Metadata updatable fields -->
-            <if test="data.name != null"> name = #{data.name}, </if>
-            <if test="data.type != null"> type = #{data.type}, </if>
-            <if test="data.icon != null"> icon = #{data.icon}, </if>
+            <!-- DepositOption updatable fields -->
+            <if test="data.info.name != null"> name = #{data.info.name}, </if>
+            <if test="data.info.icon != null"> icon = #{data.info.icon}, </if>
 
+            <!-- FundAccount updatable fields -->
+            <if test="data.type != null"> type = #{data.type}, </if>
             <if test="!data.fields.isEmpty()">
                 <trim prefix="fields = column_create(" suffixOverrides="," suffix=")">
                     <foreach index="field" item="value" collection="data.fields.entrySet()">
@@ -81,8 +92,9 @@
     <select id="list" resultMap="FundAccount">
         <bind name="filter" value="_parameter" />
         select
-            <include refid="Common.EntityColumns" />,
-            <include refid="FundAccountColumns" />
+        <include refid="Common.EntityColumns" />,
+        <include refid="FundAccountColumns" />,
+        #{info} as info
         from fund_account
         <include refid="FundAccountFilter"/>
     </select>

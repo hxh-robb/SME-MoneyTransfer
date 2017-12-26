@@ -1,5 +1,6 @@
 package ft.biz;
 
+import ft.repo.DAO;
 import ft.repo.MetadataDAO;
 import ft.spec.model.TransferAddon;
 import ft.spec.model.Metadata;
@@ -12,10 +13,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * TODO
+ * Metadata service
  */
 @Service
-public class MetadataBiz implements MetadataService {
+public class MetadataBiz extends Biz<Metadata, MetadataDAO> implements MetadataService {
+/*
 
     @Autowired
     private MetadataDAO dao;
@@ -76,12 +78,28 @@ public class MetadataBiz implements MetadataService {
 
         return result;
     }
+*/
+    public MetadataBiz(MetadataDAO dao) {
+        super(dao); // Constructor injection
+    }
 
     @Override
     public List<TransferAddon> supportedTransferAddons(String subject) {
+        // TODO:log subject behaviors
+
         MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
         filter.catalog = Metadata.CATALOG.FUND_ACCOUNT_TYPE;
         filter.de = false;
         return dao.list(filter);
+    }
+
+    @Override
+    protected MetadataDAO.Filter createFilter() {
+        return new MetadataDAO.Filter();
+    }
+
+    @Override
+    protected Metadata createEntity() {
+        return new Metadata();
     }
 }

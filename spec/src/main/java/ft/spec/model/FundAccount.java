@@ -6,31 +6,23 @@ import java.util.Map;
  * Fund account
  */
 public class FundAccount extends SemiStructuredEntity {
-    /**
-     * Initialize fund account
-     */
-    public FundAccount() {
-        super(true);
-    }
 
     /**
-     * Fund account name
-     */
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Fund account type
+     * Type
      * @see TransferAddon#value
      */
     private String type;
+
+    /**
+     * Fund account constructor
+     */
+    public FundAccount() {
+        super(true, new DepositOption());
+    }
+
+    public final DepositOption getInfo() {
+        return (DepositOption)struct;
+    }
 
     public String getType() {
         return type;
@@ -39,19 +31,45 @@ public class FundAccount extends SemiStructuredEntity {
     public void setType(String type) {
         this.type = type;
     }
-
-    /**
-     * Fund transfer option icon image URL
-     */
-    private String icon;
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
+    //    /**
+//     * Fund account name
+//     */
+//    private String name;
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    /**
+//     * Fund account type
+//     * @see TransferAddon#value
+//     */
+//    private String type;
+//
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
+//
+//    /**
+//     * Fund transfer option icon image URL
+//     */
+//    private String icon;
+//
+//    public String getIcon() {
+//        return icon;
+//    }
+//
+//    public void setIcon(String icon) {
+//        this.icon = icon;
+//    }
 
     // TODO:additional business logical fields
 
@@ -72,9 +90,8 @@ public class FundAccount extends SemiStructuredEntity {
     public String toString() {
         return "FundAccount{" +
             super.toString(false) +
-            ", name='" + name + '\'' +
+            ", " + getInfo().toString(false) +
             ", type='" + type + '\'' +
-            ", icon='" + icon + '\'' +
             ", fields=" + unstructuredFields +
         '}';
     }
@@ -83,14 +100,14 @@ public class FundAccount extends SemiStructuredEntity {
      * Adaptive setter for mybatis mapping
      * @param map
      */
-    public void setFields(Map<String, Object> map) {
+    public final void setFields(Map<String, Object> map) {
         set(map);
     }
 
     /**
      * Adaptive getter for mybatis mapping
      */
-    public Map<String, Object> getFields() {
+    public final Map<String, Object> getFields() {
         return unstructuredFields;
     }
 }

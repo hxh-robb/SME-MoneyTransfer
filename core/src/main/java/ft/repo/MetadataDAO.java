@@ -12,20 +12,15 @@ public interface MetadataDAO extends DAO<Metadata, MetadataDAO.Filter> {
      * Metadata filter
      */
     class Filter extends DAO.Filter {
+        public Filter() {
+            this.de = false;
+        }
 
         /**
          * @see Metadata.CATALOG
          */
         public String catalog;
-
-        /**
-         * Metadata name
-         */
         public String name;
-
-        /**
-         * Metadata value
-         */
         public String value;
     }
 
@@ -34,6 +29,7 @@ public interface MetadataDAO extends DAO<Metadata, MetadataDAO.Filter> {
      */
     final class TransferAddonFilter extends Filter {
         public TransferAddonFilter(){
+            super();
             this.catalog = Metadata.CATALOG.FUND_ACCOUNT_TYPE;
         }
         public TransferAddon.Mode mode;

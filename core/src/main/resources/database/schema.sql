@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `metadata` (
   `ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
   `de` TINYINT NOT NULL DEFAULT 0 COMMENT 'deleted flag',
   `name` VARCHAR(64) NOT NULL COMMENT 'metadata name',
-  `catalog` VARCHAR(32) NOT NULL DEFAULT 'UNDEFINED' COMMENT 'metadata catalog',
+  `catalog` VARCHAR(32) NOT NULL DEFAULT 'Undefined' COMMENT 'metadata catalog',
   `description` VARCHAR(256) NULL DEFAULT NULL COMMENT 'metadata description',
   `value` VARCHAR(32) NOT NULL COMMENT 'metadata value',
   `fields` BLOB NULL DEFAULT NULL COMMENT 'metadata dynamic fields',

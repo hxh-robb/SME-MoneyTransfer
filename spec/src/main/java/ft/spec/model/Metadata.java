@@ -34,7 +34,7 @@ public class Metadata extends Entity {
      * </pre>
      * @see CATALOG
      */
-    protected String catalog = CATALOG.UNDEFINED;
+    protected String catalog;
 
     /**
      * <pre>
@@ -110,7 +110,7 @@ public class Metadata extends Entity {
         /**
          * Undefined catalog
          */
-        String UNDEFINED = "UNDEFINED";
+        String UNDEFINED = "Undefined";
 
         /**
          * Fund account type catalog

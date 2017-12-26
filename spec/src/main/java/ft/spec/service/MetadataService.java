@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Metadata service
  */
-public interface MetadataService extends Serializable {
+public interface MetadataService extends Service<Metadata> {
 //    /**
 //     * Return the list of supported fund account types
 //     * @param subject The operator
@@ -19,29 +19,29 @@ public interface MetadataService extends Serializable {
 //     */
 //    List<Metadata> list(String subject, String catalog);
 
-    /**
-     * Create new metadata
-     * @param subject The operator
-     * @param metadata Metadata
-     * @return
-     */
-    Result create(String subject, Metadata metadata);
-
-    /**
-     * Create specific metadata
-     * @param subject The operator
-     * @param metadata Metadata
-     * @return
-     */
-    Result update(String subject, Metadata metadata);
-
-    /**
-     * Delete specific metadata
-     * @param subject The operator
-     * @param id  ID of the metadata
-     * @return
-     */
-    Result delete(String subject, String id);
+//    /**
+//     * Create new metadata
+//     * @param subject The operator
+//     * @param metadata Metadata
+//     * @return
+//     */
+//    Result create(String subject, Metadata metadata);
+//
+//    /**
+//     * Update specific metadata
+//     * @param subject The operator
+//     * @param metadata Metadata
+//     * @return
+//     */
+//    Result update(String subject, Metadata metadata);
+//
+//    /**
+//     * Delete specific metadata
+//     * @param subject The operator
+//     * @param id  ID of the metadata
+//     * @return
+//     */
+//    Result delete(String subject, String id);
 
     /**
      * List supported transfer addons.

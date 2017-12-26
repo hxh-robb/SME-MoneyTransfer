@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * Entity base class
  */
-public abstract class Entity implements Serializable {
+public abstract class Entity implements Serializable{
     /**
      * Construct an entity instance
      */
@@ -99,6 +99,6 @@ public abstract class Entity implements Serializable {
          String fields = "id='" + id + '\'' +
                 ", ts=" + ts +
                 ", de=" + de ;
-        return complete ? MessageFormat.format("Entity'{'{0}'}'}", fields) : fields;
+        return complete ? MessageFormat.format("Entity'{'{0'}'}", fields) : fields;
     }
 }
