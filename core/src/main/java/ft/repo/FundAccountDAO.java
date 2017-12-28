@@ -4,6 +4,7 @@ import ft.spec.model.DepositOption;
 import ft.spec.model.FundAccount;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Fund account DAO
@@ -22,6 +23,8 @@ public interface FundAccountDAO extends DAO<FundAccount, FundAccountDAO.Filter> 
     class Filter extends DAO.Filter {
         public String name;
         public String type;
+        public Map<String,Object> fields;
         public Boolean info = false;
+        public Boolean addon = false;
     }
 }

@@ -4,6 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Common">
     <sql id="EntityColumns">
-        id, ts, de
+        t.id, t.ts, t.de
+    </sql>
+
+    <sql id="DynamicColumnDataType" >
+        <choose>
+            <when test="value instanceof Integer">int</when>
+            <otherwise>char</otherwise>
+        </choose>
     </sql>
 </mapper>

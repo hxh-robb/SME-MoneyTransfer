@@ -14,6 +14,25 @@ public class FundAccount extends SemiStructuredEntity {
     private String type;
 
     /**
+     * Addon(Filtered by {@link TransferAddon#value})
+     */
+    private TransferAddon addon;
+
+    // TODO:additional business logical fields
+//    /**
+//     * Transfer fee
+//     */
+//    protected Double fee;
+//
+//    public Double getFee() {
+//        return fee;
+//    }
+//
+//    public void setFee(Double fee) {
+//        this.fee = fee;
+//    }
+
+    /**
      * Fund account constructor
      */
     public FundAccount() {
@@ -31,7 +50,16 @@ public class FundAccount extends SemiStructuredEntity {
     public void setType(String type) {
         this.type = type;
     }
-    //    /**
+
+    public TransferAddon getAddon() {
+        return addon;
+    }
+
+    public void setAddon(TransferAddon addon) {
+        this.addon = addon;
+    }
+
+//    /**
 //     * Fund account name
 //     */
 //    private String name;
@@ -71,27 +99,13 @@ public class FundAccount extends SemiStructuredEntity {
 //        this.icon = icon;
 //    }
 
-    // TODO:additional business logical fields
-
-//    /**
-//     * Transfer fee
-//     */
-//    protected Double fee;
-//
-//    public Double getFee() {
-//        return fee;
-//    }
-//
-//    public void setFee(Double fee) {
-//        this.fee = fee;
-//    }
-
     @Override
     public String toString() {
         return "FundAccount{" +
             super.toString(false) +
             ", " + getInfo().toString(false) +
             ", type='" + type + '\'' +
+            ", addon='" + addon + '\'' +
             ", fields=" + unstructuredFields +
         '}';
     }

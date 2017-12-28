@@ -14,6 +14,8 @@
         <result property="type" column="type"/>
         <result property="fields" column="fields" typeHandler="Json"/>
 
+        <association property="addon" resultMap="MetadataMapper.TransferAddon" columnPrefix="addon_" />
+
         <discriminator column="info" javaType="int">
             <case value="1" resultMap="DepositOption"/>
         </discriminator>
@@ -26,19 +28,40 @@
     </resultMap>
 
     <sql id="FundAccountColumns">
-        name, type, icon, convert( column_json(fields) using utf8 ) as fields
+        t.name, t.type, t.icon, convert( column_json(t.fields) using utf8 ) as fields
     </sql>
 
     <sql id="FundAccountFilter" >
         <where> <if test="filter != null">
             <!-- Entity filter -->
-            <if test="filter.id != null"> and id = #{filter.id} </if>
-            <if test="filter.de != null"> and de = #{filter.de} </if>
+            <if test="filter.id != null"> and t.id = #{filter.id} </if>
+            <if test="filter.de != null"> and t.de = #{filter.de} </if>
 
             <!-- FundAccount filter -->
-            <if test="filter.name != null"> and name = #{filter.name} </if>
-            <if test="filter.type != null"> and type = #{filter.type} </if>
+            <if test="filter.name != null"> and t.name = #{filter.name} </if>
+            <if test="filter.type != null"> and t.type = #{filter.type} </if>
+            <if test="filter.fields != null">
+                <foreach index="field" item="value" collection="filter.fields.entrySet()">
+                    and column_get(t.fields, #{field} as <include refid="Common.DynamicColumnDataType"/>) = #{value}
+                </foreach>
+            </if>
         </if> </where>
+    </sql>
+
+    <sql id="TransferAddonColumns">
+        <if test="filter != null and filter.addon">
+            m.id as addon_id, m.de as addon_de, m.ts as addon_ts,
+            column_get(m.fields, 'mode' as int) as addon_mode,
+            column_get(m.fields, 'type' as int) as addon_type,
+            column_get(m.fields, 'content' as char) as addon_content,
+        </if>
+    </sql>
+
+    <sql id="TransferAddonJoin">
+        <if test="filter != null and filter.addon">
+            inner join metadata m
+            on m.catalog = 'FundAccountType' and m.value = type and m.de = 0
+        </if>
     </sql>
 
     <insert id="create">
@@ -92,10 +115,13 @@
     <select id="list" resultMap="FundAccount">
         <bind name="filter" value="_parameter" />
         select
-        <include refid="Common.EntityColumns" />,
-        <include refid="FundAccountColumns" />,
-        #{info} as info
-        from fund_account
+            <include refid="Common.EntityColumns" />,
+            <include refid="FundAccountColumns" />,
+            <include refid="TransferAddonColumns" />
+            #{info} as info
+        from fund_account t
+        inner join metadata m <!-- Use inner join for data integrity( fund account 1_To_1 map to addon) -->
+        on m.catalog = 'FundAccountType' and m.value = type and m.de = 0
         <include refid="FundAccountFilter"/>
     </select>
 </mapper>

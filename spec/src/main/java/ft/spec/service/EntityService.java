@@ -5,10 +5,10 @@ import ft.spec.model.Metadata;
 import java.io.Serializable;
 
 /**
- * Service base interface
+ * Entity service base interface
  * @param <T> Entity type
  */
-public interface Service<T extends Serializable> extends Serializable {
+public interface EntityService<T extends Serializable> extends Serializable {
     /**
      * Create new entity
      * @param subject The operator
@@ -26,7 +26,7 @@ public interface Service<T extends Serializable> extends Serializable {
     Result update(String subject, T entity);
 
     /**
-     *  Delete specific entity
+     * Delete specific entity
      * @param subject The operator
      * @param id  ID of the entity
      * @return

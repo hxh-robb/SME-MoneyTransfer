@@ -3,7 +3,7 @@ package ft.spec.model;
 /**
  * TODO
  */
-public abstract class DepositSlip<T> {
-    protected String mime;
-    protected T content;
+public class DepositSlip {
+    public String mime;
+    public String content;
 }

@@ -1,16 +1,8 @@
 package ft;
 
-import ft.repo.DAO;
 import ft.repo.FundAccountDAO;
-import ft.repo.MetadataDAO;
-import ft.repo.mariadb.MybatisMetadataDAO;
-import ft.spec.model.Metadata;
-import ft.spec.model.SemiStructuredEntity;
-import ft.spec.model.TransferAddon;
-import ft.spec.model.FundAccount;
+import ft.spec.service.FundAccountService;
 import ft.spec.service.MetadataService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,21 +10,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
-import java.util.List;
-
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private Datastore datastore;
 
-	@Autowired
-	private MetadataDAO metadataDao;
+//	@Autowired
+//	private MetadataDAO metadataDao;
 
 	@Autowired
 	private FundAccountDAO fundAccountDao;
 
-	@Autowired
-	private MetadataService metadataService;
+    @Autowired
+    private MetadataService metadataService;
+
+    @Autowired
+    private FundAccountService fundAccountService;
 
 //	@Autowired
 //	private MybatisMetadataDAO test;
@@ -43,7 +36,7 @@ public class CoreApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// mongodb_metadata();
+        // mongodb_metadata();
 		// mongodb_fund_account();
 		mybatis_test();
     }
@@ -72,7 +65,7 @@ public class CoreApplication implements CommandLineRunner {
 //            addon.setValue("1");
 //            addon.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
 //            addon.setType(TransferAddon.Type.PYTHON);
-//            addon.setDescription(addon.getDescription() + "|修改测试 - Test MetadataService");
+//            addon.setDescription(addon.getDescription() + "|修改测试 - Test MetadataEntityService");
 //            addon.setContent("Some script will be written");
 //            addon.setSpec("Wait for me");
 
@@ -88,25 +81,41 @@ public class CoreApplication implements CommandLineRunner {
 		addon.setDescription("Test - 测试修改");
 		System.out.println(test.update(filter,addon));
 		System.out.println(test.delete(filter));*/
-//
-//		TransferAddon bank = new TransferAddon();
-//        bank.setName("Bank");
-//        bank.setDescription("银行卡支付");
-//        bank.setValue("0");
-//        bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
-//        bank.setType(TransferAddon.Type.JAVA);
-//        bank.setSpec("TODO");
-//        bank.setContent("TODO");
-//        System.out.println(metadataDao.create(bank));
-//        TransferAddon hnapay = new TransferAddon();
-//        hnapay.setName("Hnapay");
-//        hnapay.setDescription("新生支付");
-//        hnapay.setValue("1");
-//        hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
-//        hnapay.setType(TransferAddon.Type.PYTHON);
-//        hnapay.setSpec("TODO");
-//        hnapay.setContent("TODO");
-//        System.out.println(metadataDao.create(hnapay));
+
+		/*TransferAddon bank = new TransferAddon();
+        bank.setName("Bank");
+        bank.setDescription("银行卡支付");
+        bank.setValue("0");
+        bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
+        bank.setType(TransferAddon.Type.JAVA);
+        bank.setSpec("TODO");
+        bank.setContent("TODO");
+        System.out.println(metadataService.create(null, bank));
+
+        TransferAddon hnapay = new TransferAddon();
+        hnapay.setName("Hnapay");
+        hnapay.setDescription("新生支付");
+        hnapay.setValue("1");
+        hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
+        hnapay.setType(TransferAddon.Type.PYTHON);
+        hnapay.setSpec("TODO");
+        hnapay.setContent("TODO");
+        System.out.println(metadataService.create(null,hnapay));
+
+        FundAccount hnapayAccount = new FundAccount();
+        hnapayAccount.getInfo().setName("新生商户");
+        hnapayAccount.setType(hnapay.getValue());
+        hnapayAccount.set("Field_0", "ABC");
+        hnapayAccount.set("Field_2", "123");
+        System.out.println(fundAccountService.create(null, hnapayAccount));
+
+        FundAccount bankAccount = new FundAccount();
+        bankAccount.getInfo().setName("银行账号");
+        bankAccount.setType(bank.getValue());
+        bankAccount.set("Account", "6888888888888881");
+        bankAccount.set("Holder", "江泽民");
+        bankAccount.set("Remark", 321);
+        System.out.println(fundAccountService.create(null, bankAccount));*/
 
 		/*MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
 		filter.name = "Simple";
@@ -115,24 +124,19 @@ public class CoreApplication implements CommandLineRunner {
 		addon.setContent("Some script here");
         System.out.println(metadataDao.update(filter,addon));*/
 
-        /*FundAccount account = new FundAccount();
-        account.getInfo().setName("新生7-15");
-        account.getInfo().setType("1");
-        account.set("Godnn", "NNII");
-        account.set("GodAnn", "NN中文SII");
-        fundAccountDao.create(account);*/
-
-        /*FundAccountDAO.Filter filter = null;
+        FundAccountDAO.Filter filter = null;
         filter = new FundAccountDAO.Filter();
-        filter.name = "新生7-15";
-        System.out.println(fundAccountDao.list(filter));
+        // filter.name = "新生7-15";
+        // filter.addon = true;
+//        System.out.println(fundAccountDao.list(filter));
 //        System.out.println(fundAccountDao.listDepositOptions(filter));
+        System.out.println(fundAccountService.supportedDepositOption(null));
         // fundAccountDao.delete(filter);
 //        FundAccount data = new FundAccount();
 //        data.set("MerchantPass", "OutwitPass");
 //        data.set("MerchantID","DDU");
 //        data.setDe(true);
-//        fundAccountDao.update(filter, data);*/
+//        fundAccountDao.update(filter, data);
 	}
 
 //	private void mongodb_fund_account(){

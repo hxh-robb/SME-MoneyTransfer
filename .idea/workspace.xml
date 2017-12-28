@@ -6,26 +6,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d30d38a3-5d29-4271-bf8c-34cbf9b89fa2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/ft/biz/Biz.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountBiz.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositOption.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Service.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/ft/addon/BankDepositSlipGenerator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/ft/addon/TransferAddon.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/ft/biz/EntityBiz.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/ft/biz/TransferBiz.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TransferTask.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/DepositService.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/TransferService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Service.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/EntityService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/CoreApplication.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/CoreApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/biz/Biz.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/biz/Biz.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountBiz.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountBiz.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/biz/MetadataBiz.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/biz/MetadataBiz.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/repo/DAO.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/repo/DAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/repo/FundAccountDAO.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/repo/FundAccountDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/repo/MetadataDAO.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/repo/MetadataDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisFundAccountDAO.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisFundAccountDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/MongoFundAccountDAO.java" afterPath="$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/MongoFundAccountDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/resources/database/schema.sql" afterPath="$PROJECT_DIR$/core/src/main/resources/database/schema.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/Common.xml" afterPath="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/Common.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/FundAccountMapper.xml" afterPath="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/FundAccountMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Entity.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/MetadataMapper.xml" afterPath="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/MetadataMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositSlip.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositSlip.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/FundAccount.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/FundAccount.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Metadata.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Metadata.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/SemiStructuredEntity.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/SemiStructuredEntity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/FundAccountService.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/FundAccountService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/MetadataService.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/MetadataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Result.java" afterPath="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Result.java" />
     </list>
     <ignored path="$PROJECT_DIR$/spec/target/" />
     <ignored path="$PROJECT_DIR$/core/target/" />
@@ -43,57 +44,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Biz.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/Biz.java">
+      <file leaf-file-name="FundAccountDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/FundAccountDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FundAccountBiz.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountBiz.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#337#338#0" expanded="true" />
-                <element signature="e#388#389#0" expanded="true" />
-                <element signature="e#570#571#0" expanded="true" />
-                <element signature="e#620#621#0" expanded="true" />
-                <element signature="e#678#679#0" expanded="true" />
-                <element signature="e#718#719#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MetadataBiz.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/MetadataBiz.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="82" column="44" lean-forward="false" selection-start-line="82" selection-start-column="44" selection-end-line="82" selection-end-column="44" />
-              <folding>
-                <element signature="e#2114#2115#0" expanded="true" />
-                <element signature="e#2165#2166#0" expanded="true" />
-                <element signature="e#2674#2675#0" expanded="true" />
-                <element signature="e#2711#2712#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CoreApplication.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/CoreApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="53" selection-end-column="37" />
+            <state relative-caret-position="378">
+              <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransferBiz.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/TransferBiz.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="644">
+              <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FundAccount.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/FundAccount.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="518">
+              <caret line="53" column="25" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+              <folding>
+                <element signature="e#954#955#0" expanded="true" />
+                <element signature="e#982#983#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransferAddon.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/TransferAddon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BankDepositSlipGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/BankDepositSlipGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
+              <folding>
+                <element signature="e#141#142#0" expanded="true" />
+                <element signature="e#168#169#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,20 +107,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fillUpdateOperators</find>
-      <find>resolveDiscriminatedResultMap</find>
-      <find>applyAutomaticMappings</find>
-      <find>shouldApplyAutomaticMappings</find>
-      <find>parameterType</find>
-      <find>parameterMap</find>
-      <find>doQuery</find>
       <find>mappedStatements.put</find>
       <find>MetadataWhere</find>
       <find>Param</find>
@@ -140,6 +137,13 @@
       <find>unstructured</find>
       <find>unstructuredFields</find>
       <find>this</find>
+      <find>==</find>
+      <find>!=</find>
+      <find>EntityColumns</find>
+      <find>TransferAddonColumns</find>
+      <find>MetadataColumns</find>
+      <find>column_get</find>
+      <find>FundAccountFilter</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,28 +157,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositAddon.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/skeleton/MetadataSkeleton.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/MongoDAOHelper.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/boot/MongoDBConfiguration.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/MongoMetadataDAO.java" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/http-banner.txt" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/spec-banner.txt" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/Common.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/TransferAddonTypeHandlers.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/TransferAddonEnumTypeHandler.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/TransferAddonEnumHandler.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/ModeHandler.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/TransferAddonTypeHandler.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/TransferAddonModeHandler.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/CustomReflectorFactory.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mybatis/ReflectorWrapper.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mybatis/CustomReflectorFactory.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mybatis/CustomReflector.java" />
         <option value="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-parent/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-parent-2.0.0.BUILD-SNAPSHOT.pom" />
         <option value="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-dependencies/2.0.0.BUILD-SNAPSHOT/spring-boot-dependencies-2.0.0.BUILD-SNAPSHOT.pom" />
-        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/DepositService.java" />
-        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Result.java" />
         <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/SemiStructedEntity.java" />
         <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TransferAddon.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisDAO.java" />
@@ -183,27 +169,45 @@
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/JsonHandler.java" />
         <option value="$PROJECT_DIR$/core/src/main/resources/mybatis-config.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/MetadataMapper.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/FundAccountDAO.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisFundAccountDAO.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/DAO.java" />
         <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/SemiStructuredEntity.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/MongoFundAccountDAO.java" />
-        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/FundAccount.java" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/FundAccountMapper.xml" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/MetadataDAO.java" />
-        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/MetadataService.java" />
-        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/FundAccountService.java" />
-        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Service.java" />
         <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositOption.java" />
         <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Entity.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/Biz.java" />
         <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Metadata.java" />
         <option value="$PROJECT_DIR$/core/src/main/resources/database/schema.sql" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Task.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TaskHistory.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TransferTask.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/DepositService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/MetadataMapper.xml" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Result.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/repo/FundAccountDAO.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/Common.xml" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/FundAccountMapper.xml" />
         <option value="$PROJECT_DIR$/core/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/MetadataBiz.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountBiz.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/FundAccountService.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/MetadataService.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/TransferService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/Biz.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Service.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/EntityService.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/MetadataEntityService.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/service/FundAccountEntityService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountDaoBiz.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/MetadataDaoBiz.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/DaoBiz.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ft/CoreApplication.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountBiz.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/MetadataBiz.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/FundAccount.java" />
+        <option value="$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositSlip.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/addon/BankDepositSlipAddon.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/biz/TransferBiz.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/addon/BankDepositSlipGenerator.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ft/addon/TransferAddon.java" />
       </list>
     </option>
   </component>
@@ -301,6 +305,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="ft" type="462c0819:PsiDirectoryNode" />
+              <item name="addon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ft" type="462c0819:PsiDirectoryNode" />
               <item name="biz" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -330,25 +344,10 @@
               <item name="core" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis-mappers" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ft" type="462c0819:PsiDirectoryNode" />
+              <item name="repo" type="462c0819:PsiDirectoryNode" />
+              <item name="mongodb" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
@@ -359,7 +358,51 @@
               <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
               <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
               <item name="spec" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fund-transfer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="outwit-FT" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -374,7 +417,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/core" />
-    <property name="SearchEverywhereHistoryKey" value="TypeHandler&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/type/TypeHandler.java&#10;Semi&#9;FILE&#9;file:///home/robb/Git/outwit-FT/spec/src/main/java/ft/spec/model/SemiStructuredEntity.java&#10;TransferAddon&#9;FILE&#9;file:///home/robb/Git/outwit-FT/spec/src/main/java/ft/spec/model/TransferAddon.java&#10;a&#9;FILE&#9;file:///home/robb/Git/outwit-FT/core/src/main/resources/application.yml&#10;spring.datasource.initialize&#9;PSI&#9;JAVA://org.springframework.jdbc.datasource.init.DataSourceInitializer&#10;@Param&#9;PSI&#9;JAVA://org.apache.ibatis.annotations.Param&#10;Default&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/session/defaults/DefaultSqlSession.java&#10;Object&#9;PSI&#9;JAVA://java.lang.Object&#10;IntegerTypeHan&#9;PSI&#9;JAVA://org.apache.ibatis.type.IntegerTypeHandler&#10;Unknow&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/type/UnknownTypeHandler.java&#10;TypeHandlerRegistry&#9;PSI&#9;JAVA://org.apache.ibatis.type.TypeHandlerRegistry&#10;ResultSet&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/executor/resultset/DefaultResultSetHandler.java&#10;CoreA&#9;FILE&#9;file:///home/robb/Git/outwit-FT/core/src/main/java/ft/CoreApplication.java&#10;Arrays&#9;PSI&#9;JAVA://java.util.Arrays" />
+    <property name="SearchEverywhereHistoryKey" value="FundAccountService&#9;FILE&#9;file:///home/robb/Git/outwit-FT/spec/src/main/java/ft/spec/service/FundAccountService.java&#10;Serializ&#9;PSI&#9;JAVA://java.io.Serializable&#10;TypeHandler&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/type/TypeHandler.java&#10;Semi&#9;FILE&#9;file:///home/robb/Git/outwit-FT/spec/src/main/java/ft/spec/model/SemiStructuredEntity.java&#10;TransferAddon&#9;FILE&#9;file:///home/robb/Git/outwit-FT/spec/src/main/java/ft/spec/model/TransferAddon.java&#10;a&#9;FILE&#9;file:///home/robb/Git/outwit-FT/core/src/main/resources/application.yml&#10;spring.datasource.initialize&#9;PSI&#9;JAVA://org.springframework.jdbc.datasource.init.DataSourceInitializer&#10;@Param&#9;PSI&#9;JAVA://org.apache.ibatis.annotations.Param&#10;Default&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/session/defaults/DefaultSqlSession.java&#10;Object&#9;PSI&#9;JAVA://java.lang.Object&#10;IntegerTypeHan&#9;PSI&#9;JAVA://org.apache.ibatis.type.IntegerTypeHandler&#10;Unknow&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/type/UnknownTypeHandler.java&#10;TypeHandlerRegistry&#9;PSI&#9;JAVA://org.apache.ibatis.type.TypeHandlerRegistry&#10;ResultSet&#9;FILE&#9;jar:///home/robb/.m2/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/executor/resultset/DefaultResultSetHandler.java&#10;CoreA&#9;FILE&#9;file:///home/robb/Git/outwit-FT/core/src/main/java/ft/CoreApplication.java&#10;Arrays&#9;PSI&#9;JAVA://java.util.Arrays" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -587,9 +630,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.87741935" sideWeight="0.50408274" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="136" y="96" width="1685" height="885" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.077844314" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30430108" sideWeight="0.4980947" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3344086" sideWeight="0.4980947" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51827955" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="60" y="293" width="1837" height="476" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5172043" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="60" y="293" width="1837" height="476" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6860215" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -599,7 +642,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986391" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986391" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6698925" sideWeight="0.49591726" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31290323" sideWeight="0.49591726" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -607,6 +650,35 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.87741935" sideWeight="0.50408274" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.077844314" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6860215" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4474687" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986391" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986391" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31290323" sideWeight="0.49591726" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.455914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="136" y="96" width="1685" height="885" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47741935" sideWeight="0.4980947" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5172043" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="60" y="293" width="1837" height="476" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24496461" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -696,7 +768,7 @@
           </selected-grouping-rules>
         </breakpoints-dialog>
       </breakpoints-dialog>
-      <option name="time" value="102" />
+      <option name="time" value="105" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -705,150 +777,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/skeleton/MetadataSkeleton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="12" column="7" lean-forward="true" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/JsonHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/boot/MybatisConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/boot/MongoDBConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/Coordinator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mybatis-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/builder/xml/mybatis-3-mapper.dtd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/src.zip!/java/lang/reflect/Method.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="200" column="15" lean-forward="false" selection-start-line="200" selection-start-column="15" selection-end-line="200" selection-end-column="15" />
-          <folding>
-            <element signature="e#7330#7331#0" expanded="false" />
-            <element signature="e#7362#7363#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/src.zip!/java/lang/reflect/Modifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="233" column="38" lean-forward="false" selection-start-line="233" selection-start-column="38" selection-end-line="233" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/MetadataMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="49" lean-forward="true" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisMetadataDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/2.7.4/HikariCP-2.7.4-sources.jar!/com/zaxxer/hikari/HikariConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="816" column="0" lean-forward="true" selection-start-line="816" selection-start-column="0" selection-end-line="816" selection-end-column="0" />
-          <folding>
-            <element signature="e#25889#25890#0" expanded="false" />
-            <element signature="e#25926#25927#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.0.BUILD-SNAPSHOT/spring-boot-autoconfigure-2.0.0.BUILD-20171224.120631-315-sources.jar!/org/springframework/boot/autoconfigure/jdbc/DataSourceInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/session/SqlSessionManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="205" column="11" lean-forward="false" selection-start-line="205" selection-start-column="11" selection-end-line="205" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/session/SqlSession.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0-SNAPSHOT/mybatis-spring-2.0.0-20171204.114259-51.jar!/org/mybatis/spring/SqlSessionTemplate.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="194" column="0" lean-forward="false" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.5/mybatis-3.4.5-sources.jar!/org/apache/ibatis/executor/CachingExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -881,25 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisFundAccountDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="27" column="47" lean-forward="true" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
-          <folding>
-            <element signature="e#456#457#0" expanded="false" />
-            <element signature="e#534#535#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/MongoFundAccountDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -911,122 +820,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/Common.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/FundAccountMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="46" column="28" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/SemiStructuredEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1529">
           <caret line="26" column="42" lean-forward="false" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositSlip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/DAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="22" column="18" lean-forward="true" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/FundAccountDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/FundAccountService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="11" column="64" lean-forward="false" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/MetadataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="11" column="58" lean-forward="false" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Result.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/FundAccount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositOption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="8" column="50" lean-forward="false" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TransferAddon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-          <folding>
-            <element signature="e#218#219#0" expanded="true" />
-            <element signature="e#304#305#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1038,19 +836,6 @@
             <element signature="e#7567#7575#0" expanded="true" />
             <element signature="e#14074#14082#0" expanded="true" />
             <element signature="e#37778#37786#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Metadata.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="36" column="28" lean-forward="false" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
-          <folding>
-            <element signature="e#581#582#0" expanded="true" />
-            <element signature="e#619#620#0" expanded="true" />
-            <element signature="e#1616#1617#0" expanded="true" />
-            <element signature="e#1654#1655#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1073,24 +858,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/MetadataDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="31" column="20" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Service.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="33" column="11" lean-forward="false" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
@@ -1107,18 +874,235 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1358">
+          <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisFundAccountDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="47" lean-forward="true" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/MybatisMetadataDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/resources/database/schema.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="51" lean-forward="false" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+        <state relative-caret-position="342">
+          <caret line="40" column="79" lean-forward="true" selection-start-line="40" selection-start-column="79" selection-end-line="41" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mongodb/skeleton/MetadataSkeleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="12" column="7" lean-forward="true" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/mariadb/JsonHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/src.zip!/java/io/Serializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="161" column="34" lean-forward="true" selection-start-line="161" selection-start-column="34" selection-end-line="161" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TaskHistory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TransferAddon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <element signature="e#218#219#0" expanded="true" />
+            <element signature="e#304#305#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Metadata.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-310">
+          <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/DAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/MetadataDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="30" column="15" lean-forward="false" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/Common.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/FundAccountMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="119" column="52" lean-forward="true" selection-start-line="119" selection-start-column="52" selection-end-line="119" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9">
+          <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="66" column="30" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mybatis-mappers/MetadataMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-243">
+          <caret line="8" column="50" lean-forward="false" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" column="53" lean-forward="true" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/TransferTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/EntityService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="28" column="7" lean-forward="false" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/Biz.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+        <state relative-caret-position="108">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/MetadataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/FundAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/CoreApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/service/TransferService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/EntityBiz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1127,37 +1111,106 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/FundAccountBiz.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#388#389#0" expanded="true" />
-            <element signature="e#570#571#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-            <element signature="e#678#679#0" expanded="true" />
-            <element signature="e#718#719#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/MetadataBiz.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="82" column="44" lean-forward="false" selection-start-line="82" selection-start-column="44" selection-end-line="82" selection-end-column="44" />
+        <state relative-caret-position="-724">
+          <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
           <folding>
-            <element signature="e#2114#2115#0" expanded="true" />
-            <element signature="e#2165#2166#0" expanded="true" />
-            <element signature="e#2674#2675#0" expanded="true" />
-            <element signature="e#2711#2712#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/CoreApplication.java">
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/DepositSlip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="51" column="10" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="53" selection-end-column="37" />
+        <state relative-caret-position="126">
+          <caret line="7" column="10" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/boot/MongoDBConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="22" column="35" lean-forward="true" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/boot/MybatisConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/Coordinator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/repo/FundAccountDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/biz/TransferBiz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/BankDepositSlipGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
+          <folding>
+            <element signature="e#141#142#0" expanded="true" />
+            <element signature="e#168#169#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/src/main/java/ft/spec/model/FundAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="53" column="25" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+          <folding>
+            <element signature="e#954#955#0" expanded="true" />
+            <element signature="e#982#983#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ft/addon/TransferAddon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="26" />
           <folding />
         </state>
       </provider>
