@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema#",
+  "type": "object",
+  "properties": {
+    "account": {
+        "type": "string",
+        "title": "银行账号",
+        "description": "用于接收用户充值款项的银行账号",
+        "required": true
+    },
+    "holder": {
+        "type": "string",
+        "title": "收款人",
+        "description": "银行账号的持卡人",
+        "required": true
+    },
+    "bank": {
+        "type": "string",
+        "title": "银行名称",
+        "description": "签发该银行账号的支行信息"
+    },
+    "branch": {
+        "type": "string",
+        "title": "支行信息",
+        "description": "签发该银行账号的支行信息"
+    }
+  }
+}

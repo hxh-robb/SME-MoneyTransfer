@@ -121,7 +121,7 @@
             #{info} as info
         from fund_account t
         inner join metadata m <!-- Use inner join for data integrity( fund account 1_To_1 map to addon) -->
-        on m.catalog = 'FundAccountType' and m.value = type and m.de = 0
+        on m.catalog = 'TransferAddon' and m.value = type and m.de = 0
         <include refid="FundAccountFilter"/>
     </select>
 </mapper>

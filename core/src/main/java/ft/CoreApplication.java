@@ -1,14 +1,28 @@
 package ft;
 
 import ft.repo.FundAccountDAO;
+import ft.spec.model.FundAccount;
+import ft.spec.model.TransferAddon;
 import ft.spec.service.FundAccountService;
 import ft.spec.service.MetadataService;
+import ft.spec.service.TransferService;
+import org.python.core.Py;
+import org.python.core.PyCode;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 public class CoreApplication implements CommandLineRunner {
@@ -27,18 +41,93 @@ public class CoreApplication implements CommandLineRunner {
     @Autowired
     private FundAccountService fundAccountService;
 
+    @Autowired
+    private TransferService transferService;
+
 //	@Autowired
 //	private MybatisMetadataDAO test;
 
-	public static void main(String[] args) {
-		SpringApplication.run(CoreApplication.class, args);
+	public static void main(String[] args) throws IOException {
+        PythonInterpreter interpreter = new PythonInterpreter();
+	    String code = read("script/test.py");
+        interpreter.exec("import types");
+        interpreter.exec("addon = types.ModuleType('addon')");
+        interpreter.exec(MessageFormat.format("exec ''''''\n{0}\n'''''' in addon.__dict__",code));
+
+        PyObject func = interpreter.eval("addon.test");
+        Map<String, Number> params = new HashMap<>();
+        params.put("count",0);
+
+        Object i = 0;
+        long begin = System.currentTimeMillis();
+        while( System.currentTimeMillis() - begin < 1000) {
+            // i = interpreter.eval("addon.test(" + i + ")").__tojava__(Integer.class);
+            // i = Py.py2int(func.__call__(Py.java2py(i)));
+            // func.__call__(Py.java2py(params));
+            count(params);
+        }
+        System.out.println(params);
+
+        // SpringApplication.run(CoreApplication.class, args);
+//        String s1 = read("script/test.py");
+//        String s2 = read("script/test2.py");
+//        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+//        PyHelper helper1 = new PyHelper(s1);
+//        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+//        PyHelper helper2 = new PyHelper(s2);
+//        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+//        helper1.run("test()");
+//        helper2.run("test()");
+//        helper1.run("test()");
+//        helper2.run("test()");
+//        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+//        helper1 = null;
+//        helper2 = null;
+//        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
+
+	private static void count(Map<String,Number> params){
+	    params.put("count", params.get("count").longValue() + 1);
+    }
 
 	@Override
 	public void run(String... args) throws Exception {
         // mongodb_metadata();
 		// mongodb_fund_account();
-		mybatis_test();
+		// mybatis_test();
+
+        String s1 = read("script/test.py");
+        String s2 = read("script/test2.py");
+
+        PyHelper helper1 = new PyHelper(s1);
+        PyHelper helper2 = new PyHelper(s2);
+
+        helper1.run("test()");
+        helper2.run("test()");
+        helper1.run("test()");
+        helper2.run("test()");
+
+        helper1.close();
+        helper2.close();
+
+        helper1 = null;
+        helper2 = null;
+    }
+
+
+
+    private static final class PyHelper{
+	    private PythonInterpreter pi;
+
+	    public PyHelper(String script){
+	        this.pi = new PythonInterpreter();
+            pi.exec(script);
+        }
+
+        public void run(String expression){
+	        pi.exec(expression);
+        }
+        public void close(){ pi.close(); }
     }
 
 	private void mybatis_test() {
@@ -82,14 +171,14 @@ public class CoreApplication implements CommandLineRunner {
 		System.out.println(test.update(filter,addon));
 		System.out.println(test.delete(filter));*/
 
-		/*TransferAddon bank = new TransferAddon();
+		TransferAddon bank = new TransferAddon();
         bank.setName("Bank");
         bank.setDescription("银行卡支付");
         bank.setValue("0");
         bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
         bank.setType(TransferAddon.Type.JAVA);
-        bank.setSpec("TODO");
-        bank.setContent("TODO");
+        bank.setSpec(read("addon-spec/bank-spec.json"));
+        bank.setContent("ft.addon.BankDepositSlipGenerator");
         System.out.println(metadataService.create(null, bank));
 
         TransferAddon hnapay = new TransferAddon();
@@ -112,10 +201,23 @@ public class CoreApplication implements CommandLineRunner {
         FundAccount bankAccount = new FundAccount();
         bankAccount.getInfo().setName("银行账号");
         bankAccount.setType(bank.getValue());
-        bankAccount.set("Account", "6888888888888881");
-        bankAccount.set("Holder", "江泽民");
-        bankAccount.set("Remark", 321);
-        System.out.println(fundAccountService.create(null, bankAccount));*/
+        bankAccount.set("account", "6888888888888881");
+        bankAccount.set("holder", "江泽民");
+        bankAccount.set("bank", "中国中央银行");
+        System.out.println(fundAccountService.create(null, bankAccount));
+
+		/*List<DepositOption> options = fundAccountService.supportedDepositOption(null);
+		DepositOption option = null;
+        for (DepositOption o:options) {
+            if("银行账号".equals(o.getName()))
+                option = o;
+        }
+
+        if( null != option ) {
+            System.out.println(
+                transferService.generateDepositSlip(null, option.getId(), 300.0)
+            );
+        }*/
 
 		/*MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
 		filter.name = "Simple";
@@ -124,7 +226,7 @@ public class CoreApplication implements CommandLineRunner {
 		addon.setContent("Some script here");
         System.out.println(metadataDao.update(filter,addon));*/
 
-        FundAccountDAO.Filter filter = null;
+        /*FundAccountDAO.Filter filter = null;
         filter = new FundAccountDAO.Filter();
         // filter.name = "新生7-15";
         // filter.addon = true;
@@ -136,7 +238,7 @@ public class CoreApplication implements CommandLineRunner {
 //        data.set("MerchantPass", "OutwitPass");
 //        data.set("MerchantID","DDU");
 //        data.setDe(true);
-//        fundAccountDao.update(filter, data);
+//        fundAccountDao.update(filter, data);*/
 	}
 
 //	private void mongodb_fund_account(){
@@ -219,4 +321,21 @@ public class CoreApplication implements CommandLineRunner {
 		// dao.delete(f);
 		// System.out.println(metadataDao.list(f));
 	}
+
+	private static String read(String file) {
+        try {
+            FileReader reader = new FileReader(CoreApplication.class.getClassLoader().getResource(file).getFile());
+            BufferedReader buffer = new BufferedReader(reader);
+            String lines = null, line;
+            while( null != (line = buffer.readLine())) {
+                if( null == lines)
+                    lines = line;
+                else
+                    lines += "\n" + line;
+            }
+            return lines;
+        } catch (Throwable throwable) {
+            return null;
+        }
+    }
 }

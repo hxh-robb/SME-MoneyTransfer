@@ -23,4 +23,9 @@ public class TransferTask extends Entity {
      * Fund account
      */
     private FundAccount account;
+
+    /**
+     * Reference flag
+     */
+    private String ref;
 }

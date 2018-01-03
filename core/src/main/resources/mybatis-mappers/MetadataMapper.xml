@@ -16,7 +16,7 @@
         <result property="value" column="value"/>
 
         <discriminator javaType="string" column="catalog">
-            <case value="FundAccountType" resultMap="TransferAddon"/>
+            <case value="TransferAddon" resultMap="TransferAddon"/>
         </discriminator>
     </resultMap>
 

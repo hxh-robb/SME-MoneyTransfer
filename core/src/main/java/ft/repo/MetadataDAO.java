@@ -30,7 +30,7 @@ public interface MetadataDAO extends DAO<Metadata, MetadataDAO.Filter> {
     final class TransferAddonFilter extends Filter {
         public TransferAddonFilter(){
             super();
-            this.catalog = Metadata.CATALOG.FUND_ACCOUNT_TYPE;
+            this.catalog = Metadata.CATALOG.TRANSFER_ADDON;
         }
         public TransferAddon.Mode mode;
         public TransferAddon.Type type;

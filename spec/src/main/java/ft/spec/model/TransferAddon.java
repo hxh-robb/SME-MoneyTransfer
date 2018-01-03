@@ -10,7 +10,7 @@ public class TransferAddon extends Metadata {
      * </pre>
      */
     public TransferAddon() {
-        super(true, CATALOG.FUND_ACCOUNT_TYPE); // Specify the metadata catalog
+        super(true, CATALOG.TRANSFER_ADDON); // Specify the metadata catalog
     }
 
     /**
@@ -136,8 +136,16 @@ public class TransferAddon extends Metadata {
          * <pre>
          * Deposit slip represented as a HTML form which will auto-submit to third-party financial intermediaries
          * </pre>
+         * TODO : Register intermediary notify http api
          */
         INTERMEDIARY_DEPOSIT(0x0001),
+
+        /**
+         * <pre>
+         * Deposit slip represented as a HTML form which will auto-submit to third-party financial intermediaries
+         * </pre>
+         */
+        WECHAT_DEPOSIT(0x0001),
 
         /**
          * <pre>

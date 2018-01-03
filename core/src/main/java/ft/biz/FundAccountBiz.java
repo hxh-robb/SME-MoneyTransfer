@@ -28,7 +28,7 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
         if( null == account.getType() ) return true;
 
         MetadataDAO.Filter filter = new MetadataDAO.Filter();
-        filter.catalog = Metadata.CATALOG.FUND_ACCOUNT_TYPE;
+        filter.catalog = Metadata.CATALOG.TRANSFER_ADDON;
         filter.value = account.getType();
         filter.de = false;
         return metadataDAO.list(filter).isEmpty();  // Cannot find match addon for this account
@@ -48,7 +48,7 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
     public List<DepositOption> supportedDepositOption(String subject) {
         FundAccountDAO.Filter filter = createFilter();
         filter.de = false;
-        // TODO: Set filter by subject
+        // TODO: Set filter by subject(ACL)
         return dao.listDepositOptions(filter);
     }
 

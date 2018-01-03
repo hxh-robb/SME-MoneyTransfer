@@ -115,6 +115,6 @@ public class Metadata extends Entity {
         /**
          * Fund account type catalog
          */
-        String FUND_ACCOUNT_TYPE = "FundAccountType";
+        String TRANSFER_ADDON = "TransferAddon";
     }
 }
