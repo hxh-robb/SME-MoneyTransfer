@@ -3,6 +3,7 @@ package ft.addon;
 import ft.repo.MetadataDAO;
 import ft.spec.model.Metadata;
 import ft.spec.model.TransferAddon;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -67,6 +68,7 @@ public class Coordinator {
     public <T> T execute(String metadataId, String function, Map<String,Object> parameters) {
         Addon addon = lookup(metadataId);
         if( null == addon ) {
+            LoggerFactory.getLogger(this.getClass()).error("Can not find available addon:" + metadataId);
             return null;
         }
 
@@ -131,6 +133,7 @@ public class Coordinator {
 
             return null;
         } catch(Throwable throwable) {
+            LoggerFactory.getLogger(this.getClass()).error("Create addon fail", throwable);
             return null;
         }
     }

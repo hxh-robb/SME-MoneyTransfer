@@ -22,7 +22,7 @@ public abstract class Entity implements Serializable{
     protected Entity(boolean init) {
         if( init ) {
             this.id = UUID.randomUUID().toString(); // generate random unique id
-            this.ts = new Date();
+//            this.ts = new Date();
             this.de = false;
         }
     }

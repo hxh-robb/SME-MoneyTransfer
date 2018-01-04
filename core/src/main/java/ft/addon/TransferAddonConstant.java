@@ -1,6 +1,7 @@
 package ft.addon;
 
 import ft.spec.model.FundAccount;
+import ft.spec.model.TransferTask;
 
 import java.util.Map;
 
@@ -40,9 +41,9 @@ public interface TransferAddonConstant {
         String ACCOUNT = "account";
 
         /**
-         * Transfer amount
+         * Transfer details
          */
-        String AMOUNT = "amount";
+        String TASK = "task";
     }
 
     /**
@@ -50,21 +51,21 @@ public interface TransferAddonConstant {
      */
     final class Parameters {
         public FundAccount account;
-        public Double amount;
+        public TransferTask task;
 
         public static final Parameters instance(Map<String,Object> raw){
             if( null == raw ) return null;
 
             Object rawAccount = raw.get(ParamKeys.ACCOUNT);
-            Object rawAmount = raw.get(ParamKeys.AMOUNT);
+            Object rawTask = raw.get(ParamKeys.TASK);
 
             if( null == rawAccount || !(rawAccount instanceof FundAccount) ||
-                null == rawAmount || !(rawAmount instanceof Double))
+                null == rawTask || !(rawTask instanceof TransferTask))
                 return null;
 
             Parameters parameters = new Parameters();
             parameters.account = (FundAccount)rawAccount;
-            parameters.amount = (Double)rawAmount;
+            parameters.task = (TransferTask)rawTask;
             return parameters;
         }
     }

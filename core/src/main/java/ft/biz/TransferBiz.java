@@ -6,6 +6,7 @@ import ft.repo.FundAccountDAO;
 import ft.spec.model.DepositSlip;
 import ft.spec.model.FundAccount;
 import ft.spec.model.TransferAddon;
+import ft.spec.model.TransferTask;
 import ft.spec.service.TransferService;
 import org.springframework.stereotype.Service;
 
@@ -48,15 +49,23 @@ public class TransferBiz extends Biz implements TransferService {
             return null; // Invalid addon
 
         // TODO : Create task for following deposit process
-        TransferAddon.Mode mode = account.getAddon().getMode();
-        if( TransferAddon.Mode.INTERMEDIARY_DEPOSIT.equals(mode) ) {
-            // TODO : register notification on program startup
-        }
+        TransferTask task = new TransferTask();
+        task.setAmount(amount);
+//        task.setRef(""); // order id? ps?
+
+//        TransferAddon.Mode mode = account.getAddon().getMode();
+//        if( TransferAddon.Mode.INTERMEDIARY_DEPOSIT.equals(mode) ) {
+//            // TO-DO : register notification on program startup
+//        }
 
         /* TODO : Generate deposit slip, Script + amount + fundAccount.fields = DepositSlip */
         Map<String,Object> param = new HashMap<>();
         param.put(TransferAddonConstant.ParamKeys.ACCOUNT, account);
-        param.put(TransferAddonConstant.ParamKeys.AMOUNT, amount);
-        return coordinator.execute(account.getAddon().getId(), param);
+        param.put(TransferAddonConstant.ParamKeys.TASK, task);
+        DepositSlip slip = coordinator.execute(account.getAddon().getId(), param);;
+
+        // TODO : Store transfer task to database after slip generated
+
+        return slip;
     }
 }

@@ -3,6 +3,7 @@ package ft.addon;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ft.spec.model.DepositSlip;
 import ft.spec.model.FundAccount;
+import ft.spec.model.TransferTask;
 
 import java.text.MessageFormat;
 import java.util.Map;
@@ -22,30 +23,32 @@ public class BankDepositSlipGenerator implements Addon,TransferAddonConstant {
     public <T> T execute(String func, Map<String, Object> parameters) {
         Parameters param = Parameters.instance(parameters);
         if( Functions.GENERATE.equalsIgnoreCase(func) )
-            return (T)generate(param.account,param.amount);
+            return (T)generate(param.account,param.task);
         throw new UnsupportedOperationException(MessageFormat.format("Unsupported function:[{0}]", func));
     }
 
     /**
      * Generate slip(Default execution)
      * @param account
-     * @param amount
+     * @param task
      * @return
      */
-    private DepositSlip generate(FundAccount account, Double amount) {
+    private DepositSlip generate(FundAccount account, TransferTask task) {
         try {
             Slip slip = new Slip();
             slip.account = account.get(Fields.ACCOUNT);
             slip.holder = account.get(Fields.HOLDER);
             slip.bank = account.get(Fields.BANK);
             slip.branch = account.get(Fields.BRANCH);
-            slip.amount = amount;
-            slip.ps = UUID.randomUUID().toString().substring(0,4);
+            slip.amount = task.getAmount();
+            slip.ps = task.getId().substring(0,4);
+
+            // set dynamic parameter back to task object
+            task.setRef(slip.ps);
 
             DepositSlip ds = new DepositSlip();
             ds.mime = "application/json; charset=UTF-8";
             ds.content = new ObjectMapper().writeValueAsString(slip);
-            ds.ref = slip.ps;
             return ds;
         } catch (Throwable throwable) {
             throw new RuntimeException("Cannot generate deposit slip", throwable);

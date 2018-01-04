@@ -1,6 +1,8 @@
 package ft;
 
 import ft.repo.FundAccountDAO;
+import ft.spec.model.DepositOption;
+import ft.spec.model.DepositSlip;
 import ft.spec.model.FundAccount;
 import ft.spec.model.TransferAddon;
 import ft.spec.service.FundAccountService;
@@ -22,6 +24,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
@@ -47,28 +50,38 @@ public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private MybatisMetadataDAO test;
 
+
 	public static void main(String[] args) throws IOException {
-        PythonInterpreter interpreter = new PythonInterpreter();
-	    String code = read("script/test.py");
-        interpreter.exec("import types");
-        interpreter.exec("addon = types.ModuleType('addon')");
-        interpreter.exec(MessageFormat.format("exec ''''''\n{0}\n'''''' in addon.__dict__",code));
+//        PythonInterpreter interpreter = new PythonInterpreter();
 
-        PyObject func = interpreter.eval("addon.test");
-        Map<String, Number> params = new HashMap<>();
-        params.put("count",0);
+//        DepositSlip slip = new DepositSlip();
+//        slip.content = "test"; slip.mime = "text/plain"; slip.t = 10.0;
+//        interpreter.exec("def test(param):\n  print param\n  param.t=15.0");
+//        PyObject func = interpreter.eval("test");
+//        func.__call__(Py.java2py(slip));
+//        System.out.println(slip);
 
-        Object i = 0;
-        long begin = System.currentTimeMillis();
-        while( System.currentTimeMillis() - begin < 1000) {
-            // i = interpreter.eval("addon.test(" + i + ")").__tojava__(Integer.class);
-            // i = Py.py2int(func.__call__(Py.java2py(i)));
-            // func.__call__(Py.java2py(params));
-            count(params);
-        }
-        System.out.println(params);
+//	    String code = read("script/test.py");
+//        interpreter.exec("import types");
+//        interpreter.exec("addon = types.ModuleType('addon')");
+//        interpreter.exec(MessageFormat.format("exec ''''''\n{0}\n'''''' in addon.__dict__",code));
+//
+//        PyObject func = interpreter.eval("addon.test");
+//        Map<String, Number> params = new HashMap<>();
+//        params.put("count",0);
+//
+//        Object i = 0;
+//        long begin = System.currentTimeMillis();
+//        while( System.currentTimeMillis() - begin < 1000) {
+//            // i = interpreter.eval("addon.test(" + i + ")").__tojava__(Integer.class);
+//            // i = Py.py2int(func.__call__(Py.java2py(i)));
+//            // func.__call__(Py.java2py(params));
+//            count(params);
+//        }
+//        System.out.println(params);
 
-        // SpringApplication.run(CoreApplication.class, args);
+         SpringApplication.run(CoreApplication.class, args);
+
 //        String s1 = read("script/test.py");
 //        String s2 = read("script/test2.py");
 //        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
@@ -85,36 +98,10 @@ public class CoreApplication implements CommandLineRunner {
 //        helper2 = null;
 //        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
-
+/*
 	private static void count(Map<String,Number> params){
 	    params.put("count", params.get("count").longValue() + 1);
     }
-
-	@Override
-	public void run(String... args) throws Exception {
-        // mongodb_metadata();
-		// mongodb_fund_account();
-		// mybatis_test();
-
-        String s1 = read("script/test.py");
-        String s2 = read("script/test2.py");
-
-        PyHelper helper1 = new PyHelper(s1);
-        PyHelper helper2 = new PyHelper(s2);
-
-        helper1.run("test()");
-        helper2.run("test()");
-        helper1.run("test()");
-        helper2.run("test()");
-
-        helper1.close();
-        helper2.close();
-
-        helper1 = null;
-        helper2 = null;
-    }
-
-
 
     private static final class PyHelper{
 	    private PythonInterpreter pi;
@@ -129,8 +116,46 @@ public class CoreApplication implements CommandLineRunner {
         }
         public void close(){ pi.close(); }
     }
+*/
+
+    @Override
+    public void run(String... args) throws Exception {
+        // mongodb_metadata();
+        // mongodb_fund_account();
+        mybatis_test();
+
+//        String s1 = read("script/test.py");
+//        String s2 = read("script/test2.py");
+//
+//        PyHelper helper1 = new PyHelper(s1);
+//        PyHelper helper2 = new PyHelper(s2);
+//
+//        helper1.run("test()");
+//        helper2.run("test()");
+//        helper1.run("test()");
+//        helper2.run("test()");
+//
+//        helper1.close();
+//        helper2.close();
+//
+//        helper1 = null;
+//        helper2 = null;
+    }
 
 	private void mybatis_test() {
+        List<TransferAddon> addons = metadataService.supportedTransferAddons(null);
+        for (TransferAddon addon : addons) {
+            if(TransferAddon.Mode.INTERMEDIARY_DEPOSIT.equals(addon.getMode()) && TransferAddon.Type.PYTHON.equals(addon.getType())){
+                addon.setContent(read("script/hnapay2.6.py"));
+                metadataService.update(null, addon);
+            }
+        }
+
+        List<DepositOption> list = fundAccountService.supportedDepositOption(null);
+        for (DepositOption option:list) {
+            System.out.println(transferService.generateDepositSlip(null, option.getId(),  100.0));
+        }
+
 	    /*List<TransferAddon> result = metadataService.supportedTransferAddons(null);
         System.out.println(result.size());
         System.out.println(result);*/
@@ -171,7 +196,7 @@ public class CoreApplication implements CommandLineRunner {
 		System.out.println(test.update(filter,addon));
 		System.out.println(test.delete(filter));*/
 
-		TransferAddon bank = new TransferAddon();
+		/*TransferAddon bank = new TransferAddon();
         bank.setName("Bank");
         bank.setDescription("银行卡支付");
         bank.setValue("0");
@@ -188,7 +213,7 @@ public class CoreApplication implements CommandLineRunner {
         hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
         hnapay.setType(TransferAddon.Type.PYTHON);
         hnapay.setSpec("TODO");
-        hnapay.setContent("TODO");
+        hnapay.setContent(read("script/eco.py"));
         System.out.println(metadataService.create(null,hnapay));
 
         FundAccount hnapayAccount = new FundAccount();
@@ -204,7 +229,7 @@ public class CoreApplication implements CommandLineRunner {
         bankAccount.set("account", "6888888888888881");
         bankAccount.set("holder", "江泽民");
         bankAccount.set("bank", "中国中央银行");
-        System.out.println(fundAccountService.create(null, bankAccount));
+        System.out.println(fundAccountService.create(null, bankAccount));*/
 
 		/*List<DepositOption> options = fundAccountService.supportedDepositOption(null);
 		DepositOption option = null;

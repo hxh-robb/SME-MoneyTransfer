@@ -35,7 +35,9 @@ public abstract class PythonAddon implements Addon {
         } catch (Throwable throwable) {
             // remove module
             PYTHON_INTERPRETER.exec(MessageFormat.format("globals().pop(''{0}'', None)",module));
+            throw new IllegalArgumentException("Can not register module:" + module, throwable);
         } finally {
+            // Remove all module function from cache
             for (String func:MODULE_FUNCTIONS.keySet()) {
                 if(func.startsWith(module + "."))
                     MODULE_FUNCTIONS.remove(func);
@@ -44,7 +46,8 @@ public abstract class PythonAddon implements Addon {
     }
 
     /**
-     * Execute python code
+     * Call python code
+     * @param returnType
      * @param module
      * @param function
      * @param parameters
@@ -55,9 +58,20 @@ public abstract class PythonAddon implements Addon {
         String func = MessageFormat.format("{0}.{1}", module, function);
         PyObject pyFunc = MODULE_FUNCTIONS.get(func);
         if( null == pyFunc) {
-            pyFunc = PYTHON_INTERPRETER.eval(func);
-            MODULE_FUNCTIONS.put(func,pyFunc);
+            try {
+                pyFunc = PYTHON_INTERPRETER.eval(func); // get python function object
+            } catch (Throwable throwable) {
+                throw new UnsupportedOperationException("Python function(" + func + ") is undefined");
+            }
+            if( null == pyFunc)
+                throw new UnsupportedOperationException("Python function(" + func + ") does not exist");
+            MODULE_FUNCTIONS.put(func,pyFunc); // cache the function
         }
+
+        /*
+        PyObject.__call__ is 30 times slower than java code,but 100 times faster than PythonInterpreter.eval
+        Besides, PythonInterpreter is not thread-safe, so that we use PyObject.__call__ as an alternatives
+         */
         return (T)pyFunc.__call__(Py.java2py(parameters)).__tojava__(returnType);
     }
 }
