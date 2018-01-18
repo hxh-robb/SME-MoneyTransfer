@@ -1,10 +1,13 @@
 package ft.addon;
 
+import ft.boot.JschConfiguration;
 import ft.repo.MetadataDAO;
 import ft.spec.model.Metadata;
 import ft.spec.model.TransferAddon;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,13 +25,22 @@ public class Coordinator {
     private final Map<String, Addon> CONTEXT = new ConcurrentHashMap<>();
 
     private MetadataDAO dao;
+    private TemplateEngine tp;
+
+//    @Value("${jsch.}")
+//    private String value;
 
     /**
      * Constructor injection
      * @param dao
+     * @param tp
      */
-    public Coordinator(MetadataDAO dao) {
+    public Coordinator(MetadataDAO dao,TemplateEngine tp, JschConfiguration jsch) {
         this.dao = dao;
+        this.tp = tp;
+
+        // Manual injection
+        PythonAddon.SSH.init(jsch);
     }
 
 //    private void reset(){
@@ -124,7 +136,7 @@ public class Coordinator {
                 if ( TransferAddon.Type.PYTHON.equals(ta.getType()) ) {
                     // Intermediary deposit helper
                     if( TransferAddon.Mode.INTERMEDIARY_DEPOSIT.equals(ta.getMode()) ) {
-                        return new IntermediaryDepositHelper(ta);
+                        return new IntermediaryDepositHelper(ta, tp);
                     }
                 }
             }/* else if {

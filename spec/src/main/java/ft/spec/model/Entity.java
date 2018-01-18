@@ -37,6 +37,14 @@ public abstract class Entity implements Serializable{
 
     /**
      * <pre>
+     * Entity creation timestamp
+     * "ct" stands for "Creation Timestamp"
+     * </pre>
+     */
+    protected Date ct;
+
+    /**
+     * <pre>
      * Entity updated timestamp
      * "ts" stands for "TimeStamp"
      * </pre>
@@ -64,6 +72,14 @@ public abstract class Entity implements Serializable{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Date getCt() {
+        return ct;
+    }
+
+    public void setCt(Date ct) {
+        this.ct = ct;
     }
 
     public Date getTs() {
@@ -96,9 +112,10 @@ public abstract class Entity implements Serializable{
     }
 
     protected String toString(boolean complete) {
-         String fields = "id='" + id + '\'' +
-                ", ts=" + ts +
-                ", de=" + de ;
-        return complete ? MessageFormat.format("Entity'{'{0'}'}", fields) : fields;
+        String fields = "id='" + id + '\'' +
+            ", ct=" + ct +
+            ", ts=" + ts +
+            ", de=" + de ;
+        return complete ? MessageFormat.format("Entity'{'{0}'}'", fields) : fields;
     }
 }

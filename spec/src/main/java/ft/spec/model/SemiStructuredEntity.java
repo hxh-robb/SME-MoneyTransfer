@@ -116,6 +116,15 @@ public class SemiStructuredEntity extends Entity {
      * @return
      */
     public final <T> T get(String field) {
+        return get(field, false);
+    }
+
+    /**
+     * get value
+     * @param field
+     * @return
+     */
+    public final <T> T get(String field, boolean remove) {
         Tuple tuple = structuredFields.get(field);
         Method getter;
         if( null != tuple && null != tuple.descriptor && null != (getter = tuple.descriptor.getReadMethod()) ) {
@@ -130,6 +139,9 @@ public class SemiStructuredEntity extends Entity {
         }
 
         try {
+            if(remove) {
+                return (T)unstructuredFields.remove(field);
+            }
             return (T)unstructuredFields.get(field);
         } catch (Throwable throwable) {
             return null;

@@ -6,6 +6,7 @@ import ft.spec.service.EntityService;
 import ft.spec.service.Result;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Base entity service implementation
@@ -13,6 +14,7 @@ import java.util.Date;
  * @param <D> DAO Type
  */
 public abstract class EntityBiz<T extends Entity, D extends DAO> extends Biz implements EntityService<T> {
+
     protected D dao;
 
     protected EntityBiz(D dao) {
@@ -67,6 +69,15 @@ public abstract class EntityBiz<T extends Entity, D extends DAO> extends Biz imp
             result.setCode(Result.Code.SUCCESS);
 
         return result;
+    }
+
+    @Override
+    public List<T> list(String subject) {
+        processSubject(subject);
+
+        DAO.Filter filter = createFilter();
+        filter.de = false;
+        return dao.list(filter);
     }
 
     /**

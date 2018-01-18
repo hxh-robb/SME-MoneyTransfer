@@ -1,7 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-03/schema#",
-  "type": "object",
-  "properties": {
     "account": {
         "type": "string",
         "title": "银行账号",
@@ -24,5 +21,4 @@
         "title": "支行信息",
         "description": "签发该银行账号的支行信息"
     }
-  }
 }

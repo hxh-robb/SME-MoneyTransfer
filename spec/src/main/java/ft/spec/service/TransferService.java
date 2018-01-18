@@ -22,6 +22,13 @@ public interface TransferService {
     );
 
     /**
+     * Process intermediary deposit notification
+     * @param param
+     * @return
+     */
+    Result processDepositNotification(Object param);
+
+    /**
      * Transfer service result code
      */
     interface Code extends Result.Code {

@@ -145,7 +145,7 @@ public class TransferAddon extends Metadata {
          * Deposit slip represented as a HTML form which will auto-submit to third-party financial intermediaries
          * </pre>
          */
-        WECHAT_DEPOSIT(0x0001),
+        WECHAT_DEPOSIT(0x0002),
 
         /**
          * <pre>

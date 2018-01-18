@@ -47,7 +47,7 @@ public class BankDepositSlipGenerator implements Addon,TransferAddonConstant {
             task.setRef(slip.ps);
 
             DepositSlip ds = new DepositSlip();
-            ds.mime = "application/json; charset=UTF-8";
+            ds.mime = DepositSlip.MIME.JSON;
             ds.content = new ObjectMapper().writeValueAsString(slip);
             return ds;
         } catch (Throwable throwable) {

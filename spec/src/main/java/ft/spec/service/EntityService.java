@@ -3,6 +3,7 @@ package ft.spec.service;
 import ft.spec.model.Metadata;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Entity service base interface
@@ -32,4 +33,11 @@ public interface EntityService<T extends Serializable> extends Serializable {
      * @return
      */
     Result delete(String subject, String id);
+
+    /**
+     * List entities
+     * @param subject
+     * @return
+     */
+    List<T> list(String subject);
 }

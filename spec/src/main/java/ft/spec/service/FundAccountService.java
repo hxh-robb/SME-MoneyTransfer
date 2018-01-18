@@ -17,6 +17,13 @@ public interface FundAccountService extends EntityService<FundAccount> {
     List<DepositOption> supportedDepositOption(String subject);
 
     /**
+     * Generate fund account json form schema
+     * @param subject
+     * @return
+     */
+    String jsonFormSchema(String subject);
+
+    /**
      * Fund account service result code
      */
     interface Code extends Result.Code {

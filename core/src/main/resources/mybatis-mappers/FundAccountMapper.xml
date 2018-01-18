@@ -3,10 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="FundAccountMapper">
-    <resultMap id="FundAccount" type="FundAccount">
-        <id property="id" column="id"/>
+    <resultMap id="FundAccount" type="FundAccount" extends="Common.Entity">
+        <!--<id property="id" column="id"/>
+        <result property="ct" column="ct"/>
         <result property="ts" column="ts"/>
-        <result property="de" column="de"/>
+        <result property="de" column="de"/>-->
 
         <result property="info.name" column="name"/>
         <result property="info.icon" column="icon"/>
@@ -67,8 +68,13 @@
     <insert id="create">
         insert into fund_account (
             id,
-            name, icon, type,
-            fields
+            name, icon, type
+            <!--, fields-->
+            <trim prefix=",">
+                <if test="!fields.isEmpty()">
+                    fields
+                </if>
+            </trim>
         ) values (
             #{id},
             #{info.name}, #{info.icon}, #{type}
@@ -90,7 +96,7 @@
     </delete>
 
     <update id="update">
-        update fund_account
+        update fund_account t
         <set>
             <!-- Entity updatable field -->
             <if test="data.de != null"> de = #{data.de}, </if>

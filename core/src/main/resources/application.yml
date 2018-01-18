@@ -10,6 +10,21 @@ spring:
     password: robbpass
     hikari:
       idle-timeout: 10000
+  thymeleaf:
+    cache: true
+    check-template: true
+    check-template-lockation: true
+    content-type: text/html
+    enabled: false
+    encoding: UTF-8
+    mode: HTML,
+    templateResolverOrder: 0
+
+jsch:
+  addr: 10.63.57.26
+  port: 22
+  user: robb
+  password: robbpass
 
 mybatis:
   config-location: classpath:mybatis-config.xml

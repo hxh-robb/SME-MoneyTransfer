@@ -17,7 +17,12 @@ import java.util.List;
 public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> implements FundAccountService {
     private MetadataDAO metadataDAO;
 
-    protected FundAccountBiz(FundAccountDAO dao, MetadataDAO metadataDAO) {
+    /**
+     * Constructor injection
+     * @param dao
+     * @param metadataDAO
+     */
+    public FundAccountBiz(FundAccountDAO dao, MetadataDAO metadataDAO) {
         super(dao); // Constructor injection
         this.metadataDAO = metadataDAO;
     }
@@ -50,6 +55,11 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
         filter.de = false;
         // TODO: Set filter by subject(ACL)
         return dao.listDepositOptions(filter);
+    }
+
+    @Override
+    public String jsonFormSchema(String subject) {
+        return null;
     }
 
     @Override

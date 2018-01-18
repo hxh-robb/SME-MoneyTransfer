@@ -1,0 +1,30 @@
+{
+  "type":"object",
+  "properties": {
+    "name":{
+      "title":"渠道名称",
+      "description":"前台展示的渠道名称",
+      "type":"string",
+      "required":true
+    },"icon":{
+      "title":"渠道图标",
+      "format":"inputstream",
+      "type":"string",
+      "description":"前台展示的渠道图片"
+    },"type":{
+      "title":"渠道类型",
+      "description":"转账渠道类型,如有疑问请咨询开发人员了解各类型的具体处理流程",
+      "type":"string",
+      "required":true,
+      "enum":[[# th:each="addon,iterStat : ${addons}"]
+          {"text":"[(${addon.name})]","value":"[(${addon.value})]"}[# th:if="!${iterStat.last}"],[/]
+      [/]]
+    }
+  },
+  "appendedProperties":{
+    "dependsOn":"type",
+    "appendix":{[# th:each="addon,iterStat : ${addons}"]
+    "[(${addon.value})]":[(${addon.spec})][# th:if="!${iterStat.last}"],[/]
+    [/]}
+  }
+}

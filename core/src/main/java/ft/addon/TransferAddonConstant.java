@@ -65,8 +65,17 @@ public interface TransferAddonConstant {
 
             Parameters parameters = new Parameters();
             parameters.account = (FundAccount)rawAccount;
+            parameters.account.setAddon(null);
             parameters.task = (TransferTask)rawTask;
             return parameters;
+        }
+
+        @Override
+        public String toString() {
+            return "Parameters{" +
+            "account=" + account +
+            ", task=" + task +
+            '}';
         }
     }
 }

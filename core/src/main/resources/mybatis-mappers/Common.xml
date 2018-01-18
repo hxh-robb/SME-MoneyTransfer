@@ -3,8 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Common">
+    <resultMap id="Entity" type="Entity">
+        <id property="id" column="id"/>
+        <result property="ct" column="ct"/>
+        <result property="ts" column="ts"/>
+        <result property="de" column="de"/>
+    </resultMap>
+
     <sql id="EntityColumns">
-        t.id, t.ts, t.de
+        t.id, t.ct, t.ts, t.de
     </sql>
 
     <sql id="DynamicColumnDataType" >

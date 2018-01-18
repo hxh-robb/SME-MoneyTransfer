@@ -7,6 +7,7 @@ import ft.spec.model.DepositSlip;
 import ft.spec.model.FundAccount;
 import ft.spec.model.TransferAddon;
 import ft.spec.model.TransferTask;
+import ft.spec.service.Result;
 import ft.spec.service.TransferService;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class TransferBiz extends Biz implements TransferService {
         // Result result = new Result();
         processSubject(subject);
 
-        if(null == depositOption)
+        if(null == subject || null == depositOption)
             return null;
 
         FundAccountDAO.Filter filter = new FundAccountDAO.Filter();
@@ -49,8 +50,10 @@ public class TransferBiz extends Biz implements TransferService {
             return null; // Invalid addon
 
         // TODO : Create task for following deposit process
-        TransferTask task = new TransferTask();
+        TransferTask task = new TransferTask(TransferTask.Type.DEPOSIT);
         task.setAmount(amount);
+        task.setBeneficiary(subject);
+        task.setPlatform(null); // TODO: Get the platform along with the user
 //        task.setRef(""); // order id? ps?
 
 //        TransferAddon.Mode mode = account.getAddon().getMode();
@@ -62,10 +65,16 @@ public class TransferBiz extends Biz implements TransferService {
         Map<String,Object> param = new HashMap<>();
         param.put(TransferAddonConstant.ParamKeys.ACCOUNT, account);
         param.put(TransferAddonConstant.ParamKeys.TASK, task);
-        DepositSlip slip = coordinator.execute(account.getAddon().getId(), param);;
+        DepositSlip slip = coordinator.execute(account.getAddon().getId(), param);
 
         // TODO : Store transfer task to database after slip generated
 
         return slip;
+    }
+
+    @Override
+    public Result processDepositNotification(Object param) {
+        // TODO
+        return null;
     }
 }

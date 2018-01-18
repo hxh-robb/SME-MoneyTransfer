@@ -18,6 +18,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -123,6 +125,7 @@ public class CoreApplication implements CommandLineRunner {
         // mongodb_metadata();
         // mongodb_fund_account();
         mybatis_test();
+        // thymeleaf_test();
 
 //        String s1 = read("script/test.py");
 //        String s2 = read("script/test2.py");
@@ -142,19 +145,77 @@ public class CoreApplication implements CommandLineRunner {
 //        helper2 = null;
     }
 
+    @Autowired
+    TemplateEngine tp;
+    private void thymeleaf_test(){
+        Context ctx = new Context();
+
+        ctx.setVariable("addons", metadataService.supportedTransferAddons(null));
+
+        System.out.println(tp.process("fund_account_form_schema",ctx));
+
+        /*FundAccount account = null;
+        List<FundAccount> list = fundAccountDao.list(null);
+        for (FundAccount a:list) {
+            if ("新生商户".equals(a.getInfo().getName())) {
+                account = a;
+            }
+        }
+
+        if( null == account )
+            return;
+
+        boolean out = true; int count = 5;
+        long begin = System.currentTimeMillis();
+        for( int i = 0; i < count; i++) {
+            Context ctx = new Context();
+            ctx.setVariable("action", account.get("__form_action__",true));
+            ctx.setVariable("inputs", account.getFields());
+            account.getFields().put("amount", (double)(i+1));
+            String text = tp.process("deposit_slip", ctx);
+            if(out){
+                System.out.println(text);
+            }
+        }
+        System.out.println("dur:" + (System.currentTimeMillis() - begin));*/
+    }
+
 	private void mybatis_test() {
+        /*String type = null;
         List<TransferAddon> addons = metadataService.supportedTransferAddons(null);
         for (TransferAddon addon : addons) {
             if(TransferAddon.Mode.INTERMEDIARY_DEPOSIT.equals(addon.getMode()) && TransferAddon.Type.PYTHON.equals(addon.getType())){
-                addon.setContent(read("script/hnapay2.6.py"));
+                addon.setName("新生支付收款渠道");
+                addon.setContent(read("script/hnapay2_6.py"));
+                addon.setSpec(read("addon-spec/hnapay-spec.json"));
+                metadataService.update(null, addon);
+                type = addon.getValue();
+            } else if (TransferAddon.Mode.BANK_DEPOSIT.equals(addon.getMode())) {
+                addon.setName("银行卡收款渠道");
+                addon.setSpec(read("addon-spec/bank-spec.json"));
                 metadataService.update(null, addon);
             }
         }
 
         List<DepositOption> list = fundAccountService.supportedDepositOption(null);
         for (DepositOption option:list) {
-            System.out.println(transferService.generateDepositSlip(null, option.getId(),  100.0));
-        }
+            System.out.println(option);
+            if( "新生商户".equals(option.getName()) ){
+                FundAccount account = new FundAccount();
+                account.set("__form_action__", "https://gateway.hnapay.com/website/pay.htm");
+                account.set("customerIP","www.outwit.inc[10.63.57.34]");
+                account.setId(option.getId());
+                account.setType(type);
+                fundAccountService.update(null, account);
+            }
+
+            System.out.println(transferService.generateDepositSlip("robb", option.getId(),  100.0));
+        }*/
+
+//        List<DepositOption> options = fundAccountService.supportedDepositOption(null);
+//        for (DepositOption option : options){
+//
+//        }
 
 	    /*List<TransferAddon> result = metadataService.supportedTransferAddons(null);
         System.out.println(result.size());
@@ -196,9 +257,9 @@ public class CoreApplication implements CommandLineRunner {
 		System.out.println(test.update(filter,addon));
 		System.out.println(test.delete(filter));*/
 
-		/*TransferAddon bank = new TransferAddon();
-        bank.setName("Bank");
-        bank.setDescription("银行卡支付");
+		TransferAddon bank = new TransferAddon();
+        bank.setName("银行卡收款渠道");
+        bank.setDescription("银行卡收款渠道");
         bank.setValue("0");
         bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
         bank.setType(TransferAddon.Type.JAVA);
@@ -207,29 +268,27 @@ public class CoreApplication implements CommandLineRunner {
         System.out.println(metadataService.create(null, bank));
 
         TransferAddon hnapay = new TransferAddon();
-        hnapay.setName("Hnapay");
-        hnapay.setDescription("新生支付");
+        hnapay.setName("新生支付收款渠道");
+        hnapay.setDescription("新生支付收款渠道");
         hnapay.setValue("1");
         hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
         hnapay.setType(TransferAddon.Type.PYTHON);
-        hnapay.setSpec("TODO");
-        hnapay.setContent(read("script/eco.py"));
+        hnapay.setSpec(read("addon-spec/hnapay-spec.json"));
+        hnapay.setContent(read("script/hnapay2_6.py"));
         System.out.println(metadataService.create(null,hnapay));
 
         FundAccount hnapayAccount = new FundAccount();
-        hnapayAccount.getInfo().setName("新生商户");
+        hnapayAccount.getInfo().setName("新生支付");
         hnapayAccount.setType(hnapay.getValue());
-        hnapayAccount.set("Field_0", "ABC");
-        hnapayAccount.set("Field_2", "123");
         System.out.println(fundAccountService.create(null, hnapayAccount));
 
         FundAccount bankAccount = new FundAccount();
-        bankAccount.getInfo().setName("银行账号");
+        bankAccount.getInfo().setName("银行卡转账");
         bankAccount.setType(bank.getValue());
         bankAccount.set("account", "6888888888888881");
         bankAccount.set("holder", "江泽民");
         bankAccount.set("bank", "中国中央银行");
-        System.out.println(fundAccountService.create(null, bankAccount));*/
+        System.out.println(fundAccountService.create(null, bankAccount));
 
 		/*List<DepositOption> options = fundAccountService.supportedDepositOption(null);
 		DepositOption option = null;

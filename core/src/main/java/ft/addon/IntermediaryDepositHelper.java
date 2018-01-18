@@ -2,6 +2,10 @@ package ft.addon;
 
 import ft.spec.model.DepositSlip;
 import ft.spec.model.TransferAddon;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.context.IContext;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 
 import java.util.Map;
 
@@ -10,12 +14,13 @@ import java.util.Map;
  */
 public class IntermediaryDepositHelper extends PythonAddon implements TransferAddonConstant {
     private final String module; // python module
+    private final TemplateEngine tp;
 
     /**
      * Construct transfer addon
      * @param addon
      */
-    IntermediaryDepositHelper(TransferAddon addon){
+    IntermediaryDepositHelper(TransferAddon addon,TemplateEngine tp){
         if( null == addon )
             throw new IllegalArgumentException("TransferAddon cannot be null");
 
@@ -25,6 +30,8 @@ public class IntermediaryDepositHelper extends PythonAddon implements TransferAd
 
         module = "addon_" + addon.getId().replaceAll("-", "");
         registerModule(module, addon.getContent());
+
+        this.tp = tp;
     }
 
     @Override
@@ -36,10 +43,16 @@ public class IntermediaryDepositHelper extends PythonAddon implements TransferAd
     public <T> T execute(String func, Map<String, Object> parameters) {
         if( true ) {
             Parameters param = Parameters.instance(parameters);
+            String action = param.account.get("__form_action__", true);
+            Map<String, Object> signedParam = executePython(Map.class, module, Functions.SIGN, param);
 
             DepositSlip slip = new DepositSlip();
-            slip.content = executePython(Map.class, module, Functions.SIGN, param.account.getFields()).toString();
-            System.out.println(param.account.getFields());
+            slip.mime = DepositSlip.MIME.HTML;
+            Context ctx  = new Context();
+            ctx.setVariable("action", action);
+            ctx.setVariable("inputs", signedParam);
+            slip.content = tp.process("deposit_slip", ctx);
+
             return (T)slip;
         }
 
