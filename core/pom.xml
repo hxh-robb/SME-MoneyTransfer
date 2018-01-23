@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>inc.outwit.ft</groupId>
-	<artifactId>core</artifactId>
+	<artifactId>fund-transfer-core</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>core</name>
+	<name>fund-transfer-core</name>
 	<description>Core module of fund-transfer service</description>
 
 	<parent>

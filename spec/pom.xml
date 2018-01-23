@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>inc.outwit.ft</groupId>
-  <artifactId>spec</artifactId>
+  <artifactId>fund-transfer-spec</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
-  <name>spec</name>
+  <name>fund-transfer-spec</name>
   <description>RPC specification of fund-transfer service</description>
 
   <properties>
