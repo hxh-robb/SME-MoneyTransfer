@@ -10,7 +10,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -24,9 +24,12 @@ public class JsonHandler extends BaseTypeHandler<Map<String,Object>> {
 
     private Map<String, Object> map(String json) {
         try {
-            ObjectMapper om = new ObjectMapper();
             TypeReference<Map<String,Object>> ref = new TypeReference<Map<String, Object>>() {};
-            return om.readValue(json, ref);
+            if( null != json ) {
+                ObjectMapper om = new ObjectMapper();
+                return om.readValue(json, ref);
+            }
+            return Collections.EMPTY_MAP;
         } catch (IOException e) {
             return null;
         }

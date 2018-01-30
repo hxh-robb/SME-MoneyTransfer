@@ -9,7 +9,7 @@ import java.util.List;
  * Entity service base interface
  * @param <T> Entity type
  */
-public interface EntityService<T extends Serializable> extends Serializable {
+public interface EntityService<T extends Serializable> {
     /**
      * Create new entity
      * @param subject The operator

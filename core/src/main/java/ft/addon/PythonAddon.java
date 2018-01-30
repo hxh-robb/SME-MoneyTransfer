@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Addon that capable to execute python code snippet
  */
-public abstract class PythonAddon implements Addon {
+abstract class PythonAddon implements Addon {
     // Only one interpreter will exist for saving resource usage
     private static final PythonInterpreter PYTHON_INTERPRETER;
     private static final Map<String, PyObject> MODULE_FUNCTIONS;

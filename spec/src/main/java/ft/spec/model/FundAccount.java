@@ -112,4 +112,12 @@ public class FundAccount extends SemiStructuredEntity {
     public final Map<String, Object> getFields() {
         return unstructuredFields;
     }
+
+    @Override
+    public void set(String field, Object value) {
+        if( "".equals(value) ) {
+            value = null;
+        }
+        super.set(field, value);
+    }
 }

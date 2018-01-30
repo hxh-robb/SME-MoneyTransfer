@@ -27,15 +27,9 @@
 	<dependencies>
 		<dependency>
 			<groupId>inc.outwit.ft</groupId>
-			<artifactId>spec</artifactId>
+			<artifactId>fund-transfer-spec</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-
-		<!--<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>3.5.0</version>
-		</dependency>-->
 
 		<dependency>
 			<groupId>org.mongodb.morphia</groupId>
@@ -87,6 +81,30 @@
 			<groupId>com.jcraft</groupId>
 			<artifactId>jsch</artifactId>
 			<version>0.1.54</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.weibo</groupId>
+			<artifactId>motan-core</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.weibo</groupId>
+			<artifactId>motan-transport-netty</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.weibo</groupId>
+			<artifactId>motan-springsupport</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.weibo</groupId>
+			<artifactId>motan-registry-zookeeper</artifactId>
+			<version>RELEASE</version>
 		</dependency>
 	</dependencies>
 

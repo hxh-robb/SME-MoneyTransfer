@@ -75,7 +75,10 @@ public class SemiStructuredEntity extends Entity {
      * @param field
      * @param value
      */
-    public final void set(String field, Object value) {
+    public void set(String field, Object value) {
+        if( null == field ) {
+            return;
+        }
         Tuple tuple = structuredFields.get(field);
         Method setter;
         if( null != tuple && null != tuple.descriptor && null != ( setter = tuple.descriptor.getWriteMethod()) ) {
@@ -100,7 +103,7 @@ public class SemiStructuredEntity extends Entity {
      * set value
      * @param map
      */
-    public final void set(Map<String, Object> map) {
+    public void set(Map<String, Object> map) {
         if( null == map || map.isEmpty() ) {
             return;
         }

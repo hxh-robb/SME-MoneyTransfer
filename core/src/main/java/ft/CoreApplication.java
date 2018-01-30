@@ -2,17 +2,14 @@ package ft;
 
 import ft.repo.FundAccountDAO;
 import ft.spec.model.DepositOption;
-import ft.spec.model.DepositSlip;
 import ft.spec.model.FundAccount;
 import ft.spec.model.TransferAddon;
 import ft.spec.service.FundAccountService;
 import ft.spec.service.MetadataService;
 import ft.spec.service.TransferService;
-import org.python.core.Py;
-import org.python.core.PyCode;
-import org.python.core.PyObject;
-import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,11 +21,9 @@ import org.thymeleaf.context.Context;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+// TODO : Move test code to unit test
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 public class CoreApplication implements CommandLineRunner {
 //	@Autowired
@@ -37,7 +32,7 @@ public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private MetadataDAO metadataDao;
 
-	@Autowired
+/*	@Autowired
 	private FundAccountDAO fundAccountDao;
 
     @Autowired
@@ -47,7 +42,7 @@ public class CoreApplication implements CommandLineRunner {
     private FundAccountService fundAccountService;
 
     @Autowired
-    private TransferService transferService;
+    private TransferService transferService;*/
 
 //	@Autowired
 //	private MybatisMetadataDAO test;
@@ -124,7 +119,7 @@ public class CoreApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // mongodb_metadata();
         // mongodb_fund_account();
-        mybatis_test();
+        // mybatis_test();
         // thymeleaf_test();
 
 //        String s1 = read("script/test.py");
@@ -148,16 +143,22 @@ public class CoreApplication implements CommandLineRunner {
     @Autowired
     TemplateEngine tp;
     private void thymeleaf_test(){
-        Context ctx = new Context();
+        /*Context ctx = new Context();
 
         ctx.setVariable("addons", metadataService.supportedTransferAddons(null));
 
-        System.out.println(tp.process("fund_account_form_schema",ctx));
+        System.out.println(tp.process("fund_account_form_schema",ctx));*/
 
         /*FundAccount account = null;
-        List<FundAccount> list = fundAccountDao.list(null);
-        for (FundAccount a:list) {
-            if ("新生商户".equals(a.getInfo().getName())) {
+//        List<FundAccount> list = fundAccountDao.list(null);
+//        for (FundAccount a:list) {
+//            if ("新生商户".equals(a.getInfo().getName())) {
+//                account = a;
+//            }
+//        }
+        List<FundAccount> list = fundAccountService.list(null);
+        for (FundAccount a : list) {
+            if (a.getInfo().getName().contains("新生")) {
                 account = a;
             }
         }
@@ -165,7 +166,7 @@ public class CoreApplication implements CommandLineRunner {
         if( null == account )
             return;
 
-        boolean out = true; int count = 5;
+        boolean out = true; int count = 100;
         long begin = System.currentTimeMillis();
         for( int i = 0; i < count; i++) {
             Context ctx = new Context();
@@ -200,7 +201,7 @@ public class CoreApplication implements CommandLineRunner {
         List<DepositOption> list = fundAccountService.supportedDepositOption(null);
         for (DepositOption option:list) {
             System.out.println(option);
-            if( "新生商户".equals(option.getName()) ){
+            if( option.getName().contains("新生") ){
                 FundAccount account = new FundAccount();
                 account.set("__form_action__", "https://gateway.hnapay.com/website/pay.htm");
                 account.set("customerIP","www.outwit.inc[10.63.57.34]");
@@ -257,7 +258,7 @@ public class CoreApplication implements CommandLineRunner {
 		System.out.println(test.update(filter,addon));
 		System.out.println(test.delete(filter));*/
 
-		TransferAddon bank = new TransferAddon();
+		/*TransferAddon bank = new TransferAddon();
         bank.setName("银行卡收款渠道");
         bank.setDescription("银行卡收款渠道");
         bank.setValue("0");
@@ -280,6 +281,7 @@ public class CoreApplication implements CommandLineRunner {
         FundAccount hnapayAccount = new FundAccount();
         hnapayAccount.getInfo().setName("新生支付");
         hnapayAccount.setType(hnapay.getValue());
+        // hnapayAccount.set("partnerID","1000002158");
         System.out.println(fundAccountService.create(null, hnapayAccount));
 
         FundAccount bankAccount = new FundAccount();
@@ -288,7 +290,7 @@ public class CoreApplication implements CommandLineRunner {
         bankAccount.set("account", "6888888888888881");
         bankAccount.set("holder", "江泽民");
         bankAccount.set("bank", "中国中央银行");
-        System.out.println(fundAccountService.create(null, bankAccount));
+        System.out.println(fundAccountService.create(null, bankAccount));*/
 
 		/*List<DepositOption> options = fundAccountService.supportedDepositOption(null);
 		DepositOption option = null;

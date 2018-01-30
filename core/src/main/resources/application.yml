@@ -1,4 +1,7 @@
 spring:
+#  main:
+#    web-environment: false
+#    banner-mode: false
   datasource:
     name: ft
     schema: classpath:database/schema.sql
@@ -17,7 +20,7 @@ spring:
     content-type: text/html
     enabled: false
     encoding: UTF-8
-    mode: HTML,
+    mode: HTML
     templateResolverOrder: 0
 
 jsch:
@@ -25,6 +28,9 @@ jsch:
   port: 22
   user: robb
   password: robbpass
+
+motan:
+  zookeeper: 10.63.57.34:2181
 
 mybatis:
   config-location: classpath:mybatis-config.xml
@@ -37,9 +43,9 @@ mybatis:
 #  password: "todo"
 
 logging:
-#  level:
-#    MetadataMapper: DEBUG
-#    FundAccountMapper: DEBUG
+  level:
+    MetadataMapper: INFO
+    FundAccountMapper: INFO
   pattern:
     console: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
 #    file: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"

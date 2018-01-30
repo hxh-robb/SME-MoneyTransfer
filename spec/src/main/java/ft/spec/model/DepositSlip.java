@@ -1,9 +1,11 @@
 package ft.spec.model;
 
+import java.io.Serializable;
+
 /**
  * Deposit slip
  */
-public class DepositSlip {
+public class DepositSlip implements Serializable {
     public interface MIME {
         String JSON = "application/json; charset=UTF-8";
         String HTML = "text/html; charset=UTF-8";
