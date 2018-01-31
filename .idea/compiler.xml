@@ -7,12 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
+        <module name="fund-transfer-web" />
         <module name="spec" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="core" target="1.8" />
       <module name="fund-transfer" target="1.8" />
+      <module name="fund-transfer-web" target="1.8" />
+      <module name="fund-transfer-web (1)" target="1.8" />
+      <module name="fund-transfer-web (2)" target="1.8" />
       <module name="spec" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -16,7 +16,7 @@ public class FundAccount extends SemiStructuredEntity {
     /**
      * Addon(Filtered by {@link TransferAddon#value})
      */
-    private TransferAddon addon;
+    private transient TransferAddon addon;
 
     /**
      * Processing fund upper bound

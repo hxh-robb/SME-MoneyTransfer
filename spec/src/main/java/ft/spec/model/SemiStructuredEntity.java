@@ -4,6 +4,7 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Map;
@@ -17,13 +18,13 @@ public class SemiStructuredEntity extends Entity {
 //        super();
 //        collectStructuredFields();
 //    }
-    protected final Object struct;
+    protected final Serializable struct;
 
     /**
      * Force sub-class to call this constructor
      * @param init
      */
-    public SemiStructuredEntity(boolean init, Object struct) {
+    public SemiStructuredEntity(boolean init, Serializable struct) {
         super(init); this.struct = struct;
         collectStructuredFields(null == struct ? this : struct);
     }
@@ -63,7 +64,15 @@ public class SemiStructuredEntity extends Entity {
     /**
      * structured fields cache
      */
-    private final Map<String, Tuple> structuredFields = new ConcurrentHashMap<>();
+    private final transient Map<String, Tuple> structuredFields = new ConcurrentHashMap<String, Tuple>(){
+        @Override
+        public Tuple get(Object key) {
+            if( this.isEmpty() ) {
+                collectStructuredFields(null == struct ? this : struct);
+            }
+            return super.get(key);
+        }
+    };
 
     /**
      * dynamic fields

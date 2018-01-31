@@ -1,0 +1,16 @@
+jsch:
+  addr: 10.63.57.26
+  port: 22
+  user: robb
+  password: robbpass
+
+motan:
+  zookeeper: 10.63.57.34:2181
+
+logging:
+  level:
+    MetadataMapper: INFO
+    FundAccountMapper: INFO
+  pattern:
+    console: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
+#    file: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"

@@ -1,10 +1,7 @@
 package ft.boot;
 
 import com.weibo.api.motan.common.MotanConstants;
-import com.weibo.api.motan.config.springsupport.AnnotationBean;
-import com.weibo.api.motan.config.springsupport.BasicServiceConfigBean;
-import com.weibo.api.motan.config.springsupport.ProtocolConfigBean;
-import com.weibo.api.motan.config.springsupport.RegistryConfigBean;
+import com.weibo.api.motan.config.springsupport.*;
 import com.weibo.api.motan.util.MotanSwitcherUtil;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -27,10 +24,12 @@ public class MotanConfiguration {
         public void setZookeeper(String zookeeper) {
             this.zookeeper = zookeeper;
         }
-    }@Bean
+    }
+
+    @Bean
     public AnnotationBean motanAnnotationBean() {
         AnnotationBean motanAnnotationBean = new AnnotationBean();
-        motanAnnotationBean.setPackage("ft.biz.motan");
+        motanAnnotationBean.setPackage("ft.api");
         return motanAnnotationBean;
     }
 
@@ -54,14 +53,13 @@ public class MotanConfiguration {
     }
 
     @Bean(name = "motan-service")
-    public BasicServiceConfigBean basicServiceConfig() {
-        BasicServiceConfigBean config = new BasicServiceConfigBean();
-        config.setExport("motan-protocol:16001");
-        config.setApplication("ft");
-        config.setModule("ft-rpc");
+    public BasicRefererConfigBean basicServiceConfig() {
+        BasicRefererConfigBean config = new BasicRefererConfigBean();
         config.setGroup("fund-transfer");
         config.setAccessLog(false);
         config.setShareChannel(true);
+        config.setModule("ft-rpc");
+        config.setApplication("ft");
         config.setRegistry("motan-registry");
         config.setRequestTimeout(5 * 1000);
         return config;
