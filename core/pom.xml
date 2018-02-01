@@ -118,7 +118,12 @@
 	</build>
 
 	<repositories>
-		<repository>
+        <repository>
+            <id>public</id>
+            <name>Public Repository</name>
+            <url>http://10.63.57.26:8081/repository/public/</url>
+        </repository>
+		<!--<repository>
 			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
 			<url>https://repo.spring.io/snapshot</url>
@@ -133,11 +138,16 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
+		</repository>-->
 	</repositories>
 
 	<pluginRepositories>
-		<pluginRepository>
+        <pluginRepository>
+            <id>public</id>
+            <name>Public Repository</name>
+            <url>http://10.63.57.26:8081/repository/public/</url>
+        </pluginRepository>
+		<!--<pluginRepository>
 			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
 			<url>https://repo.spring.io/snapshot</url>
@@ -152,7 +162,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</pluginRepository>
+		</pluginRepository>-->
 	</pluginRepositories>
 
 </project>
