@@ -30,7 +30,7 @@ jsch:
   password: robbpass
 
 motan:
-  zookeeper: 10.63.57.34:2181
+  zookeeper: 10.63.57.26:2181
 
 mybatis:
   config-location: classpath:mybatis-config.xml
