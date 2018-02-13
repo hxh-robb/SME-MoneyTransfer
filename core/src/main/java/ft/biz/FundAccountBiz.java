@@ -6,7 +6,12 @@ import ft.spec.model.DepositOption;
 import ft.spec.model.FundAccount;
 import ft.spec.model.Metadata;
 import ft.spec.service.FundAccountService;
+import ft.spec.service.MetadataService;
+import ft.spec.service.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import java.util.List;
 
@@ -16,15 +21,24 @@ import java.util.List;
 @Service
 public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> implements FundAccountService {
     private MetadataDAO metadataDAO;
+    private MetadataService metadataService;
+    private TemplateEngine templateEngine;
 
     /**
      * Constructor injection
      * @param dao
      * @param metadataDAO
      */
-    public FundAccountBiz(FundAccountDAO dao, MetadataDAO metadataDAO) {
+    public FundAccountBiz(
+        FundAccountDAO dao,
+        MetadataDAO metadataDAO,
+        MetadataService metadataService,
+        TemplateEngine tp
+    ) {
         super(dao); // Constructor injection
         this.metadataDAO = metadataDAO;
+        this.metadataService = metadataService;
+        this.templateEngine = tp;
     }
 
     @Override
@@ -59,7 +73,16 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
 
     @Override
     public String jsonFormSchema(String subject) {
-        return null;
+        Context ctx = new Context();
+        ctx.setVariable("addons", metadataService.supportedTransferAddons(null));
+        return templateEngine.process("fund_account_form_schema",ctx);
+    }
+
+    @Override
+    public Result create(String subject, FundAccount entity) {
+        // TODO : File paths manipulation
+
+        return super.create(subject, entity);
     }
 
     @Override

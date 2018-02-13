@@ -5,7 +5,8 @@ jsch:
   password: robbpass
 
 motan:
-  zookeeper: 10.63.57.26:2181
+  #zookeeper: 10.63.57.26:2181
+  zookeeper: 10.63.51.114:2181
 
 logging:
   level:

@@ -72,6 +72,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -81,6 +84,9 @@
             <id>public</id>
             <name>Public Repository</name>
             <url>http://10.63.57.26:8081/repository/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
         <!--<repository>
             <id>spring-snapshots</id>
@@ -97,7 +103,15 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>-->
+        </repository>
+        <repository>
+			<id>mybatis-snapshots</id>
+			<name>MyBatis Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>-->
     </repositories>
 
     <pluginRepositories>
@@ -105,6 +119,9 @@
             <id>public</id>
             <name>Public Repository</name>
             <url>http://10.63.57.26:8081/repository/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </pluginRepository>
         <!--<pluginRepository>
             <id>spring-snapshots</id>
@@ -121,7 +138,15 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </pluginRepository>-->
+        </pluginRepository>
+        <pluginRepository>
+			<id>mybatis-snapshots</id>
+			<name>MyBatis Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>-->
     </pluginRepositories>
 
 

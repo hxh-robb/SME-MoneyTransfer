@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Addon that capable to execute python code snippet
  */
 abstract class PythonAddon implements Addon {
-    // Only one interpreter will exist for saving resource usage
+    // For saving resource usage, just keep one interpreter
     private static final PythonInterpreter PYTHON_INTERPRETER;
     private static final Map<String, PyObject> MODULE_FUNCTIONS;
 
@@ -139,10 +139,10 @@ abstract class PythonAddon implements Addon {
 //            ChannelSftp sftp = null;
 //
 //            try {
-//                JSch channel = new JSch();
+//                JScht channel = new JSch();
 //                session = channel.getSession(config.getUser(), config.getAddr(), config.getPort());
 //                session.setPassword(config.getPassword());
-//                session.setConfig("StrictHostKeyChecking", "no");
+//                session.setConfig("StrictHosKeyChecking", "no");
 //                session.connect(3000);
 //
 //                sftp = (ChannelSftp)session.openChannel("sftp");
