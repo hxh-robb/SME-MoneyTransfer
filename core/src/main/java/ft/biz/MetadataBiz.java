@@ -4,6 +4,7 @@ import ft.repo.MetadataDAO;
 import ft.spec.model.Metadata;
 import ft.spec.model.TransferAddon;
 import ft.spec.service.MetadataService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Metadata service implementation
  */
-@Service
+@Service @Qualifier("ActualMetadataService")
 public class MetadataBiz extends EntityBiz<Metadata, MetadataDAO> implements MetadataService {
 /*
 

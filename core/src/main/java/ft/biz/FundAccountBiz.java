@@ -9,6 +9,7 @@ import ft.spec.service.FundAccountService;
 import ft.spec.service.MetadataService;
 import ft.spec.service.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Fund account service implementation
  */
-@Service
+@Service @Qualifier("ActualFundAccountService")
 public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> implements FundAccountService {
     private MetadataDAO metadataDAO;
     private MetadataService metadataService;
@@ -32,7 +33,7 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
     public FundAccountBiz(
         FundAccountDAO dao,
         MetadataDAO metadataDAO,
-        MetadataService metadataService,
+        @Qualifier("ActualMetadataService") MetadataService metadataService,
         TemplateEngine tp
     ) {
         super(dao); // Constructor injection
