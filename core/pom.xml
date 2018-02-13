@@ -115,6 +115,9 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<executable>true</executable>
+					<embeddedLaunchScriptProperties>
+						<inlinedConfScript>core/environment_variables.script</inlinedConfScript>
+					</embeddedLaunchScriptProperties>
 				</configuration>
 			</plugin>
 		</plugins>
