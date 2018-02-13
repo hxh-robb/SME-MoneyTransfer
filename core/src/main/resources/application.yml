@@ -76,9 +76,4 @@ motan:
 ---
 
 ## test environment settings
-spring:
-  profiles: test
-
----
-
-## production environment settings
+sis## production environment settings
