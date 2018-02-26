@@ -23,3 +23,6 @@ spring:
 
 motan:
   zookeeper: 10.63.51.114:2181
+
+server:
+  port: 9090
