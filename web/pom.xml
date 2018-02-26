@@ -74,6 +74,9 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<executable>true</executable>
+					<embeddedLaunchScriptProperties>
+						<inlinedConfScript>${project.basedir}/environment_variables.script</inlinedConfScript>
+					</embeddedLaunchScriptProperties>
 				</configuration>
 			</plugin>
 		</plugins>
