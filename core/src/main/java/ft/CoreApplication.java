@@ -35,11 +35,11 @@ public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private MybatisMetadataDAO test;
 
-    @Autowired
-    private ObjectPool<ChannelSftp> pool;
+//    @Autowired
+//    private ObjectPool<ChannelSftp> pool;
 
-    @Autowired @Qualifier("ActualFundAccountService")
-    private FundAccountService fundAccountService;
+//    @Autowired @Qualifier("ActualFundAccountService")
+//    private FundAccountService fundAccountService;
 
 
 	public static void main(String[] args) throws IOException {
@@ -211,7 +211,7 @@ public class CoreApplication implements CommandLineRunner {
 //        System.out.println(fao.mv("mama/cc/mamamiya.txt","newworld"));
 
 //        System.out.println(local.mv("/tmp/accd","/tmp/pqwer/papapia"));
-        System.out.println(fundAccountService.jsonFormSchema(null));
+//        System.out.println(fundAccountService.jsonFormSchema(null));
     }
 
     @Autowired
