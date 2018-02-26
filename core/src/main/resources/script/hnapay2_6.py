@@ -3,7 +3,7 @@ from ft.addon.PythonAddon import SSH
 import time, os
 
 def sign(param):
-    print((SSH.clone('/tmp/test.txt')))
+    #print((SSH.clone('/tmp/test.txt')))
     result = {}
 
     account_dict = param.account.fields

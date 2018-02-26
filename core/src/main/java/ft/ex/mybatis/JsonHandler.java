@@ -1,4 +1,4 @@
-package ft.repo.mariadb;
+package ft.ex.mybatis;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

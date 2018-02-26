@@ -1,11 +1,10 @@
 package ft.addon;
 
-import ft.boot.JschConfiguration;
+import ft.boot.SftpConfiguration;
 import ft.repo.MetadataDAO;
 import ft.spec.model.Metadata;
 import ft.spec.model.TransferAddon;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 
@@ -35,12 +34,12 @@ public class Coordinator {
      * @param dao
      * @param tp
      */
-    public Coordinator(MetadataDAO dao,TemplateEngine tp, JschConfiguration jsch) {
+    public Coordinator(MetadataDAO dao,TemplateEngine tp, SftpConfiguration jsch) {
         this.dao = dao;
         this.tp = tp;
 
         // Manual injection
-        PythonAddon.SSH.init(jsch);
+        // PythonAddon.SSH.init(jsch);
     }
 
 //    private void reset(){

@@ -39,6 +39,6 @@ public class FundAccountController {
 //
 //        return "OK";
 
-        return fundAccountService.list(null).toString();
+        return fundAccountService.jsonFormSchema(null).toString();
     }
 }

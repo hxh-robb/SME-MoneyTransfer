@@ -1,27 +1,18 @@
 package ft;
 
-import ft.repo.FundAccountDAO;
-import ft.spec.model.DepositOption;
-import ft.spec.model.FundAccount;
-import ft.spec.model.TransferAddon;
+import com.jcraft.jsch.ChannelSftp;
 import ft.spec.service.FundAccountService;
-import ft.spec.service.MetadataService;
-import ft.spec.service.TransferService;
+import org.apache.commons.pool2.ObjectPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
+import java.io.*;
 
 // TODO : Move test code to unit test
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
@@ -39,13 +30,16 @@ public class CoreApplication implements CommandLineRunner {
     private MetadataService metadataService;
 
     @Autowired
-    private FundAccountService fundAccountService;
-
-    @Autowired
     private TransferService transferService;*/
 
 //	@Autowired
 //	private MybatisMetadataDAO test;
+
+    @Autowired
+    private ObjectPool<ChannelSftp> pool;
+
+    @Autowired @Qualifier("ActualFundAccountService")
+    private FundAccountService fundAccountService;
 
 
 	public static void main(String[] args) throws IOException {
@@ -94,7 +88,7 @@ public class CoreApplication implements CommandLineRunner {
 //        helper1 = null;
 //        helper2 = null;
 //        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-	}
+    }
 /*
 	private static void count(Map<String,Number> params){
 	    params.put("count", params.get("count").longValue() + 1);
@@ -138,6 +132,86 @@ public class CoreApplication implements CommandLineRunner {
 //
 //        helper1 = null;
 //        helper2 = null;
+
+//        for(;;) {
+//            ChannelSftp sftp = pool.borrowObject();
+//            for (Object item : sftp.ls("/")) {
+//                System.out.println(item);
+//            };
+//            Thread.sleep(5000);
+//            pool.returnObject(sftp);
+//            Thread.sleep(5000);
+//        }
+
+//        ChannelSftp sftp = pool.borrowObject();
+//        pool.returnObject(sftp);
+
+//        new Thread(()->{
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//            try {
+//                while( null != reader.readLine() ) {
+//                    ChannelSftp s = pool.borrowObject();
+//                    reader.readLine();
+//                    pool.returnObject(s);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+//        List<ChannelSftp> sftpList = new ArrayList<>();
+//        List<BufferedReader> inList = new ArrayList<>();
+//        int leak = 0;
+//        for (; ; ) {
+//            try {
+//                ChannelSftp sftp = pool.borrowObject();
+//
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(sftp.get("examples.desktop")));
+//                System.out.println(reader.readLine());
+//
+//                inList.add(reader);
+//                sftpList.add(sftp);
+//            } catch (Throwable th) {
+//                System.out.println(pool.getNumActive() + "," + pool.getNumIdle());
+//                int size = sftpList.size();
+//                while(sftpList.size() >= size / 2) {
+//                    if (sftpList.isEmpty()) {
+//                        break;
+//                    }
+//                    try {
+//                        inList.remove(0).close();
+//                    } catch (Throwable canNotCloseInputStream) {
+//                        if( leak < 0 ){
+//                            size = 0;
+//                        } else {
+//                            leak++;
+//                            if( leak > 2 ) {
+//                                leak = -1;
+//                            }
+//                        }
+//                    } finally {
+//                        pool.returnObject(sftpList.remove(0));
+//                    }
+//                }
+//            }
+//        }
+
+//        ChannelSftp sftp1 = pool.borrowObject();
+//        ChannelSftp sftp2 = pool.borrowObject();
+//        System.out.println("sftp1 == sftp2:" + (sftp1 == sftp2) );
+//        pool.returnObject(sftp1);
+//        pool.returnObject(sftp2);
+
+        // System.out.println("examples.desktop:" + fao.fileExist("examples.desktop"));
+        // System.out.println("examples.desktop:" + fao.dirExist("examples.desktop"));
+
+//        System.out.println(fao.rmdir("mama"));
+//        System.out.println(fao.rm("mamamiya.txt"));
+//        System.out.println(fao.rmdir("abcd/ccav"));
+//        System.out.println(fao.ls("."));
+//        System.out.println(fao.mv("mama/cc/mamamiya.txt","newworld"));
+
+//        System.out.println(local.mv("/tmp/accd","/tmp/pqwer/papapia"));
+        System.out.println(fundAccountService.jsonFormSchema(null));
     }
 
     @Autowired

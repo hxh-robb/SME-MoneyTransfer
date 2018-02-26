@@ -15,9 +15,8 @@ import org.springframework.context.event.EventListener;
 @Configuration
 public class MotanConfiguration {
 
-    @Configuration
-    @ConfigurationProperties("motan")
-    public static class MotanProperties {
+    @Configuration @ConfigurationProperties("motan")
+    static class Properties {
         private String zookeeper;
 
         public String getZookeeper() {
@@ -27,15 +26,17 @@ public class MotanConfiguration {
         public void setZookeeper(String zookeeper) {
             this.zookeeper = zookeeper;
         }
-    }@Bean
-    public AnnotationBean motanAnnotationBean() {
+    }
+
+    @Bean
+    AnnotationBean motanAnnotationBean() {
         AnnotationBean motanAnnotationBean = new AnnotationBean();
         motanAnnotationBean.setPackage("ft.biz.motan");
         return motanAnnotationBean;
     }
 
     @Bean(name = "motan-protocol")
-    public ProtocolConfigBean protocolConfig() {
+    ProtocolConfigBean protocolConfig() {
         ProtocolConfigBean config = new ProtocolConfigBean();
         config.setName("motan");
         config.setDefault(true);
@@ -45,7 +46,7 @@ public class MotanConfiguration {
     }
 
     @Bean(name = "motan-registry")
-    public RegistryConfigBean registryConfig(MotanProperties properties) {
+    RegistryConfigBean registryConfig(Properties properties) {
         RegistryConfigBean config = new RegistryConfigBean();
         config.setRegProtocol("zookeeper");
         config.setAddress(properties.getZookeeper());
@@ -54,7 +55,7 @@ public class MotanConfiguration {
     }
 
     @Bean(name = "motan-service")
-    public BasicServiceConfigBean basicServiceConfig() {
+    BasicServiceConfigBean basicServiceConfig() {
         BasicServiceConfigBean config = new BasicServiceConfigBean();
         config.setExport("motan-protocol:16001");
         config.setApplication("ft");
@@ -68,7 +69,7 @@ public class MotanConfiguration {
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void turnOnMotanHeartbeat() {
+    void turnOnMotanHeartbeat() {
         MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, true);
     }
 

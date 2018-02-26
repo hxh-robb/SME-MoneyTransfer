@@ -5,10 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+/**
+ * Configuration for template engine
+ */
 @Configuration
 public class ThymeleafConfiguration {
     @Bean
-    public SpringResourceTemplateResolver jsonTemplateResovler(){
+    SpringResourceTemplateResolver jsonTemplateResovler(){
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setCheckExistence(true);
         resolver.setPrefix("classpath:/templates/");

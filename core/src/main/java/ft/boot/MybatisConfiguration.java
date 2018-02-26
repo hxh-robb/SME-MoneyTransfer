@@ -2,8 +2,6 @@ package ft.boot;
 
 import ft.repo.DAO;
 import ft.spec.model.Entity;
-import ft.spec.model.Metadata;
-import ft.spec.model.SemiStructuredEntity;
 import org.apache.ibatis.ognl.*;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,8 +16,8 @@ public class MybatisConfiguration {
     /**
      * Ignore NoSuchPropertyException exception cause Mappers accept different inheritances of Entity and Filter
      */
-    @PostConstruct
-    public void initMybatisCustomSettings(){
+    @PostConstruct @SuppressWarnings("unused")
+    void initMybatisCustomSettings(){
         PropertyAccessor accessor = new ObjectPropertyAccessor(){
             @Override
             public Object getProperty(Map context, Object target, Object oname) throws OgnlException {

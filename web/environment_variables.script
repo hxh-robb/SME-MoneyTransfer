@@ -1,0 +1,2 @@
+export SPRING_CONFIG_LOCATION=classpath:/,file:///etc/outwit-ft-web/
+export RUN_ARGS='--spring.profiles.active=dev,test,prod'

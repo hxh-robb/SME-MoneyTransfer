@@ -1,14 +1,9 @@
 package ft.addon;
 
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-import ft.boot.JschConfiguration;
+import ft.boot.SftpConfiguration;
 import org.python.core.Py;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
 import java.util.Map;
@@ -96,13 +91,13 @@ abstract class PythonAddon implements Addon {
         // TODO : apache connection pool + JSch(create a new ssh connection cost 300ms)
         // TODO : upload file and form data (spring mvc)
 
-        private static JschConfiguration config;
+        private static SftpConfiguration config;
 
         /**
          * Manually injection
          * @param config
          */
-        public static final void init(JschConfiguration config) {
+        public static final void init(SftpConfiguration config) {
             SSH.config = config;
         }
 

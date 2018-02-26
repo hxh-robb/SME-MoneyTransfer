@@ -1,12 +1,11 @@
-jsch:
-  addr: 10.63.57.26
-  port: 22
-  user: robb
-  password: robbpass
+#jsch:
+#  addr: 10.63.57.26
+#  port: 22
+#  user: robb
+#  password: robbpass
 
 motan:
-  #zookeeper: 10.63.57.26:2181
-  zookeeper: 10.63.51.114:2181
+  zookeeper: 10.63.57.26:2181
 
 logging:
   level:
@@ -15,3 +14,12 @@ logging:
   pattern:
     console: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
 #    file: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
+
+---
+
+## development environment settings
+spring:
+  profiles: dev
+
+motan:
+  zookeeper: 10.63.51.114:2181

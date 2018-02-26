@@ -33,7 +33,7 @@ public class MongoDBConfiguration {
     private String mongoPass;
 
     @Bean
-    public Datastore datastore(){
+    Datastore datastore(){
         Morphia morphia = new Morphia();
 
         // Mapping stage

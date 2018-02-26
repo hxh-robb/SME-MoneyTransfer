@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/fund-transfer.iml" filepath="$PROJECT_DIR$/fund-transfer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spec/spec.iml" filepath="$PROJECT_DIR$/spec/spec.iml" />
-      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/fund-transfer-core.iml" filepath="$PROJECT_DIR$/core/fund-transfer-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spec/fund-transfer-spec.iml" filepath="$PROJECT_DIR$/spec/fund-transfer-spec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/fund-transfer-web.iml" filepath="$PROJECT_DIR$/web/fund-transfer-web.iml" />
     </modules>
   </component>
 </project>

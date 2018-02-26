@@ -12,9 +12,6 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/ft
     username: robb
     password: robbpass
-#    url: jdbc:mysql://10.63.51.105:3306/pubplat_deposit
-#    username: bidev_deposit
-#    password: BIDEV_DEPOSIT
     hikari:
       idle-timeout: 10000
   thymeleaf:
@@ -29,15 +26,22 @@ spring:
   profiles:
     active: local
 
-jsch:
-  addr: 10.63.57.26
+docs-dir:
+  local:
+  raw:
+  img:
+  cert:
+
+sftp:
+  host: 127.0.0.1
   port: 22
-  user: robb
-  password: robbpass
-  file-queue:
-    raw:
-    image:
-    cert:
+  username: shared-files
+  password: shared-files-pass
+  connectTimeout: 10000
+  pool:
+    maxTotal: 10
+    maxIdle: 1
+    maxWaitMillis: 10000
 
 motan:
   zookeeper: 10.63.57.26:2181
@@ -56,6 +60,7 @@ logging:
   level:
     MetadataMapper: INFO
     FundAccountMapper: INFO
+    serviceStatsLog: OFF # disable motan logger which is super annoying
   pattern:
     console: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
 #    file: "[%d{yyyy-MM-dd HH:mm:ss}][%p][%c][%t]%m%n"
@@ -75,5 +80,4 @@ motan:
 
 ---
 
-## test environment settings
-sis## production environment settings
+## For test & production environment settings, please see /etc/outwit-ft-core/application.yml

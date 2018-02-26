@@ -1,4 +1,4 @@
-package ft.repo.mariadb;
+package ft.ex.mybatis;
 
 import ft.spec.model.TransferAddon;
 import org.apache.ibatis.type.BaseTypeHandler;
