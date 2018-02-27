@@ -27,10 +27,9 @@ spring:
     active: local
 
 docs-dir:
-  local:
-  raw:
-  img:
-  cert:
+  raw: /home/shared-files/raw/
+  base: /home/shared-files/resources/
+  urlBase: http://127.0.0.1:8888/resources/
 
 sftp:
   host: 127.0.0.1

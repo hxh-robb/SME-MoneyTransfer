@@ -2,6 +2,7 @@ package ft.biz.motan;
 
 import com.weibo.api.motan.config.springsupport.annotation.MotanService;
 import ft.biz.FundAccountBiz;
+import ft.files.FileManager;
 import ft.repo.FundAccountDAO;
 import ft.repo.MetadataDAO;
 import ft.spec.service.FundAccountService;
@@ -21,8 +22,8 @@ public class MotanFundAccountService extends FundAccountBiz implements FundAccou
         FundAccountDAO dao,
         MetadataDAO metadataDAO,
         @Qualifier("ActualMetadataService") MetadataService metadataService,
-        TemplateEngine tp
+        TemplateEngine tp, FileManager fm
     ) {
-        super(dao, metadataDAO, metadataService, tp);
+        super(dao, metadataDAO, metadataService, tp, fm);
     }
 }

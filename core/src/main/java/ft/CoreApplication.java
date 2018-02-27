@@ -1,8 +1,8 @@
 package ft;
 
-import com.jcraft.jsch.ChannelSftp;
+import ft.files.FileManager;
+import ft.spec.model.FundAccount;
 import ft.spec.service.FundAccountService;
-import org.apache.commons.pool2.ObjectPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +12,9 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfigurat
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.thymeleaf.TemplateEngine;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 // TODO : Move test code to unit test
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
@@ -23,14 +25,14 @@ public class CoreApplication implements CommandLineRunner {
 //	@Autowired
 //	private MetadataDAO metadataDao;
 
-/*	@Autowired
-	private FundAccountDAO fundAccountDao;
+//	@Autowired
+//	private FundAccountDAO fundAccountDao;
 
-    @Autowired
-    private MetadataService metadataService;
+//    @Autowired
+//    private MetadataService metadataService;
 
-    @Autowired
-    private TransferService transferService;*/
+//    @Autowired
+//    private TransferService transferService;
 
 //	@Autowired
 //	private MybatisMetadataDAO test;
@@ -38,9 +40,11 @@ public class CoreApplication implements CommandLineRunner {
 //    @Autowired
 //    private ObjectPool<ChannelSftp> pool;
 
-//    @Autowired @Qualifier("ActualFundAccountService")
-//    private FundAccountService fundAccountService;
+    @Autowired @Qualifier("ActualFundAccountService")
+    private FundAccountService fundAccountService;
 
+    @Autowired
+    private FileManager fm;
 
 	public static void main(String[] args) throws IOException {
 //        PythonInterpreter interpreter = new PythonInterpreter();
@@ -113,7 +117,7 @@ public class CoreApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // mongodb_metadata();
         // mongodb_fund_account();
-        // mybatis_test();
+        mybatis_test();
         // thymeleaf_test();
 
 //        String s1 = read("script/test.py");
@@ -332,52 +336,54 @@ public class CoreApplication implements CommandLineRunner {
 		System.out.println(test.update(filter,addon));
 		System.out.println(test.delete(filter));*/
 
-		/*TransferAddon bank = new TransferAddon();
-        bank.setName("银行卡收款渠道");
-        bank.setDescription("银行卡收款渠道");
-        bank.setValue("0");
-        bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
-        bank.setType(TransferAddon.Type.JAVA);
-        bank.setSpec(read("addon-spec/bank-spec.json"));
-        bank.setContent("ft.addon.BankDepositSlipGenerator");
-        System.out.println(metadataService.create(null, bank));
-
-        TransferAddon hnapay = new TransferAddon();
-        hnapay.setName("新生支付收款渠道");
-        hnapay.setDescription("新生支付收款渠道");
-        hnapay.setValue("1");
-        hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
-        hnapay.setType(TransferAddon.Type.PYTHON);
-        hnapay.setSpec(read("addon-spec/hnapay-spec.json"));
-        hnapay.setContent(read("script/hnapay2_6.py"));
-        System.out.println(metadataService.create(null,hnapay));
+//		TransferAddon bank = new TransferAddon();
+//        bank.setName("银行卡收款渠道");
+//        bank.setDescription("银行卡收款渠道");
+//        bank.setValue("0");
+//        bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
+//        bank.setType(TransferAddon.Type.JAVA);
+//        bank.setSpec(read("addon-spec/bank-spec.json"));
+//        bank.setContent("ft.addon.BankDepositSlipGenerator");
+//        System.out.println(metadataService.create(null, bank));
+//
+//        TransferAddon hnapay = new TransferAddon();
+//        hnapay.setName("新生支付收款渠道");
+//        hnapay.setDescription("新生支付收款渠道");
+//        hnapay.setValue("1");
+//        hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
+//        hnapay.setType(TransferAddon.Type.PYTHON);
+//        hnapay.setSpec(read("addon-spec/hnapay-spec.json"));
+//        hnapay.setContent(read("script/hnapay2_6.py"));
+//        System.out.println(metadataService.create(null,hnapay));
 
         FundAccount hnapayAccount = new FundAccount();
         hnapayAccount.getInfo().setName("新生支付");
-        hnapayAccount.setType(hnapay.getValue());
+        hnapayAccount.getInfo().setIcon("/home/shared-files/raw/img-file");
+        hnapayAccount.setType("1");
+        hnapayAccount.set("cert","/home/shared-files/raw/test-file");
         // hnapayAccount.set("partnerID","1000002158");
         System.out.println(fundAccountService.create(null, hnapayAccount));
 
-        FundAccount bankAccount = new FundAccount();
-        bankAccount.getInfo().setName("银行卡转账");
-        bankAccount.setType(bank.getValue());
-        bankAccount.set("account", "6888888888888881");
-        bankAccount.set("holder", "江泽民");
-        bankAccount.set("bank", "中国中央银行");
-        System.out.println(fundAccountService.create(null, bankAccount));*/
+//        FundAccount bankAccount = new FundAccount();
+//        bankAccount.getInfo().setName("银行卡转账");
+//        bankAccount.setType(bank.getValue());
+//        bankAccount.set("account", "6888888888888881");
+//        bankAccount.set("holder", "江泽民");
+//        bankAccount.set("bank", "中国中央银行");
+//        System.out.println(fundAccountService.create(null, bankAccount));
 
-		/*List<DepositOption> options = fundAccountService.supportedDepositOption(null);
-		DepositOption option = null;
-        for (DepositOption o:options) {
-            if("银行账号".equals(o.getName()))
-                option = o;
-        }
-
-        if( null != option ) {
-            System.out.println(
-                transferService.generateDepositSlip(null, option.getId(), 300.0)
-            );
-        }*/
+//		List<DepositOption> options = fundAccountService.supportedDepositOption(null);
+//		DepositOption option = null;
+//        for (DepositOption o:options) {
+//            if("银行账号".equals(o.getName()))
+//                option = o;
+//        }
+//
+//        if( null != option ) {
+//            System.out.println(
+//                transferService.generateDepositSlip(null, option.getId(), 300.0)
+//            );
+//        }
 
 		/*MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
 		filter.name = "Simple";

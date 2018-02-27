@@ -54,6 +54,16 @@ interface FAO {
     }
 
     /**
+     * copy given file to a new path
+     * @param src
+     * @param dest
+     * @return
+     */
+    default boolean cp(String src, String dest) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    /**
      * check if the specific file is exist
      * @param path
      * @return

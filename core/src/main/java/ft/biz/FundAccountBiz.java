@@ -1,5 +1,6 @@
 package ft.biz;
 
+import ft.files.FileManager;
 import ft.repo.FundAccountDAO;
 import ft.repo.MetadataDAO;
 import ft.spec.model.DepositOption;
@@ -8,6 +9,7 @@ import ft.spec.model.Metadata;
 import ft.spec.service.FundAccountService;
 import ft.spec.service.MetadataService;
 import ft.spec.service.Result;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Fund account service implementation
@@ -24,6 +27,7 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
     private MetadataDAO metadataDAO;
     private MetadataService metadataService;
     private TemplateEngine templateEngine;
+    private FileManager fm;
 
     /**
      * Constructor injection
@@ -34,12 +38,14 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
         FundAccountDAO dao,
         MetadataDAO metadataDAO,
         @Qualifier("ActualMetadataService") MetadataService metadataService,
-        TemplateEngine tp
+        TemplateEngine tp,
+        FileManager fm
     ) {
         super(dao); // Constructor injection
         this.metadataDAO = metadataDAO;
         this.metadataService = metadataService;
         this.templateEngine = tp;
+        this.fm = fm;
     }
 
     @Override
@@ -61,6 +67,7 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
         FundAccountDAO.Filter filter = new FundAccountDAO.Filter();
         filter.type = account.getType();
         filter.fields = account.getFields();
+        filter.de = false;
         return !dao.listDepositOptions(filter).isEmpty();
     }
 
@@ -81,7 +88,30 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
 
     @Override
     public Result create(String subject, FundAccount entity) {
-        // TODO : File paths manipulation
+        String iconRawPath = entity.getInfo().getIcon();
+        if( null != iconRawPath ) {
+            String iconWebPath = fm.copyTo(iconRawPath, "icon", true);
+            if (null == iconWebPath) {
+                LoggerFactory.getLogger(FundAccountBiz.class).error(String.format("Can NOT move %s raw file[%s]", "icon", iconRawPath));
+                return new Result();
+            }
+            entity.getInfo().setIcon(iconWebPath);
+        }
+
+        Map<String, Object> fields = entity.getFields();
+        for(String field : fields.keySet()) {
+            Object value = fields.get(field);
+            if(!(value instanceof String) || !fm.isRaw((String)value)) {
+                continue;
+            }
+
+            String newPath = fm.copyTo((String)value, field, false);
+            if( null == newPath ) {
+                LoggerFactory.getLogger(FundAccountBiz.class).error(String.format("Can NOT move %s raw file[%s]", field, value));
+                return new Result();
+            }
+            entity.set(field,newPath);
+        }
 
         return super.create(subject, entity);
     }

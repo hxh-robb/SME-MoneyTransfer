@@ -49,6 +49,10 @@ class SftpFAO extends ThreadLocalObjectPoolDecorator.ThreadLocalObjectPoolHelper
             sftp = borrowObject();
 
             for (String d:pathTree) {
+                if(path.startsWith("/") && "".equals(d)){
+                    sftp.cd("/");
+                    continue;
+                }
                 if(d == pathTree.get(pathTree.size() - 1)) {
                     break;
                 }
@@ -185,6 +189,20 @@ class SftpFAO extends ThreadLocalObjectPoolDecorator.ThreadLocalObjectPoolHelper
         try {
             sftp = borrowObject();
             sftp.rename(oldPath, newPath);
+            return true;
+        } catch (Throwable throwable) {
+            return false;
+        } finally {
+            returnObject(sftp);
+        }
+    }
+
+    @Override
+    public boolean cp(String src, String dest) {
+        ChannelSftp sftp = null;
+        try {
+            sftp = borrowObject();
+            sftp.hardlink(src,dest);
             return true;
         } catch (Throwable throwable) {
             return false;
