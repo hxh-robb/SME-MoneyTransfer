@@ -88,9 +88,10 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
 
     @Override
     public Result create(String subject, FundAccount entity) {
+        // Manipulate raw files
         String iconRawPath = entity.getInfo().getIcon();
         if( null != iconRawPath ) {
-            String iconWebPath = fm.copyTo(iconRawPath, "icon", true);
+            String iconWebPath = fm.remoteCopy(iconRawPath, "icon", true);
             if (null == iconWebPath) {
                 LoggerFactory.getLogger(FundAccountBiz.class).error(String.format("Can NOT move %s raw file[%s]", "icon", iconRawPath));
                 return new Result();
@@ -101,11 +102,11 @@ public class FundAccountBiz extends EntityBiz<FundAccount, FundAccountDAO> imple
         Map<String, Object> fields = entity.getFields();
         for(String field : fields.keySet()) {
             Object value = fields.get(field);
-            if(!(value instanceof String) || !fm.isRaw((String)value)) {
+            if(!(value instanceof String) || !fm.isRemoteRaw((String)value)) {
                 continue;
             }
 
-            String newPath = fm.copyTo((String)value, field, false);
+            String newPath = fm.remoteCopy((String)value, field, false);
             if( null == newPath ) {
                 LoggerFactory.getLogger(FundAccountBiz.class).error(String.format("Can NOT move %s raw file[%s]", field, value));
                 return new Result();

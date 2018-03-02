@@ -8,10 +8,12 @@
         <result property="ct" column="ct"/>
         <result property="ts" column="ts"/>
         <result property="de" column="de"/>
+        <result property="co" column="co"/>
+        <result property="uo" column="uo"/>
     </resultMap>
 
     <sql id="EntityColumns">
-        t.id, t.ct, t.ts, t.de
+        t.id, t.ct, t.ts, t.de, t.co, t.uo
     </sql>
 
     <sql id="DynamicColumnDataType" >

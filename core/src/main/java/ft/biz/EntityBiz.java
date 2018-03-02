@@ -25,6 +25,9 @@ public abstract class EntityBiz<T extends Entity, D extends DAO> extends Biz imp
     public Result create(String subject, T entity) {
         processSubject(subject);
 
+        entity.setCo(subject);
+        entity.setUo(subject);
+
         Result result = new Result();
         if( invalid(entity) ) return result.setCode(Result.Code.INVALID_ENTITY); // Given entity is invalid
         if( duplicated(entity) ) return result.setCode(Result.Code.DUPLICATED_ENTITY); // Given entity is duplicated
@@ -47,6 +50,7 @@ public abstract class EntityBiz<T extends Entity, D extends DAO> extends Biz imp
 
         T changeDe = createEntity();
         changeDe.setId(null);
+        changeDe.setUo(subject);
         changeDe.setDe(true);
 
         if( 1 == dao.update(filter, changeDe) ) // Soft delete
@@ -64,6 +68,7 @@ public abstract class EntityBiz<T extends Entity, D extends DAO> extends Biz imp
 
         DAO.Filter filter = createFilter();
         filter.id = entity.getId();
+        entity.setUo(subject);
         entity.setTs(new Date());
         if( 1 == dao.update(filter, entity) )
             result.setCode(Result.Code.SUCCESS);

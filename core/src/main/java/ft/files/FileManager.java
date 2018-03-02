@@ -5,9 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * TODO:File manager
+ * File manager
  */
 @Component
 public class FileManager {
@@ -21,8 +22,14 @@ public class FileManager {
         this.local = local;
     }
 
-    private String copy(String remotePath, String newParent){
-        if(!isRaw(remotePath) || null == newParent){
+    /**
+     * copy file to new parent
+     * @param remotePath
+     * @param newParent
+     * @return
+     */
+    private String remoteCopy(String remotePath, String newParent){
+        if(!isRemoteRaw(remotePath) || null == newParent){
             return null;
         }
 
@@ -49,13 +56,13 @@ public class FileManager {
     }
 
     /**
-     * Move remote files
+     * Copy remote files
      * @param remotePath
      * @return cert file path
      */
-    public String copyTo(String remotePath, String tag, boolean returnWebURL){
+    public String remoteCopy(String remotePath, String tag, boolean returnWebURL){
         String parent = paths.getBase().endsWith("/") ? paths.getBase() + tag : paths.getBase() + "/" + tag;
-        String newPath = copy(remotePath, parent);
+        String newPath = remoteCopy(remotePath, parent);
         if( null == newPath ) {
             return null;
         }
@@ -72,7 +79,7 @@ public class FileManager {
      * @param remotePath
      * @return
      */
-    public boolean isRaw(String remotePath){
+    public boolean isRemoteRaw(String remotePath){
         if( null == remotePath ) {
             return false;
         }
@@ -85,11 +92,43 @@ public class FileManager {
         return null != exist && exist;
     }
 
-    /*
-    * 1) check if local has a copy
-    * 2-a) if local has the copy, load it locally then return the file descriptor;
-    * 2-b) if local doesn't have the copy, load it remotely (see section-3) ;
-    *
-    * 3)
-    * */
+    /**
+     * Clone the remote file to local filesystem then return the local path
+     * @param remotePath
+     * @return
+     */
+    public String cloneAndGetLocalPath(String remotePath){
+        if(null == remotePath) {
+            return null;
+        }
+
+        Boolean exist = remote.fileExist(remotePath);
+        if(null == exist || !exist) {
+            return null;
+        }
+
+        String tmp = System.getProperty("java.io.tmpdir");
+        String filename = "outwit-tmp-" + new File(remotePath).getName();
+        File localFile = new File(tmp, filename);
+        exist = local.fileExist(localFile.getPath());
+        if( null == exist ) {
+            return null;
+        } else if (exist) {
+            return localFile.getPath();
+        }
+
+        if(!local.touch(localFile.getPath())){
+            return null;
+        }
+
+        final AtomicBoolean success = new AtomicBoolean(false);
+        remote.readAsInputStream(remotePath, (inputStream)->{
+            success.set(local.write(localFile.getPath(), inputStream));
+        });
+
+        if(success.get()) {
+            return localFile.getPath();
+        }
+        return null;
+    }
 }

@@ -14,56 +14,6 @@ import java.util.List;
  */
 @Service @Qualifier("ActualMetadataService")
 public class MetadataBiz extends EntityBiz<Metadata, MetadataDAO> implements MetadataService {
-/*
-
-    @Autowired
-    private MetadataDAO dao;
-
-//    @Override
-//    public List<Metadata> list(String subject, String catalog) {
-//        // TODO:log subject behaviors
-//
-//        MetadataDAO.Filter filter = new MetadataDAO.Filter();
-//        filter.catalog = catalog;
-//        return dao.list(filter);
-//    }
-
-    @Override
-    public Result delete(String subject, String id) {
-        // TODO:log subject behaviors
-
-        Result result = new Result();
-        if( null == id ) return result;
-
-        MetadataDAO.Filter filter = new MetadataDAO.Filter();
-        filter.id = id;
-
-        Metadata changeDe = new Metadata();
-        changeDe.setId(null);
-        changeDe.setDe(true);
-
-        if( 1 == dao.update(filter, changeDe) )
-            result.setCode(Result.Code.SUCCESS);
-
-        return result;
-    }
-
-    @Override
-    public Result update(String subject, Metadata metadata){
-        // TODO:log subject behaviors
-
-        Result result = new Result();
-        if( null == metadata || null == metadata.getId() ) return result;
-
-        MetadataDAO.Filter filter = new MetadataDAO.Filter();
-        filter.id = metadata.getId();
-        metadata.setTs(new Date());
-        if( 1 == dao.update(filter, metadata) )
-            result.setCode(Result.Code.SUCCESS);
-
-        return result;
-    }
-*/
     public MetadataBiz(MetadataDAO dao) {
         super(dao); // Constructor injection
     }

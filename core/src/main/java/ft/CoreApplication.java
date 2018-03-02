@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.thymeleaf.TemplateEngine;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -56,7 +57,7 @@ public class CoreApplication implements CommandLineRunner {
 //        func.__call__(Py.java2py(slip));
 //        System.out.println(slip);
 
-//	    String code = read("script/test.py");
+//	    String code = read("script/test.script");
 //        interpreter.exec("import types");
 //        interpreter.exec("addon = types.ModuleType('addon')");
 //        interpreter.exec(MessageFormat.format("exec ''''''\n{0}\n'''''' in addon.__dict__",code));
@@ -77,8 +78,8 @@ public class CoreApplication implements CommandLineRunner {
 
          SpringApplication.run(CoreApplication.class, args);
 
-//        String s1 = read("script/test.py");
-//        String s2 = read("script/test2.py");
+//        String s1 = read("script/test.script");
+//        String s2 = read("script/test2.script");
 //        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 //        PyHelper helper1 = new PyHelper(s1);
 //        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
@@ -117,11 +118,11 @@ public class CoreApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // mongodb_metadata();
         // mongodb_fund_account();
-        mybatis_test();
+        // mybatis_test();
         // thymeleaf_test();
 
-//        String s1 = read("script/test.py");
-//        String s2 = read("script/test2.py");
+//        String s1 = read("script/test.script");
+//        String s2 = read("script/test2.script");
 //
 //        PyHelper helper1 = new PyHelper(s1);
 //        PyHelper helper2 = new PyHelper(s2);
@@ -216,6 +217,8 @@ public class CoreApplication implements CommandLineRunner {
 
 //        System.out.println(local.mv("/tmp/accd","/tmp/pqwer/papapia"));
 //        System.out.println(fundAccountService.jsonFormSchema(null));
+
+        System.out.println(fm.cloneAndGetLocalPath("/home/shared-files/resources/cert/test-file"));
     }
 
     @Autowired
@@ -265,13 +268,13 @@ public class CoreApplication implements CommandLineRunner {
         for (TransferAddon addon : addons) {
             if(TransferAddon.Mode.INTERMEDIARY_DEPOSIT.equals(addon.getMode()) && TransferAddon.Type.PYTHON.equals(addon.getType())){
                 addon.setName("新生支付收款渠道");
-                addon.setContent(read("script/hnapay2_6.py"));
-                addon.setSpec(read("addon-spec/hnapay-spec.json"));
+                addon.setContent(read("script/hnapay2_6.script"));
+                addon.setSpec(read("addon/hnapay-spec.json"));
                 metadataService.update(null, addon);
                 type = addon.getValue();
             } else if (TransferAddon.Mode.BANK_DEPOSIT.equals(addon.getMode())) {
                 addon.setName("银行卡收款渠道");
-                addon.setSpec(read("addon-spec/bank-spec.json"));
+                addon.setSpec(read("addon/bank-spec.json"));
                 metadataService.update(null, addon);
             }
         }
@@ -342,7 +345,7 @@ public class CoreApplication implements CommandLineRunner {
 //        bank.setValue("0");
 //        bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
 //        bank.setType(TransferAddon.Type.JAVA);
-//        bank.setSpec(read("addon-spec/bank-spec.json"));
+//        bank.setSpec(read("addon/bank-spec.json"));
 //        bank.setContent("ft.addon.BankDepositSlipGenerator");
 //        System.out.println(metadataService.create(null, bank));
 //
@@ -352,8 +355,8 @@ public class CoreApplication implements CommandLineRunner {
 //        hnapay.setValue("1");
 //        hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
 //        hnapay.setType(TransferAddon.Type.PYTHON);
-//        hnapay.setSpec(read("addon-spec/hnapay-spec.json"));
-//        hnapay.setContent(read("script/hnapay2_6.py"));
+//        hnapay.setSpec(read("addon/hnapay-spec.json"));
+//        hnapay.setContent(read("script/hnapay2_6.script"));
 //        System.out.println(metadataService.create(null,hnapay));
 
         FundAccount hnapayAccount = new FundAccount();

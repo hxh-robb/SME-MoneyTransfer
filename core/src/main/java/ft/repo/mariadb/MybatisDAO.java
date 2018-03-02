@@ -22,7 +22,7 @@ public abstract class MybatisDAO<T extends Entity, F extends DAO.Filter> impleme
     protected final Logger LOG;
 
     @Autowired
-    protected SqlSession sqlSession;
+    public SqlSession sqlSession;
 
     /**
      * Mybatis mapper namespace

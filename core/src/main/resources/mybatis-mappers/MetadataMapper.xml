@@ -65,13 +65,13 @@
 
     <insert id="create">
         insert into metadata (
-            id,
+            id, co, uo,
             <include refid="MetadataColumns" />
             <trim prefix=",">
                 <if test="mode != null or type != null or spec != null or content != null"> fields </if>
             </trim>
         ) values (
-            #{id}, #{name}, #{catalog}, #{description}, #{value}
+            #{id}, #{co}, #{uo}, #{name}, #{catalog}, #{description}, #{value}
             <trim prefix=",">
                 <if test="mode != null or type != null or spec != null or content != null">
                     <trim prefix="column_create(" suffixOverrides="," suffix=")">
@@ -89,6 +89,8 @@
         update metadata
         <set>
             <!-- Entity updatable field -->
+            <if test="data.co != null"> co = #{data.co}, </if>
+            <if test="data.uo != null"> uo = #{data.uo}, </if>
             <if test="data.de != null"> de = #{data.de}, </if>
 
             <!-- Metadata updatable fields -->

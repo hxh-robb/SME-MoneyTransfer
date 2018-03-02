@@ -66,6 +66,16 @@ public abstract class Entity implements Serializable{
      */
     protected Boolean de;
 
+    /**
+     * Creation operator
+     */
+    protected String co;
+
+    /**
+     * Update operator
+     */
+    protected String uo;
+
     public String getId() {
         return id;
     }
@@ -106,6 +116,22 @@ public abstract class Entity implements Serializable{
         this.de = de;
     }
 
+    public String getCo() {
+        return co;
+    }
+
+    public void setCo(String co) {
+        this.co = co;
+    }
+
+    public String getUo() {
+        return uo;
+    }
+
+    public void setUo(String uo) {
+        this.uo = uo;
+    }
+
     @Override
     public String toString() {
         return toString(true);
@@ -115,7 +141,9 @@ public abstract class Entity implements Serializable{
         String fields = "id='" + id + '\'' +
             ", ct=" + ct +
             ", ts=" + ts +
-            ", de=" + de ;
+            ", de=" + de +
+            ", co=" + co +
+            ", uo=" + uo ;
         return complete ? MessageFormat.format("Entity'{'{0}'}'", fields) : fields;
     }
 }

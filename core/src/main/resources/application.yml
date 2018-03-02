@@ -66,6 +66,18 @@ logging:
 
 ---
 
+## unit test environment settings
+spring:
+  profiles: unit-test
+  datasource: # need to install MariaDB in local environment first
+    schema: classpath:database/drop.sql, classpath:database/schema.sql
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ft_unit_test
+    username: robb
+    password: robbpass
+
+---
+
 ## development environment settings
 spring:
   profiles: dev

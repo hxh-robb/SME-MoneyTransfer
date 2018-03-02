@@ -67,7 +67,7 @@
 
     <insert id="create">
         insert into fund_account (
-            id,
+            id, co, uo,
             name, icon, type
             <!--, fields-->
             <trim prefix=",">
@@ -76,7 +76,7 @@
                 </if>
             </trim>
         ) values (
-            #{id},
+            #{id}, #{co}, #{uo},
             #{info.name}, #{info.icon}, #{type}
             <trim prefix=",">
                 <if test="!fields.isEmpty()">
@@ -99,6 +99,8 @@
         update fund_account t
         <set>
             <!-- Entity updatable field -->
+            <if test="data.co != null"> co = #{data.co}, </if>
+            <if test="data.uo != null"> uo = #{data.uo}, </if>
             <if test="data.de != null"> de = #{data.de}, </if>
 
             <!-- DepositOption updatable fields -->
