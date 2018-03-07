@@ -4,7 +4,11 @@ import ft.repo.MetadataDAO;
 import ft.spec.model.Metadata;
 import ft.spec.model.TransferAddon;
 import ft.spec.service.MetadataService;
+import ft.spec.service.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +44,39 @@ public class MetadataBiz extends EntityBiz<Metadata, MetadataDAO> implements Met
         MetadataDAO.TransferAddonFilter filter = new MetadataDAO.TransferAddonFilter();
         filter.de = false;
         return dao.list(filter);
+    }
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
+    @Override
+    public Result create(String subject, Metadata entity) {
+        Result result = super.create(subject, entity);
+        if(Code.SUCCESS == result.getCode()) {
+            publisher.publishEvent(entity);
+        }
+        return result;
+    }
+
+    @Override
+    public Result delete(String subject, String id) {
+        Result result = super.delete(subject, id);
+        if(Code.SUCCESS == result.getCode()) {
+            TransferAddon deleted = new TransferAddon();
+            deleted.setId(id);
+            deleted.setDe(true);
+            publisher.publishEvent(deleted);
+        }
+        return result;
+    }
+
+    @Override
+    public Result update(String subject, Metadata entity) {
+        Result result = super.update(subject, entity);
+        if(Code.SUCCESS == result.getCode()) {
+            publisher.publishEvent(entity);
+        }
+        return result;
     }
 
     @Override

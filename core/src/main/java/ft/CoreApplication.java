@@ -218,7 +218,7 @@ public class CoreApplication implements CommandLineRunner {
 //        System.out.println(local.mv("/tmp/accd","/tmp/pqwer/papapia"));
 //        System.out.println(fundAccountService.jsonFormSchema(null));
 
-        System.out.println(fm.cloneAndGetLocalPath("/home/shared-files/resources/cert/test-file"));
+//        System.out.println(fm.cloneAndGetLocalPath("/home/shared-files/resources/cert/test-file"));
     }
 
     @Autowired
@@ -264,21 +264,6 @@ public class CoreApplication implements CommandLineRunner {
 
 	private void mybatis_test() {
         /*String type = null;
-        List<TransferAddon> addons = metadataService.supportedTransferAddons(null);
-        for (TransferAddon addon : addons) {
-            if(TransferAddon.Mode.INTERMEDIARY_DEPOSIT.equals(addon.getMode()) && TransferAddon.Type.PYTHON.equals(addon.getType())){
-                addon.setName("新生支付收款渠道");
-                addon.setContent(read("script/hnapay2_6.script"));
-                addon.setSpec(read("addon/hnapay-spec.json"));
-                metadataService.update(null, addon);
-                type = addon.getValue();
-            } else if (TransferAddon.Mode.BANK_DEPOSIT.equals(addon.getMode())) {
-                addon.setName("银行卡收款渠道");
-                addon.setSpec(read("addon/bank-spec.json"));
-                metadataService.update(null, addon);
-            }
-        }
-
         List<DepositOption> list = fundAccountService.supportedDepositOption(null);
         for (DepositOption option:list) {
             System.out.println(option);
@@ -299,73 +284,13 @@ public class CoreApplication implements CommandLineRunner {
 //
 //        }
 
-	    /*List<TransferAddon> result = metadataService.supportedTransferAddons(null);
-        System.out.println(result.size());
-        System.out.println(result);*/
-
-		/*MetadataDAO.Filter filter = null;
-		filter = new MetadataDAO.Filter();
-		filter.name = "Hnapay";
-
-		// filter = new MetadataDAO.TransferAddonFilter();
-		// filter.mode = TransferAddon.Mode.BANK_DEPOSIT;
-		// filter.value = "0";
-        System.out.println(metadataDao.list(filter));*/
-
-
-		/*if( !result.isEmpty() ) {
-            TransferAddon addon = null;
-//            addon = result.get(0);
-//            addon = new TransferAddon();
-
-//            addon.setName("新生");
-//            addon.setValue("1");
-//            addon.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
-//            addon.setType(TransferAddon.Type.PYTHON);
-//            addon.setDescription(addon.getDescription() + "|修改测试 - Test MetadataEntityService");
-//            addon.setContent("Some script will be written");
-//            addon.setSpec("Wait for me");
-
-//            System.out.println(metadataService.update(null, addon));
-//            System.out.println(metadataService.delete(null, null));
-//            System.out.println(metadataService.create(null, addon));
-        }*/
-
-
-		/*filter.id = "077f4dbf-51b7-41a4-b3a3-fd96cf61ba24";
-		// TransferAddon addon = new TransferAddon();
-		Metadata addon = new Metadata();
-		addon.setDescription("Test - 测试修改");
-		System.out.println(test.update(filter,addon));
-		System.out.println(test.delete(filter));*/
-
-//		TransferAddon bank = new TransferAddon();
-//        bank.setName("银行卡收款渠道");
-//        bank.setDescription("银行卡收款渠道");
-//        bank.setValue("0");
-//        bank.setMode(TransferAddon.Mode.BANK_DEPOSIT);
-//        bank.setType(TransferAddon.Type.JAVA);
-//        bank.setSpec(read("addon/bank-spec.json"));
-//        bank.setContent("ft.addon.BankDepositSlipGenerator");
-//        System.out.println(metadataService.create(null, bank));
-//
-//        TransferAddon hnapay = new TransferAddon();
-//        hnapay.setName("新生支付收款渠道");
-//        hnapay.setDescription("新生支付收款渠道");
-//        hnapay.setValue("1");
-//        hnapay.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
-//        hnapay.setType(TransferAddon.Type.PYTHON);
-//        hnapay.setSpec(read("addon/hnapay-spec.json"));
-//        hnapay.setContent(read("script/hnapay2_6.script"));
-//        System.out.println(metadataService.create(null,hnapay));
-
         FundAccount hnapayAccount = new FundAccount();
         hnapayAccount.getInfo().setName("新生支付");
         hnapayAccount.getInfo().setIcon("/home/shared-files/raw/img-file");
         hnapayAccount.setType("1");
         hnapayAccount.set("cert","/home/shared-files/raw/test-file");
         // hnapayAccount.set("partnerID","1000002158");
-        System.out.println(fundAccountService.create(null, hnapayAccount));
+        System.out.println("A:" + fundAccountService.create(null, hnapayAccount));
 
 //        FundAccount bankAccount = new FundAccount();
 //        bankAccount.getInfo().setName("银行卡转账");

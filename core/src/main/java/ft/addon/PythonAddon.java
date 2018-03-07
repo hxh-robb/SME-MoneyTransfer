@@ -1,6 +1,6 @@
 package ft.addon;
 
-import ft.boot.SftpConfiguration;
+import ft.files.FileManager;
 import org.python.core.Py;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
@@ -8,6 +8,8 @@ import org.python.util.PythonInterpreter;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Addon that capable to execute python code snippet
@@ -15,13 +17,47 @@ import java.util.concurrent.ConcurrentHashMap;
 abstract class PythonAddon implements Addon {
     // For saving resource usage, just keep one interpreter
     private static final PythonInterpreter PYTHON_INTERPRETER;
+
+    //
     private static final Map<String, PyObject> MODULE_FUNCTIONS;
+    private static final Map<String, ReadWriteLock> MODULE_LOCKS;
 
     static {
         PYTHON_INTERPRETER = new PythonInterpreter();
         PYTHON_INTERPRETER.exec("import types"); // We need to use types.ModuleType
 
         MODULE_FUNCTIONS = new ConcurrentHashMap<>();
+        MODULE_LOCKS = new ConcurrentHashMap<>();
+    }
+
+    public static final void setFileManager(FileManager fm) {
+        SSH.fm = fm;
+    }
+
+    private static void removeModuleFunctions(String module){
+        // Remove all module functions from cache
+        for (String func:MODULE_FUNCTIONS.keySet()) {
+            if(func.startsWith(module + "."))
+                MODULE_FUNCTIONS.remove(func);
+        }
+    }
+
+    /**
+     * Get lock
+     * @param module
+     * @return
+     */
+    private static final ReadWriteLock getModuleLock(String module, boolean init) {
+        ReadWriteLock lock = MODULE_LOCKS.get(module);
+        if( init && null == lock ) {
+            synchronized (MODULE_LOCKS) {
+                if(null == (lock = MODULE_LOCKS.get(module))) {
+                    lock = new ReentrantReadWriteLock();
+                    MODULE_LOCKS.put(module, lock);
+                }
+            }
+        }
+        return lock;
     }
 
     /**
@@ -30,19 +66,48 @@ abstract class PythonAddon implements Addon {
      * @param code
      */
     final static void registerModule(String module, String code){
+        ReadWriteLock lock = getModuleLock(module, true);
+
+        lock.writeLock().lock();
         try {
-            PYTHON_INTERPRETER.exec(MessageFormat.format("{0} = types.ModuleType('{0}')",module));
+            deregisterModule(module, false);
+            PYTHON_INTERPRETER.exec(MessageFormat.format("{0} = types.ModuleType(''{0}'')", module));
             PYTHON_INTERPRETER.exec(MessageFormat.format("exec ''''''\n{1}\n'''''' in {0}.__dict__", module, code));
         } catch (Throwable throwable) {
             // remove module
-            PYTHON_INTERPRETER.exec(MessageFormat.format("globals().pop(''{0}'', None)",module));
+            deregisterModule(module,true);
             throw new IllegalArgumentException("Can not register module:" + module, throwable);
         } finally {
             // Remove all module function from cache
-            for (String func:MODULE_FUNCTIONS.keySet()) {
-                if(func.startsWith(module + "."))
-                    MODULE_FUNCTIONS.remove(func);
+            removeModuleFunctions(module);
+            lock.writeLock().unlock();
+        }
+    }
+
+    /**
+     * Remove specific addon-module variable
+     * @param module
+     */
+    final static void deregisterModule(String module, boolean removeLock) {
+        ReadWriteLock lock = getModuleLock(module, false);
+        if(null == lock){
+            return;
+        }
+
+        lock.writeLock().lock();
+        try {
+            PYTHON_INTERPRETER.exec(MessageFormat.format("if ''{0}'' in globals(): globals().pop(''{0}'', None)",module));
+        } catch (Throwable throwable) {
+            throw new IllegalArgumentException("Can not remove module:" + module, throwable);
+        } finally {
+            // Remove all module function from cache
+            removeModuleFunctions(module);
+            if(removeLock){
+                synchronized (MODULE_LOCKS) {
+                    MODULE_LOCKS.remove(module);
+                }
             }
+            lock.writeLock().unlock();
         }
     }
 
@@ -56,106 +121,61 @@ abstract class PythonAddon implements Addon {
      * @return
      */
     protected <T> T executePython(Class<T> returnType, String module, String function, Object parameters) {
-        String func = MessageFormat.format("{0}.{1}", module, function);
-        PyObject pyFunc = MODULE_FUNCTIONS.get(func);
-        if( null == pyFunc) {
-            try {
-                pyFunc = PYTHON_INTERPRETER.eval(func); // get python function object
-            } catch (Throwable throwable) {
-                throw new UnsupportedOperationException("Python function(" + func + ") is undefined");
-            }
-            if( null == pyFunc)
-                throw new UnsupportedOperationException("Python function(" + func + ") does not exist");
-            MODULE_FUNCTIONS.put(func,pyFunc); // cache the function
+        ReadWriteLock lock = getModuleLock(module, false);
+        if(null == lock){
+            throw new UnsupportedOperationException("Python module(" + module + ") is undefined");
         }
 
-        /*
-        PyObject.__call__ is 30 times slower than java code,but 100 times faster than PythonInterpreter.eval
-        Besides, PythonInterpreter is not thread-safe, so that we use PyObject.__call__ as an alternative
-         */
-        return (T)pyFunc.__call__(Py.java2py(parameters)).__tojava__(returnType);
+        lock.readLock().lock();
+        try {
+            String func = MessageFormat.format("{0}.{1}", module, function);
+            PyObject pyFunc = MODULE_FUNCTIONS.get(func);
+            if (null == pyFunc) {
+                try {
+                    pyFunc = PYTHON_INTERPRETER.eval(func); // get python function object
+                } catch (Throwable throwable) {
+                    throw new UnsupportedOperationException("Python function(" + func + ") is undefined");
+                }
+                if (null == pyFunc)
+                    throw new UnsupportedOperationException("Python function(" + func + ") does not exist");
+                MODULE_FUNCTIONS.put(func, pyFunc); // cache the function
+            }
+
+
+            /*
+            PyObject.__call__ is 30 times slower than java code,but 100 times faster than PythonInterpreter.eval
+            Besides, PythonInterpreter is not thread-safe, so that we use PyObject.__call__ as an alternative
+             */
+            return (T) pyFunc.__call__(Py.java2py(parameters)).__tojava__(returnType);
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 
     /**
      * Secure shell utility class for python addon;
-     * <pre>
-     * file name is MD5 sum;
-     *
-     * file processing queue:
-     * /var/shares/pending -----> /var/shares/certs
-     *                     |
-     *                     |----> /var/shares/images
-     * </pre>
      */
     public static final class SSH {
-        // TODO : apache connection pool + JSch(create a new ssh connection cost 300ms)
-        // TODO : upload file and form data (spring mvc)
+        private static FileManager fm;
 
-        private static SftpConfiguration config;
-
-        /**
-         * Manually injection
-         * @param config
-         */
-        public static final void init(SftpConfiguration config) {
-            SSH.config = config;
+        public static final boolean isReady(){
+            return fm != null;
         }
 
-        /**
-         * Move file remotely
-         * @param file source file remote path
-         * @param dir target directory remote path
-         */
-        public static final void remoteMove(String file, String dir){
-            // TODO
+        public static final String remoteCopy(String remotePath, String tag, boolean returnWebURL) {
+            return fm.remoteCopy(remotePath, tag, returnWebURL);
         }
 
-        /**
-         * Copy file from remote to local
-         * @param file remote file path
-         * @return local copy path
-         */
-        public static final String clone(String file){
-            // TODO check local file exist
-            return null;
+        public static final boolean isRemoteRaw(String remotePath) {
+            return fm.isRemoteRaw(remotePath);
         }
 
-//        /**
-//         * Copy file from remote
-//         * @param remotePath
-//         * @return local path
-//         */
-//        public static synchronized final String clone(String remotePath) {
-//            long begin = System.currentTimeMillis();
-//            if( null == config )
-//                return null;
-//
-//            Session session = null;
-//            ChannelSftp sftp = null;
-//
-//            try {
-//                JScht channel = new JSch();
-//                session = channel.getSession(config.getUser(), config.getAddr(), config.getPort());
-//                session.setPassword(config.getPassword());
-//                session.setConfig("StrictHosKeyChecking", "no");
-//                session.connect(3000);
-//
-//                sftp = (ChannelSftp)session.openChannel("sftp");
-//                sftp.connect();
-//
-//                String localPath = "/tmp/echo.txt";
-//                sftp.get(remotePath, localPath);
-//                return localPath;
-//            } catch (Throwable throwable) {
-//                LoggerFactory.getLogger(SSH.class).error("Clone remote file error", throwable);
-//                return null;
-//            } finally {
-//                if( null != sftp )
-//                    sftp.disconnect();
-//
-//                if( null != session )
-//                    session.disconnect();
-//            }
-//        }
+        public static final String cloneAndGetLocalPath(String remotePath) {
+            return fm.cloneAndGetLocalPath(remotePath);
+        }
+
+        public static final String sendRemoteRaw(String localPath) {
+            return fm.sendRemoteRaw(localPath);
+        }
     }
 }

@@ -32,4 +32,9 @@ public interface Addon {
      * @return
      */
     <T> T execute(String func, Map<String, Object> parameters);
+
+    /**
+     * Deactive this addon
+     */
+    default void deactive(){};
 }

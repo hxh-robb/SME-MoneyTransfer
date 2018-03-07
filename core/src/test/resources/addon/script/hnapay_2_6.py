@@ -27,7 +27,7 @@ def sign(param):
     ## static generated
     result['customerIP'] = account_dict.get('customerIP','')
     result['returnUrl'] = account_dict.get('returnUrl','')
-    result['noticeUrl'] = account_dict.get('noticeUrl','') + '/' + param.account.id
+    result['noticeUrl'] = account_dict.get('noticeUrl','') + '/' + param.task.id
     result['partnerID'] = account_dict.get('partnerID','')
 
     ## dynamic generated
@@ -41,6 +41,8 @@ def sign(param):
     ## dynamic calculated
     result['failureTime'] = (local_now + timedelta(days=account_dict.get('failureTime', 90))).strftime('%Y%m%d%H%M%S')
     result['signMsg'] = 'TODO' #account_dict['cert']
+
+    print SSH
 
     return result
 

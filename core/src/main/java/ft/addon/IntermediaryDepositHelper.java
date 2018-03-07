@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Helper for intermediary deposit process
  */
-public class IntermediaryDepositHelper extends PythonAddon implements TransferAddonConstant {
+class IntermediaryDepositHelper extends PythonAddon implements TransferAddonConstant {
     private final String module; // python module
     private final TemplateEngine tp;
 
@@ -60,7 +60,11 @@ public class IntermediaryDepositHelper extends PythonAddon implements TransferAd
         return null;
     }
 
-    public Map<String,Object> sign(Map<String,Object> staticFields, Double amount) {
-        return null;
+    @Override
+    public void deactive() {
+        deregisterModule(this.module,true);
     }
+//    public Map<String,Object> sign(Map<String,Object> staticFields, Double amount) {
+//        return null;
+//    }
 }

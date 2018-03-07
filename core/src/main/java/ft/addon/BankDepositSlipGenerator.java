@@ -7,12 +7,11 @@ import ft.spec.model.TransferTask;
 
 import java.text.MessageFormat;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Traditional bank deposit slip generator
  */
-public class BankDepositSlipGenerator implements Addon,TransferAddonConstant {
+class BankDepositSlipGenerator implements Addon,TransferAddonConstant {
 
     @Override
     public <T> T execute(Map<String, Object> parameters) {

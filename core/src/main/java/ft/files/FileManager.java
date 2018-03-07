@@ -1,10 +1,13 @@
 package ft.files;
 
 import ft.boot.DocPathConfiguration;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -12,15 +15,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 @Component
 public class FileManager {
+    @Autowired
     private DocPathConfiguration paths;
-    private FAO remote;
-    private FAO local;
 
-    public FileManager(DocPathConfiguration paths, @Qualifier("RemoteFAO")FAO remote, @Qualifier("LocalFAO")FAO local) {
-        this.paths = paths;
-        this.remote = remote;
-        this.local = local;
-    }
+    @Autowired @Qualifier("RemoteFAO")
+    private FAO remote;
+
+    @Autowired @Qualifier("LocalFAO")
+    private FAO local;
 
     /**
      * copy file to new parent
@@ -128,6 +130,42 @@ public class FileManager {
 
         if(success.get()) {
             return localFile.getPath();
+        }
+        return null;
+    }
+
+    public String sendRemoteRaw(String localPath){
+        // Calculate file MD5
+        Boolean exist = local.fileExist(localPath);
+        if(null == exist || !exist){
+            return null;
+        }
+        String filename;
+        try(FileInputStream is = new FileInputStream(localPath)){
+            filename = DigestUtils.md5Hex(is).toUpperCase();
+        } catch(Throwable th){
+            return null;
+        }
+
+        String remotePath = paths.getRaw() + filename;
+        exist = remote.fileExist(remotePath);
+        if(null == exist) {
+            return null;
+        }
+
+        if(exist) {
+            return remotePath;
+        } else if(!remote.touch(remotePath)){
+            return null;
+        }
+
+        final AtomicBoolean success = new AtomicBoolean(false);
+        local.readAsInputStream(localPath, (localInput) -> {
+            success.set(remote.write(remotePath, localInput));
+        });
+
+        if(success.get()) {
+            return remotePath;
         }
         return null;
     }

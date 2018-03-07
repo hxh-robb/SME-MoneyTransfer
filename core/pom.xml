@@ -139,6 +139,16 @@
 					</embeddedLaunchScriptProperties>
 				</configuration>
 			</plugin>
+
+            <!-- run test suite only -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+                        <include>**/ft.test.suites.*.java</include>
+                    </includes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

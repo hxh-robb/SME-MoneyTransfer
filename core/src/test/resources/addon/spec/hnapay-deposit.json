@@ -1,4 +1,10 @@
 {
+  "__form_action__":{
+    "type": "string",
+    "title": "支付地址",
+    "description": "第三方支付网关地址",
+    "required": true
+  },
   "partnerID": {
     "type": "string",
     "title": "商户ID",

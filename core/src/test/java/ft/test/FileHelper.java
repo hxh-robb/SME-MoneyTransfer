@@ -1,9 +1,18 @@
 package ft.test;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 
-public interface ReadFileHelper {
+public interface FileHelper {
+
+    default File get(String path) {
+        try {
+            return new File(this.getClass().getClassLoader().getResource(path).getFile());
+        } catch (Throwable throwable) {
+            return null;
+        }
+    }
 
     default String read(String file) {
         try {

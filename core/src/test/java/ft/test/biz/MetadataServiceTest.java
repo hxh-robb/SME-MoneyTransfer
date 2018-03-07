@@ -3,7 +3,7 @@ package ft.test.biz;
 import ft.spec.model.TransferAddon;
 import ft.spec.service.MetadataService;
 import ft.spec.service.Result;
-import ft.test.ReadFileHelper;
+import ft.test.FileHelper;
 import ft.test.Testcase;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,32 +11,18 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MetadataServiceTest extends Testcase implements ReadFileHelper {
+public class MetadataServiceTest extends Testcase implements FileHelper {
+    private static final AtomicBoolean resetDone = new AtomicBoolean(false);
+
     @Autowired @Qualifier("ActualMetadataService")
     private MetadataService service;
 
-    @Autowired
-    private DataSource ds;
-    private static boolean resetDone = false;
-
     @Before
     public synchronized void reset() throws SQLException {
-        if(resetDone)
-            return;
-
-        // Clean table `metadata`;
-        System.out.println(ds);
-        try( Connection c = ds.getConnection() ) {
-            try (PreparedStatement ps = c.prepareStatement("delete from metadata") ){
-                ps.executeUpdate();
-            }
-        }
-        resetDone = true;
+        reset("metadata", resetDone);
     }
 
     /**
@@ -63,10 +49,10 @@ public class MetadataServiceTest extends Testcase implements ReadFileHelper {
     }
 
     /**
-     * data init - create Hnapay deposit addon
+     * data init - create HnaPay deposit addon
      */
     @Test
-    public void t0_HnapayDepositAddon(){
+    public void t0_HnaPayDepositAddon(){
         TransferAddon addon = new TransferAddon();
         addon.setName("新生支付");
         addon.setDescription("新生支付收款渠道");
@@ -97,7 +83,7 @@ public class MetadataServiceTest extends Testcase implements ReadFileHelper {
         addon.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
         addon.setType(TransferAddon.Type.PYTHON);
 
-        addon.setSpec("TODO");
+        addon.setSpec("{}");
         addon.setContent("TODO");
 
         Result result = service.create("JUnit", addon);
