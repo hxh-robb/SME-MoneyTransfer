@@ -3,12 +3,16 @@ package ft.boot;
 import com.jcraft.jsch.ChannelSftp;
 import ft.ex.pool.ChannelSftpFactory;
 import ft.ex.pool.ThreadLocalObjectPoolDecorator;
+import ft.files.FileManager;
 import org.apache.commons.pool2.ObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 
 /**
  * Configuration for SFTP connection
@@ -128,5 +132,12 @@ public class SftpConfiguration {
     ObjectPool<ChannelSftp> sftpConnectionPool(ChannelSftpFactory factory, PoolConfig config){
         return new GenericObjectPool<>(factory, config);
         // return new ThreadLocalObjectPoolDecorator(new GenericObjectPool<>(factory, config));
+    }
+
+    @Autowired
+    private FileManager fm;
+
+    @EventListener
+    public void initSFTP(ApplicationReadyEvent event){
     }
 }

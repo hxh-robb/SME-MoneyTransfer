@@ -24,7 +24,7 @@ public class FundAccountServiceTest extends Testcase implements FileHelper {
     @Autowired
     private FileManager fm;
 
-    private String bankIconRawPath, hnapayIconRawPath, ktoolsIconRawPath;
+    private String bankIconRawPath, hnapayIconRawPath, ktoolsIconRawPath, hnapayKeystoreRawPath;
 
     @Before
     public synchronized void reset() throws SQLException {
@@ -39,6 +39,9 @@ public class FundAccountServiceTest extends Testcase implements FileHelper {
 
         ktoolsIconRawPath = fm.sendRemoteRaw(get("files/ktools.png").getPath());
         Assert.assertNotNull(ktoolsIconRawPath); // KTools icon
+
+        hnapayKeystoreRawPath = fm.sendRemoteRaw(get("files/rsa_11000002915_1503020018091_0.jks").getPath());
+        Assert.assertNotNull(hnapayKeystoreRawPath); // Hnapay keystore file
     }
 
 
@@ -74,7 +77,11 @@ public class FundAccountServiceTest extends Testcase implements FileHelper {
         account.setType("1"); // AddOn value
 
         // TODO fields
-        account.set("__form_action__", "http://127.0.0.1/mock/pay.do");
+        account.set("__form_action__", "https://gateway.hnapay.com/website/pay.htm");
+        account.set("jks", hnapayKeystoreRawPath);
+        account.set("jksPassword", "UZMxNb");
+        account.set("keyAlias", "hnapaysh");
+        account.set("keyPassword", "loUbQB");
 
         Result result = service.create("JUnit", account);
         Assert.assertNotNull(result);
@@ -97,4 +104,9 @@ public class FundAccountServiceTest extends Testcase implements FileHelper {
         Assert.assertNotNull(result);
         Assert.assertEquals(FundAccountService.Code.SUCCESS, result.getCode());
     }
+
+//    @Test
+//    public void showScheme(){
+//        System.out.println(service.jsonFormSchema(null));
+//    }
 }

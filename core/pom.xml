@@ -119,12 +119,19 @@
 			<version>24.0-jre</version>
 		</dependency>
 
-        <dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.59</version>
+			<scope>test</scope>
+		</dependency>
+
+        <!--<dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.196</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 	<build>

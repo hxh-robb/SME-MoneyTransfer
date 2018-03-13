@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -83,8 +84,8 @@ public class MetadataServiceTest extends Testcase implements FileHelper {
         addon.setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
         addon.setType(TransferAddon.Type.PYTHON);
 
-        addon.setSpec("{}");
-        addon.setContent("TODO");
+        addon.setSpec(read("addon/spec/ktools-deposit.json"));
+        addon.setContent("pass");
 
         Result result = service.create("JUnit", addon);
         Assert.assertNotNull(result);

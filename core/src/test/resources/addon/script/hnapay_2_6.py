@@ -42,7 +42,9 @@ def sign(param):
     result['failureTime'] = (local_now + timedelta(days=account_dict.get('failureTime', 90))).strftime('%Y%m%d%H%M%S')
     result['signMsg'] = 'TODO' #account_dict['cert']
 
-    print SSH
+    if SSH.isReady():
+        print account_dict.get('cert')
+        print SSH.cloneAndGetLocalPath(account_dict.get('cert'))
 
     return result
 

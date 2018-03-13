@@ -36,7 +36,7 @@ sftp:
   port: 22
   username: shared-files
   password: shared-files-pass
-  connectTimeout: 10000
+  connectTimeout: 30000 # 30 seconds
   pool:
     maxTotal: 10
     maxIdle: 1

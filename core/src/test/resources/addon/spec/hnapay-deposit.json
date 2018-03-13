@@ -1,7 +1,7 @@
 {
   "__form_action__":{
     "type": "string",
-    "title": "支付地址",
+    "title": "支付接口地址",
     "description": "第三方支付网关地址",
     "required": true
   },
@@ -39,11 +39,28 @@
     "title": "订单有效期(天)",
     "description": "订单最后失效时间"
   },
-  "cert": {
+  "jks": {
     "type": "string",
     "format": "inputstream",
-    "title": "密钥文件",
-    "description": "支付平台提供给商户的密钥文件"
+    "title": "JKS文件",
+    "description": "支付平台提供给商户的JKS文件(内含私钥及证书)"
+  },
+  "jksPassword": {
+    "type": "string",
+    "format": "password",
+    "title": "JKS密码",
+    "description": "支付平台提供给商户的JKS文件密码"
+  },
+  "keyAlias": {
+    "type": "string",
+    "title": "私钥别名",
+    "description": "支付平台提供给商户的私钥在JKS文件中的别名"
+  },
+  "keyPassword": {
+    "type": "string",
+    "format": "password",
+    "title": "私钥密码",
+    "description": "支付平台提供给商户的私钥文件密码"
   },
   "customerIP": {
     "type": "string",

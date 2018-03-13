@@ -23,7 +23,7 @@ abstract class PythonAddon implements Addon {
     private static final Map<String, ReadWriteLock> MODULE_LOCKS;
 
     static {
-        PYTHON_INTERPRETER = new PythonInterpreter();
+        PYTHON_INTERPRETER = new PythonInterpreter(); // high-overhead operation
         PYTHON_INTERPRETER.exec("import types"); // We need to use types.ModuleType
 
         MODULE_FUNCTIONS = new ConcurrentHashMap<>();
