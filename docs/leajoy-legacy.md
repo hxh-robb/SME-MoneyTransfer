@@ -1,8 +1,10 @@
-# 猎杰充提程序总结
+# 友方充提项目跟踪总结
+
+[![Telegram Chat](https://cdn.rawgit.com/Patrolavia/telegram-badge/8fe3382b/chat.svg)](https://t.me/joinchat/EqTEwQ0QTWL0kbXYUoTbfA)
 
 ## 现况
 
-* 2018-06-28更新
+* **2018-06-28更新**
 
 <table style="text-align:center;">
   <thead style="background-color:yellow">
@@ -63,9 +65,41 @@
 --->
 (*) = 必要资源
 
+* **项目规模**
+
+TODO
+
+* **友方协助人员**
+  * None
+
 ---
 
 ## 模块分析
+
+### 源码目录结构
+
+pcpay
+├── pom.xml
+├── src
+│   ├── gens
+│   ├── main
+│   └── test
+└── WebContent
+    ├── broken.html
+    ├── css
+    ├── img
+    ├── js
+    ├── META-INF
+    ├── pay
+    └── WEB-INF
+
+TODO
+
+### 数据实体
+
+TODO
+
+### 第三方渠道
 
 TODO
 
