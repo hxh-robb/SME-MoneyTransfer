@@ -2,7 +2,7 @@
 
 TODO
 
-## Leojoy legacy project overview
+## Leajoy legacy project overview
 
 TODO
 

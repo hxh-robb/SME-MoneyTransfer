@@ -1,6 +1,8 @@
 # 猎杰充提程序总结
 
-## 现况(20180627更新)
+## 现况
+
+* 2018-06-28更新
 
 <table style="text-align:center;">
   <thead style="background-color:yellow">
@@ -37,7 +39,7 @@
     <tr>
       <td style="padding:5px;">功能验证</td>
       <td style="padding:5px;"></td>
-      <td style="padding:5px;">使用说明文档</td>
+      <td style="padding:5px;">第三方平台商户号(测试第三方支付平台对接)<br>银行卡/支付宝/微信帐户(测试玩家充值流程)<br>使用说明文档(部件接入指导)</td>
       <td style="padding:5px;">已向上级报备</td>
       <td style="padding:5px;">测试报告<br>功能说明</td>
     </tr>
@@ -46,7 +48,7 @@
       <td style="padding:5px;"></td>
       <td style="padding:5px;">接口文档</td>
       <td style="padding:5px;">已向上级报备</td>
-      <td style="padding:5px;">可指导外部系统接入该服务</td>
+      <td style="padding:5px;">部件可接入服务开展充提业务</td>
     </tr>
   </tbody>
 </table>
@@ -59,6 +61,7 @@
       <td style="padding:5px;"></td>
     </tr>
 --->
+(*) = 必要资源
 
 ---
 
