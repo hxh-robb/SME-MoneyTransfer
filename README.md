@@ -12,15 +12,9 @@ SME金流服务(SME-MTS)是一套基于springboot框架的微服务实现。通�
 
 ![sme-mts-mission](docs/pics/sme-mts-mission.png)
 
-TODO
+该项目的目标是建立一个性能优良，安全可靠且易于对接的支付网关，使公司内其他兄弟项目可方便的接入基数庞大的金融机构支付平台，迅速开展支付业务。同时通过实时分析各个资金渠道的运行质量及资费情况智能选择出当下性价比最优的资金通道，为合作方节省金流成本。
 
-<!---
-Our mission is to build an open-source crypto currency exchange with a high performance trading engine and incomparable security. We are moving toward dev/ops best practices of running an enterprise grade exchange.
-
-We provide webinar or on site training for installing, configuring and administration best practices of Peatio. Feel free to contact us for joining the next training session: Peatio.tech
-
-Help is greatly appreciated, feel free to submit pull-requests or open issues.
---->
+本项目遵循dev/ops实践及微服务架构设计，期望籍此建立一套高可维护，稳定可靠且易于扩容的企业级应用。
 
 ## 前置需求
 
