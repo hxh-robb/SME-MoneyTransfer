@@ -4,15 +4,13 @@
 
 ## 项目简介
 
-TODO
+[金流服务][1]是一种简化商户接入电子支付平台的支付网关，通过适配接口的方式去除各类电子支付平台的API差异，为商户提供统一简化的对接API降低接入难度。商户通过金流服务可快速为用户建立多种支付方式，从而提高交易效率加快商务发展。
 
-<!---
-Peatio is a free and open-source crypto currency exchange implementation with the Rails framework. Peatio.tech is a fork of Peatio designed for micro-services architecture. We have simplified the code in order to use only Peatio API with external frontend and server components.
+SME金流服务(SME-MTS)是一套基于springboot框架的微服务实现。通过API接口，商户可接入SME-MTS为客户提供多种电子支付方式。SME-MTS并不提供完整的资金结算及前端解决方案，也不提供商务性的资源，因此商户需先自行构建电商平台及准备电子支付平台的接入账户资源。
 
-To build your own exchange you should now run Peatio as a backend instead of forking the repository, and extend it using other microservices such as Barong.
---->
+## 项目使命
 
-## 使命目标
+![sme-mts-mission](docs/pics/sme-mts-mission.png)
 
 TODO
 
@@ -23,3 +21,35 @@ We provide webinar or on site training for installing, configuring and administr
 
 Help is greatly appreciated, feel free to submit pull-requests or open issues.
 --->
+
+## 前置需求
+
+TODO
+
+## 入门指南
+
+### 开发环境部署
+
+* TODO
+
+### 生产环境部署
+
+* TODO
+
+## 功能特性
+
+* TODO
+
+## API
+
+* TODO
+
+## 支持人员
+
+* Robb(robb@smeinternet.com)
+
+<!---
+* Novia(novia@smeinternet.com)
+--->
+
+[1]:https://atm60000.com/%E9%9B%BB%E5%95%86%E4%B8%AD%E8%AC%9B%E7%9A%84%E3%80%8C%E9%87%91%E6%B5%81%E3%80%8D%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F%E9%87%91%E6%B5%81%E7%99%BD%E8%A9%B1%E6%96%87%E8%A7%A3%E9%87%8B%E8%88%87%E6%8E%A8/
