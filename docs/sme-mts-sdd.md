@@ -56,35 +56,33 @@
 * D-7: 管理员跳转至出款任务管理页面
 * D-8: 查询出款任务列表(Rest:GET <MTS>/api/v0/tasks)(Rest:GET <MTS>/api/v0/tasks/<uuid>)
 * D-9: 管理员审批出款任务
-
- <details>
-  <summary><strong>D-9(a): 管理员通过客户提款申请</strong></summary>
+<details>
+ <summary><strong>D-9(a): 管理员通过客户提款申请</strong></summary>
+ <ul>
+  <li>D-10: 更新出款任务状态(Rest:PUT <MTS>/api/v0/tasks)(Rest:PATCH <MTS>/api/v0/tasks/<id>)</li>
+  <li>D-11: 自动转账(Test Double)</li>
+  <li>D-11(a): 自动转账成功
   <ul>
-   <li>D-10: 更新出款任务状态(Rest:PUT <MTS>/api/v0/tasks)(Rest:PATCH <MTS>/api/v0/tasks/<id>)</li>
-   <li>D-11: 自动转账(Test Double)</li>
-   <li>D-11(a): 自动转账成功
-   <ul>
-    <li>划扣冻结金额(Wallet Service API)</li>
-   </ul></li>
-   <li>D-11(b): 自动转账失败
-   <ul>
-    <li>D-11(b)-1: 管理员跳转至出款任务管理页面</li>
-    <li>D-11(b)-2: 查询出款任务列表(Rest:GET <MTS>/api/v0/tasks)(Rest:GET <MTS>/api/v0/tasks/<uuid>)</li>
-    <li>D-11(b)-3: 管理员取消出款任务</li>
-    <li>D-11(b)-4: 更新出款任务状态(Rest:PUT <MTS>/api/v0/tasks)(Rest:PATCH <MTS>/api/v0/tasks/<id>)</li>
-    <li>D-11(b)-5: 撤销冻结金额(Wallet Service API)</li>
-   </ul></li>
-   </ul>
-  </details>
-
-  <details>
-  <summary><strong>D-9(b): 管理员拒绝客户提款申请</strong></summary>
+   <li>划扣冻结金额(Wallet Service API)</li>
+  </ul></li>
+  <li>D-11(b): 自动转账失败
   <ul>
-   <li>D-12: 更新出款任务状态(Rest:PUT <MTS>/api/v0/tasks)(Rest:PATCH <MTS>/api/v0/tasks/<id>)</li>
-   <li>D-13: 撤销冻结金额(Wallet Service API)</li>
+   <li>D-11(b)-1: 管理员跳转至出款任务管理页面</li>
+   <li>D-11(b)-2: 查询出款任务列表(Rest:GET <MTS>/api/v0/tasks)(Rest:GET <MTS>/api/v0/tasks/<uuid>)</li>
+   <li>D-11(b)-3: 管理员取消出款任务</li>
+   <li>D-11(b)-4: 更新出款任务状态(Rest:PUT <MTS>/api/v0/tasks)(Rest:PATCH <MTS>/api/v0/tasks/<id>)</li>
+   <li>D-11(b)-5: 撤销冻结金额(Wallet Service API)</li>
+  </ul></li>
   </ul>
-  </details>
-     
+ </details>
+ <details>
+ <summary><strong>D-9(b): 管理员拒绝客户提款申请</strong></summary>
+ <ul>
+  <li>D-12: 更新出款任务状态(Rest:PUT <MTS>/api/v0/tasks)(Rest:PATCH <MTS>/api/v0/tasks/<id>)</li>
+  <li>D-13: 撤销冻结金额(Wallet Service API)</li>
+ </ul>
+ </details>
+   
 * D-14: 客户查询钱包余额
 * D-15: 查询客户余额(Wallet Service API)
 
