@@ -1,0 +1,5 @@
+spring:
+  jersey:
+    type: servlet
+    applicationPath: '/api'
+    uriVersioning: true
