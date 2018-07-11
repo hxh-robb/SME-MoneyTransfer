@@ -2,13 +2,11 @@ package com.sme.mts.config;
 
 import com.sme.mts.extension.springboot.MultipleFiltersRegistrationBean;
 import com.sme.mts.extension.springboot.MultipleServletsRegistrationBean;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -19,22 +17,25 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.RegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.ClassUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.DispatcherType;
 import javax.ws.rs.ApplicationPath;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Configuration
 @ConditionalOnExpression("'${spring.jersey.applicationPath:}' != '' and ${spring.jersey.uriVersioning:false}")
 @EnableConfigurationProperties(JerseyProperties.class)
 public class Jersey {
-    private static final Log logger = LogFactory.getLog(Jersey.class);
+    // private static final Log logger = LogFactory.getLog(Jersey.class);
 
     private final JerseyProperties jersey;
-    private final ResourceConfig[] configs;
+    private final List<ResourceConfig> configs = new ArrayList<>();
     private final List<ResourceConfigCustomizer> customizers;
 
     private Map<ResourceConfig, String> paths = new HashMap<>();
@@ -45,14 +46,32 @@ public class Jersey {
         ObjectProvider<List<ResourceConfigCustomizer>> customizers) {
 
         this.jersey = jersey;
-        this.configs = configs;
+        this.configs.addAll(Arrays.asList(configs));
         this.customizers = customizers.getIfAvailable();
     }
 
     @PostConstruct
     public void path(){
+        replacePrimaryConfig();
         resolveApplicationPaths();
         customize();
+    }
+
+    private void replacePrimaryConfig(){
+        List<ResourceConfig> filtered = this.configs.stream().filter(config -> null != AnnotationUtils.findAnnotation(config.getApplication().getClass(), Primary.class)).collect(Collectors.toList());
+        if(!filtered.isEmpty()){
+            this.configs.removeAll(filtered);
+            for (ResourceConfig config:filtered) {
+                try {
+                    Object primaryDouble = ClassUtils.getUserClass(config).newInstance();
+                    if( primaryDouble instanceof  ResourceConfig ){
+                        this.configs.add((ResourceConfig)primaryDouble);
+                    }
+                } catch (Throwable th) {
+                    // Ignore
+                }
+            }
+        }
     }
 
     private void resolveApplicationPaths() {
@@ -75,6 +94,11 @@ public class Jersey {
             }
         }
     }
+
+//    @Bean @ConditionalOn
+//    public ResourceConfig application(){
+//        return null;
+//    }
 
     @Bean
     @ConditionalOnMissingBean(name = "multipleJerseyFiltersRegistration")
