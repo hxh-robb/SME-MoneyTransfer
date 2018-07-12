@@ -1,0 +1,15 @@
+resourcePackages:
+- com.sme.mts.endpoint
+prettyPrint: true
+cacheTTL: 0
+openAPI:
+  info:
+    title: 'SME Money Transfer Service'
+    description: 'Find out more at [SME-MTS](https://github.com/hxh-robb/SME-MoneyTransferService/blob/sme/README.md)'
+    version: '0.0.0'
+    contact:
+      name: 'Robb'
+      email: 'robb@smeinternet.com'
+    license:
+      name: MIT
+      url: http://opensource.org/licenses/MIT

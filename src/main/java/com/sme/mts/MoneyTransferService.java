@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration;
 @SpringBootApplication
 // @EnableAutoConfiguration(exclude = {JerseyAutoConfiguration.class})
 public class MoneyTransferService {
-
 	public static void main(String[] args) {
 		SpringApplication.run(MoneyTransferService.class, args);
 	}
