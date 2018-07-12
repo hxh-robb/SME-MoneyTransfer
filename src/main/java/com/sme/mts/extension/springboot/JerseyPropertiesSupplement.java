@@ -1,9 +1,8 @@
 package com.sme.mts.extension.springboot;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Primary;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Add extension properties
@@ -13,7 +12,7 @@ public class JerseyPropertiesSupplement {
 
     private boolean uriVersioning = false;
 
-    private List<String> endpointPackages;
+    private Set<String> resourcePackages;
 
     public boolean isUriVersioning() {
         return uriVersioning;
@@ -23,11 +22,11 @@ public class JerseyPropertiesSupplement {
         this.uriVersioning = uriVersioning;
     }
 
-    public List<String> getEndpointPackages() {
-        return endpointPackages;
+    public Set<String> getResourcePackages() {
+        return resourcePackages;
     }
 
-    public void setEndpointPackages(List<String> endpointPackages) {
-        this.endpointPackages = endpointPackages;
+    public void setResourcePackages(Set<String> resourcePackages) {
+        this.resourcePackages = resourcePackages;
     }
 }

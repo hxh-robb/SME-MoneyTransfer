@@ -21,6 +21,7 @@ import org.springframework.util.ClassUtils;
 import javax.annotation.PostConstruct;
 import javax.servlet.DispatcherType;
 import javax.ws.rs.ApplicationPath;
+import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,12 +58,18 @@ public class JerseyConfiguration {
             this.configs.removeAll(filtered);
             for (ResourceConfig config:filtered) {
                 try {
-                    Object primaryDouble = ClassUtils.getUserClass(config).newInstance();
+                    Object primaryDouble = null;
+                    for (Constructor constructor:config.getClass().getConstructors()) {
+                        primaryDouble = constructor.newInstance(new Object[constructor.getParameterCount()]);
+                        break;
+                    }
+
                     if( primaryDouble instanceof  ResourceConfig ){
                         this.configs.add((ResourceConfig)primaryDouble);
                     }
                 } catch (Throwable th) {
                     // Ignore
+                    th.printStackTrace();
                 }
             }
         }

@@ -3,5 +3,3 @@ spring:
     type: filter
     applicationPath: '/api'
     uriVersioning: true
-    endpointPackages:
-      - 'com.sme.mts.endpoint'

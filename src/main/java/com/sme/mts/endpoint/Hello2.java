@@ -5,11 +5,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-@Path("hello")
+@Path("goodbye")
 @Tag(name = "Useless")
-public class Hello {
+public class Hello2 {
     @GET
-    public String sayHello(){
-        return "Hello, world";
+    public String sayGoodbye(){
+        return "Bye, world";
     }
 }

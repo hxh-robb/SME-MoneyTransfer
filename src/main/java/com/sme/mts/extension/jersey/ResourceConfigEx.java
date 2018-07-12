@@ -1,8 +1,11 @@
 package com.sme.mts.extension.jersey;
 
+import io.swagger.v3.jaxrs2.integration.JaxrsOpenApiContextBuilder;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import io.swagger.v3.oas.annotations.Hidden;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.integration.OpenApiConfigurationException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.reflections.Reflections;
 
@@ -17,23 +20,34 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A ResourceConfig extension class to fix SpringBoot integration issue
+ * A ResourceConfig extension class to fix SpringBoot integration issue and add swagger support
  */
 public class ResourceConfigEx extends ResourceConfig {
+    private static final Log logger = LogFactory.getLog(ResourceConfigEx.class);
+
     protected ResourceConfigEx(boolean enableSwagger) {
+        this(enableSwagger, false);
+    }
+
+    protected ResourceConfigEx(boolean enableSwagger, boolean scanFromSwagger) {
         if(enableSwagger) {
             register(OpenApiResource.class);
-            register(SwaggerWelcome.class);
+            register(SwaggerWelcome.class); // swagger-ui index page redirection
+
+            if(scanFromSwagger){
+                try {
+                    Set<String> packages = new JaxrsOpenApiContextBuilder().buildContext(true).getOpenApiConfiguration().getResourcePackages();
+                    scan(packages.toArray(new String[]{}));
+                } catch (OpenApiConfigurationException e) {
+                    logger.error("No resource package is specified", e);
+                }
+            }
         }
     }
 
     public final ResourceConfig scan(String ... packages) {
         if (packages == null || packages.length == 0) {
             return this;
-        }
-
-        if( null != this.getClass().getAnnotation(OpenAPIDefinition.class)){
-            register(this);
         }
 
         for (String pack : packages) {
