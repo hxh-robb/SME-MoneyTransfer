@@ -26,7 +26,7 @@ public class RegistrationDynamics<D extends Registration.Dynamic> implements Reg
                 name += ",";
             }
 
-            name += null == entry.source.getName() ? "Unknown" : entry.source.getName();
+            name += null == entry.source.getName() ? "Unknown" : entry.source.getName() + "(" + entry.path + ")";
         }
         name += "}";
         return name;

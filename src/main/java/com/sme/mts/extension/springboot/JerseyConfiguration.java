@@ -114,7 +114,7 @@ public class JerseyConfiguration {
             registration.addFilter(new ServletContainer(config),path,initParams);
         }
         registration.setOrder(jersey.getFilter().getOrder() - 2);
-        registration.addUrlPatterns(paths.values().toString());
+        registration.addUrlPatterns(paths.values().toArray(new String[]{}));
         registration.setName("multipleJerseyFilters");
         registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
         return registration;
