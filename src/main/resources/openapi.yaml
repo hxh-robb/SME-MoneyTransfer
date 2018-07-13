@@ -14,14 +14,12 @@ openAPI:
       name: MIT
       url: http://opensource.org/licenses/MIT
   tags:
-    - name: 'Deposit'
-      description: '[用户充值接口调用流程](https://github.com/hxh-robb/SME-MoneyTransferService/blob/sme_1st_phase/docs/sme-mts-sdd.md#demo客户自主转账充值平台银行账号收款)'
-    - name: 'Withdraw'
-      description: '[用户提款接口调用流程](https://github.com/hxh-robb/SME-MoneyTransferService/blob/sme_1st_phase/docs/sme-mts-sdd.md#demo客户申请提款转账至客户银行账号)'
-    - name: 'Common'
+    - name: '用户申请充值'
+      description: '[接口调用流程](https://github.com/hxh-robb/SME-MoneyTransferService/blob/sme_1st_phase/docs/sme-mts-sdd.md#demo客户自主转账充值平台银行账号收款)'
+    - name: '用户申请提款'
+      description: '[接口调用流程](https://github.com/hxh-robb/SME-MoneyTransferService/blob/sme_1st_phase/docs/sme-mts-sdd.md#demo客户申请提款转账至客户银行账号)'
+    - name: '通用接口'
       description: '跨业务通用功能接口'
-    - name: 'Useless'
-      description: '待删除垃圾代码'
   servers:
     - url: '/api'
       description: 'Newest version API'

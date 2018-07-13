@@ -76,7 +76,7 @@ public class ResourceConfigEx extends ResourceConfig {
     public static final class SwaggerWelcome {
         @GET
         public Response redirect(@Context UriInfo uriInfo) throws URISyntaxException {
-            URI uri = new URI("/webjars/swagger-ui/index.html?url=" + uriInfo.getRequestUri().getPath() + "/openapi.json&validatorUrl=");
+            URI uri = new URI("/webjars/swagger-ui/index.html?url=" + uriInfo.getRequestUri().getPath() + "/openapi.yaml&validatorUrl=");
             return Response.seeOther(uri).build();
         }
     }
