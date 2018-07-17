@@ -3,3 +3,10 @@ spring:
     type: filter
     applicationPath: '/api'
     uriVersioning: true
+
+mongodb:
+  host: '127.0.0.1'
+  port: 27017
+  usename:
+  password:
+  database: 'sme-mts'
