@@ -1,12 +1,35 @@
+## local environment settings
 spring:
+  datasource:
+    name: ft
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://mariadb:3306/sme
+    username: dev
+    password: devpass
+    hikari:
+      idle-timeout: 10000
   jersey:
     type: filter
     applicationPath: '/api'
     uriVersioning: true
 
-mongodb:
-  host: '127.0.0.1'
-  port: 27017
-  usename:
-  password:
-  database: 'sme-mts'
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mybatis-mappers/*.xml
+
+#mongodb:
+#  host: '127.0.0.1'
+#  port: 27017
+#  usename:
+#  password:
+#  database: 'sme-mts'
+
+---
+
+## test environment settings
+# TODO
+
+---
+
+## For test & production environment settings, please see /etc/sme/application.yml

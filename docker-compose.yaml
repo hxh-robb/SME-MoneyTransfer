@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mariadb:
+    image: "mariadb:10.3.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_DATABASE: "sme"
+      MYSQL_USER: "dev"
+      MYSQL_PASSWORD: "devpass"
+    ports:
+      - "13306:3306"
+    volumes:
+      - "./target/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    networks:
+      - backend
+  sme-mts:
+    image: "sme-mts:0.0.0"
+    ports:
+      - "18080:8080"
+    networks:
+      - backend
+    depends_on:
+      - mariadb
+networks:
+  backend:

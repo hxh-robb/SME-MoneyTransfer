@@ -1,14 +1,11 @@
 package com.sme.mts.data.document;
 
+import com.sme.mts.data.Data;
+
 /**
  * 元数据基类
  */
-public class Metadata {
-
-    /**
-     * 唯一标识
-     */
-    protected String id;
+public class Metadata extends Data {
 
     /**
      * 元数据名称

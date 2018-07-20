@@ -3,7 +3,7 @@ package com.sme.mts.data.entity;
 /**
  * 转账任务
  */
-public class TransferTask extends PlatformRelated {
+public class TransferTask extends PlatformRelatedEntity {
     /**
      * 任务类型:0-收款任务;1-出款任务;
      */

@@ -15,16 +15,16 @@ public class TransferAddon extends Addon {
     protected String spec;
 
     /**
-     * 转账模式
+     * 转账模式(Addon calling sequence)
      */
     public enum Mode {
         /**
-         * 银行转账
+         * 银行转账收款
          */
         BANK_DEPOSIT,
 
         /**
-         * 金融机构转账
+         * 金融机构转账收款
          */
         INTERMEDIARY_DEPOSIT
     }

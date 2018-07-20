@@ -29,20 +29,23 @@ def createScriptForCatalogObjects(path, catalog, objectCreationParams):
 
     if 'TableExcludedList' not in objectCreationParams:
         objectCreationParams['TableExcludedList'] = []
+    if 'OmitSchemas' not in objectCreationParams:
+        objectCreationParams['OmitSchemas'] = 0
 
     preamble = catalog.customData["migration:preamble"]
     if preamble and preamble.temp_sql:
         #file.write(object_heading("Preamble script", ""))
         file.write(preamble.temp_sql+"\n")
     for schema in catalog.schemata:
-        file.write(object_heading("Schema", schema.name))
-        file.write(schema.temp_sql+";\n")
+        if objectCreationParams['OmitSchemas'] == 0:
+            file.write(object_heading("Schema", schema.name))
+            file.write(schema.temp_sql+";\n")
 
         for table in schema.tables:
             if(table.name in objectCreationParams['TableExcludedList']):
                 continue
             file.write(object_heading("Table", "%s.%s" % (schema.name, table.name)))
-            file.write(table.temp_sql+";\n")
+            file.write(table.temp_sql.replace("`%s`.`%s`" % (schema.name, table.name),"`%s`" % table.name)+";\n") if objectCreationParams['OmitSchemas'] == 1 else file.write(table.temp_sql+";\n")
 
         for view in schema.views:
             file.write(object_heading("View", "%s.%s" % (schema.name, view.name)))
@@ -69,4 +72,4 @@ def createScriptForCatalogObjects(path, catalog, objectCreationParams):
 c = grt.root.wb.doc.physicalModels[0].catalog
 DbMySQLFE.generateSQLCreateStatements(c, c.version, {'SkipForeignKeys':1})
 # DbMySQLFE.createScriptForCatalogObjects(os.getenv('SQL_PATH'), c, {})
-createScriptForCatalogObjects(os.getenv('SQL_PATH'), c, {'TableExcludedList':['mts_entity']})
+createScriptForCatalogObjects(os.getenv('SQL_PATH'), c, {'TableExcludedList':['mts_entity'],"OmitSchemas":1})

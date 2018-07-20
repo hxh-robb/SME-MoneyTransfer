@@ -1,5 +1,7 @@
 package com.sme.mts.endpoint;
 
+import com.sme.mts.data.entity.FundAccount;
+import com.sme.mts.data.repository.FundAccountDAO;
 import com.sme.mts.extension.jaxrs.MediaType;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -8,12 +10,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 @Path("fund-accounts")
 public class FundAccountResource {
+
+    @Autowired
+    private FundAccountDAO fundAccountDAO;
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Tag(name = "用户申请充值")
@@ -56,6 +64,14 @@ public class FundAccountResource {
                     content = @Content(schema = @Schema(implementation = Object.class)))
             Object fundAccount // TODO - FundAccount schema
     ){
+        // test
+        FundAccount data = new FundAccount();
+        data.setId(UUID.randomUUID().toString());
+        data.setCo("Robb");
+        data.setType(0);
+        data.setName("Dummy Account");
+        fundAccountDAO.create(data);
+
         // @content(json form)
         return Response.status(500, "Not yet implemented").build();
     }

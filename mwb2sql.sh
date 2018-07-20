@@ -1,17 +1,18 @@
 #!/bin/bash
 
-mkdir -p target/initdb.d
+export DIR=`dirname $(readlink -f $0)`
+export OUT="$DIR/target/docker-entrypoint-initdb.d"
+
+cd $DIR
+mkdir -p $OUT
 
 type mysql-workbench 1> /dev/null || exit 1 # MySQL workbench is not installed
-
-export DIR=`dirname $(readlink -f $0)`
 
 export CMD="$(type -p mysql-workbench)"
 export PY_PATH="$DIR/mwb2sql.py"
 export MWB_PATH="$DIR/docs/model/sme-mts.mwb"
-export SQL_PATH="$DIR/target/initdb.d/schema.sql"
+export SQL_PATH="$OUT/00_schema.sql"
 
-cd $DIR
 
 ## Generate schema creation sql script
 $CMD --version

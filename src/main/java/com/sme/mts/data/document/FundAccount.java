@@ -1,17 +1,15 @@
 package com.sme.mts.data.document;
 
+import com.sme.mts.data.Data;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 资金账号(非结构化部分)
+ * 关联至{@link com.sme.mts.data.entity.FundAccount}
  */
-public class FundAccount {
-    /**
-     * 唯一标识,关联至{@link com.sme.mts.data.entity.FundAccount#id}
-     */
-    protected String id;
-
+public class FundAccount extends Data {
     /**
      * 可以处理该资金账号的转账插件,{@link TransferAddon#id}
      */

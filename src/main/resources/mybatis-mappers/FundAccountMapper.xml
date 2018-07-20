@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundAccountMapper">
+  <resultMap id="FundAccount" type="FundAccount" extends="Common.Entity">
+    <result property="type" column="type"/>
+    <result property="name" column="name"/>
+    <result property="title" column="title"/>
+    <result property="icon" column="icon"/>
+  </resultMap>
+
+  <!--
+  <resultMap id="DepositOption" type="DepositOption" autoMapping="false">
+    <id property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="icon" column="icon"/>
+  </resultMap>
+  -->
+
+  <sql id="FundAccountColumns">
+    t.type, t.name, t.title, t.icon
+  </sql>
+
+  <sql id="FundAccountFilter">
+    <where>
+      <if test="filter != null">
+        <include refid="Common.EntityFilter" />
+        <include refid="Common.PlatformRelatedEntityFilter" />
+
+        <!-- FundAccount filter -->
+        <if test="filter.type != null">and t.type = #{filter.type}</if>
+        <if test="filter.name != null">and t.name = #{filter.name}</if>
+      </if>
+    </where>
+  </sql>
+
+  <insert id="create">
+    insert into mts_fund_account (
+      id, co, uo,
+      platform,
+      type, name, title, icon
+    ) values (
+      #{id}, #{co}, #{uo},
+      #{platform},
+      #{type}, #{name}, #{title}, #{icon}
+    )
+  </insert>
+
+  <delete id="delete">
+    <bind name="filter" value="_parameter"/>
+    delete from mts_fund_account
+    <include refid="FundAccountFilter"/>
+  </delete>
+
+  <update id="update">
+    update mts_fund_account t
+    <set>
+      <include refid="Common.EntityUpdateFields"/>
+      <include refid="Common.PlatformRelatedEntityUpdateFields"/>
+
+      <!-- FundAccount updatable fields -->
+      <if test="data.type != null">type = #{data.type},</if>
+      <if test="data.name != null">name = #{data.name},</if>
+      <if test="data.title != null">title = #{data.title},</if>
+      <if test="data.icon != null">icon = #{data.icon},</if>
+    </set>
+    <include refid="FundAccountFilter"/>
+  </update>
+
+  <select id="list" resultMap="FundAccount">
+    <bind name="filter" value="_parameter"/>
+    select
+    <include refid="Common.EntityColumns"/>,
+    <include refid="Common.PlatformRelatedEntityColumns"/>,
+    <include refid="FundAccountColumns"/>
+    #{info} as info
+    from fund_account t
+    <include refid="FundAccountFilter"/>
+  </select>
+</mapper>
