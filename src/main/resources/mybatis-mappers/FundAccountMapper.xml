@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="FundAccountMapper">
-  <resultMap id="FundAccount" type="FundAccount" extends="Common.Entity">
+  <resultMap id="FundAccount" type="FundAccount" extends="Common.PlatformRelatedEntity">
     <result property="type" column="type"/>
     <result property="name" column="name"/>
     <result property="title" column="title"/>
@@ -30,7 +30,8 @@
 
         <!-- FundAccount filter -->
         <if test="filter.type != null">and t.type = #{filter.type}</if>
-        <if test="filter.name != null">and t.name = #{filter.name}</if>
+        <if test="filter.name != null">and t.name like #{filter.name}</if>
+        <if test="filter.title != null">and t.title like concat('%',#{filter.title},'%')</if>
       </if>
     </where>
   </sql>
@@ -49,7 +50,7 @@
 
   <delete id="delete">
     <bind name="filter" value="_parameter"/>
-    delete from mts_fund_account
+    delete from t using mts_fund_account as t
     <include refid="FundAccountFilter"/>
   </delete>
 
@@ -74,8 +75,7 @@
     <include refid="Common.EntityColumns"/>,
     <include refid="Common.PlatformRelatedEntityColumns"/>,
     <include refid="FundAccountColumns"/>
-    #{info} as info
-    from fund_account t
+    from mts_fund_account t
     <include refid="FundAccountFilter"/>
   </select>
 </mapper>

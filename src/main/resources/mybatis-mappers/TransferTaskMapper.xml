@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TransferTaskMapper">
+  <resultMap id="TransferTask" type="TransferTask" extends="Common.PlatformRelatedEntity">
+    <result property="type" column="type"/>
+    <result property="beneficiary" column="beneficiary"/>
+    <result property="amount" column="amount"/>
+    <result property="status" column="status"/>
+    <result property="state" column="state"/>
+    <result property="retry" column="retry"/>
+    <result property="fallback" column="fallback"/>
+    <result property="ref" column="ref"/>
+    <result property="fundAccount" column="fund_account"/>
+  </resultMap>
+
+  <sql id="TransferTaskColumns">
+    t.type, t.beneficiary, t.amount, t.status, t.state, t.retry, t.fallback, t.ref, t.fund_account
+  </sql>
+
+  <sql id="TransferTaskFilter">
+    <where>
+      <if test="filter != null">
+        <include refid="Common.EntityFilter" />
+        <include refid="Common.PlatformRelatedEntityFilter" />
+
+        <!-- TransferTask filter -->
+        <if test="filter.type != null">and t.type = #{filter.type}</if>
+        <if test="filter.beneficiary != null">and t.beneficiary = #{filter.beneficiary}</if>
+        <if test="filter.status != null">and t.status = #{filter.status}</if>
+        <if test="filter.state != null">and t.state = #{filter.state}</if>
+        <if test="filter.retry != null">and t.retry = #{filter.retry}</if>
+        <if test="filter.fallback != null">and t.fallback = #{filter.fallback}</if>
+        <if test="filter.ref != null">and t.ref = #{filter.ref}</if>
+        <if test="filter.fundAccount != null">and t.fund_account = #{filter.fundAccount}</if>
+      </if>
+    </where>
+  </sql>
+
+  <insert id="create">
+    insert into mts_transfer_task (
+      id, co, uo,
+      platform,
+      type, beneficiary, amount, status, state, retry, fallback, ref, fund_account
+    ) values (
+      #{id}, #{co}, #{uo},
+      #{platform},
+      #{type}, #{beneficiary}, #{amount}, #{status}, #{state}, #{retry}, #{fallback}, #{ref}, #{fundAccount}
+    )
+  </insert>
+
+  <delete id="delete">
+    <bind name="filter" value="_parameter"/>
+    delete from t using mts_transfer_task as t
+    <include refid="TransferTaskFilter"/>
+  </delete>
+
+  <update id="update">
+    update mts_transfer_task t
+    <set>
+      <include refid="Common.EntityUpdateFields"/>
+      <include refid="Common.PlatformRelatedEntityUpdateFields"/>
+
+      <!-- TransferTask updatable fields -->
+      <if test="data.status != null">status = #{data.status},</if>
+      <if test="data.state != null">state = #{data.state},</if>
+      <if test="data.retry != null">retry = #{data.retry},</if>
+      <if test="data.fallback != null">fallback = #{data.fallback},</if>
+      <if test="data.fundAccount != null">fund_account = #{data.fundAccount},</if>
+    </set>
+    <include refid="TransferTaskFilter"/>
+  </update>
+
+  <select id="list" resultMap="TransferTask">
+    <bind name="filter" value="_parameter"/>
+    select
+      <include refid="Common.EntityColumns"/>,
+      <include refid="Common.PlatformRelatedEntityColumns"/>,
+      <include refid="TransferTaskColumns"/>
+    from mts_transfer_task t
+      <include refid="TransferTaskFilter"/>
+  </select>
+</mapper>

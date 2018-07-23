@@ -5,4 +5,4 @@ cd $DIR
 
 ./stop.sh
 ./build.sh
-docker-compose up -d
+docker-compose -f docker-compose.deps.yaml -f docker-compose.yaml up -d

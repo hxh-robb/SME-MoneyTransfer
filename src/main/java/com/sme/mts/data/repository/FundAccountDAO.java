@@ -6,5 +6,6 @@ public interface FundAccountDAO extends PlatformRelatedDAO<FundAccount, FundAcco
     class Filter extends PlatformRelatedDAO.Filter {
         public String type;
         public String name;
+        public String title;
     }
 }
