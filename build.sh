@@ -10,4 +10,4 @@ cd $DIR
 ./mwb2sql.sh
 
 # Build Docker image
-docker build -f ./Dockerfile . -t sme-mts:0.0.0
+sudo docker build -f ./Dockerfile . -t sme-mts:0.0.0

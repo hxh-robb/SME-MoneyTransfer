@@ -10,14 +10,6 @@
     <result property="icon" column="icon"/>
   </resultMap>
 
-  <!--
-  <resultMap id="DepositOption" type="DepositOption" autoMapping="false">
-    <id property="id" column="id"/>
-    <result property="name" column="name"/>
-    <result property="icon" column="icon"/>
-  </resultMap>
-  -->
-
   <sql id="FundAccountColumns">
     t.type, t.name, t.title, t.icon
   </sql>

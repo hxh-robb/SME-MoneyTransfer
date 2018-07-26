@@ -26,3 +26,6 @@
 
 ### MySQL Workbench ###
 *.mwb.bak
+
+### Docker volume mounting ###
+.docker

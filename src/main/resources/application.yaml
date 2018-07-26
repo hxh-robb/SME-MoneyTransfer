@@ -4,8 +4,8 @@ spring:
     name: sme-mts
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.mariadb.jdbc.Driver
-    #url: jdbc:mysql://mariadb:3306/sme
-    url: jdbc:mysql://127.0.0.1:13306/sme
+    url: jdbc:mysql://mariadb:3306/sme
+    #url: jdbc:mysql://127.0.0.1:13306/sme
     username: dev
     password: devpass
     hikari:
@@ -19,12 +19,11 @@ mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mybatis-mappers/*.xml
 
-#mongodb:
-#  host: '127.0.0.1'
-#  port: 27017
-#  usename:
-#  password:
-#  database: 'sme-mts'
+mongodb:
+  address: "mongodb:27017"
+  #address: "127.0.0.1:57017"
+  usename: "dev"
+  password: "devpass"
 
 ---
 

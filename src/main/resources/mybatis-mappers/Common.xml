@@ -46,13 +46,4 @@
     <!-- Entity updatable field -->
     <if test="data.platform != null">platform = #{data.platform},</if>
   </sql>
-
-  <!--
-  <sql id="DynamicColumnDataType">
-    <choose>
-      <when test="value instanceof Integer">int</when>
-      <otherwise>char</otherwise>
-    </choose>
-  </sql>
-  -->
 </mapper>

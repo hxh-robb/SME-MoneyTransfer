@@ -5,4 +5,4 @@ cd $DIR
 
 ./stop.sh
 ./build.sh
-docker-compose -f docker-compose.deps.yaml -f docker-compose.yaml up -d
+sudo docker-compose -p demo -f docker-compose.deps.yaml -f docker-compose.yaml up -d
