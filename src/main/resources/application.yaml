@@ -1,11 +1,15 @@
 ## local environment settings
 spring:
+  data:
+    mongo:
+      #uri: mongodb://dev:devpass@mongodb/sme-mts
+      uri: mongodb://dev:devpass@127.0.0.1:57017/sme-mts
   datasource:
     name: sme-mts
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://mariadb:3306/sme
-    #url: jdbc:mysql://127.0.0.1:13306/sme
+    #url: jdbc:mysql://mariadb:3306/sme
+    url: jdbc:mysql://127.0.0.1:13306/sme
     username: dev
     password: devpass
     hikari:
@@ -19,12 +23,8 @@ mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mybatis-mappers/*.xml
 
-mongodb:
-  address: "mongodb:27017"
-  #address: "127.0.0.1:57017"
-  usename: "dev"
-  password: "devpass"
-
+logging:
+  file: /var/log/sme/mts.log
 ---
 
 ## test environment settings

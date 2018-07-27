@@ -1,5 +1,7 @@
 package com.sme.mts.addon;
 
-public class PythonAddon {
+import com.sme.mts.data.document.Addon;
+
+public class PythonAddon extends Addon {
     // TODO
 }

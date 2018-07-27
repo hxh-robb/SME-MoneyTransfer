@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Primary;
 
 import javax.ws.rs.ApplicationPath;
 
+/**
+ * Jersey RESTFul endpoint configuration
+ */
 @Primary @Configuration
 @ApplicationPath("v0")
 @EnableConfigurationProperties(JerseyPropertiesSupplement.class)

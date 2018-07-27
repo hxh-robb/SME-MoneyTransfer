@@ -4,24 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-  <!--
   <settings>
       <setting name="autoMappingBehavior" value="NONE"/>
   </settings>
-  -->
 
   <typeAliases>
     <package name="com.sme.mts.data.entity"/>
-
-    <!--
-    <typeAlias type="ft.ex.mybatis.TransferAddonModeHandler" alias="TransferAddonMode"/>
-    <typeAlias type="ft.ex.mybatis.TransferAddonTypeHandler" alias="TransferAddonType"/>
-    <typeAlias type="ft.ex.mybatis.JsonHandler" alias="Json"/>
-    &lt;!&ndash;
-    <typeAlias type="ft.repo.MetadataDAO$TransferAddonFilter" alias="TransferAddonFilter"/>
-    <typeAlias type="ft.repo.MetadataDAO$Filter" alias="MetadataFilter"/>
-    &ndash;&gt;
-    -->
   </typeAliases>
 
 </configuration>
