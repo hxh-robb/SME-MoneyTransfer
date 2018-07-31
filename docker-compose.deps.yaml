@@ -8,7 +8,7 @@ services:
       MYSQL_USER: "dev"
       MYSQL_PASSWORD: "devpass"
     ports:
-      - "13306:3306"
+      - "3306:3306"
     volumes:
       - "./target/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
       - "./.docker/storage/mariadb:/var/lib/mysql"
@@ -20,7 +20,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: "dev"
       MONGO_INITDB_ROOT_PASSWORD: "devpass"
     ports:
-      - "57017:27017"
+      - "27017:27017"
     volumes:
       - "./target/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
       - "./.docker/storage/mongodb:/data/db"

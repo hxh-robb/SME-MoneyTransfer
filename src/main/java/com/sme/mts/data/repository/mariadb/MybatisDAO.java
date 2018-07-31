@@ -2,6 +2,8 @@ package com.sme.mts.data.repository.mariadb;
 
 import com.sme.mts.data.Data;
 import com.sme.mts.data.DataAccessObject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +20,7 @@ import java.util.Map;
  * @param <F>
  */
 public abstract class MybatisDAO<D extends Data, F extends DataAccessObject.Filter> implements DataAccessObject<D,F> {
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
     public SqlSession sqlSession;

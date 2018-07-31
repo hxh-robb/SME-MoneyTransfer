@@ -1,35 +1,62 @@
-## local environment settings
+## Local profile
 spring:
-  data:
-    mongo:
-      #uri: mongodb://dev:devpass@mongodb/sme-mts
-      uri: mongodb://dev:devpass@127.0.0.1:57017/sme-mts
+  profiles:
+    active: local
+
+  ## MariaDB
   datasource:
     name: sme-mts
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.mariadb.jdbc.Driver
-    #url: jdbc:mysql://mariadb:3306/sme
-    url: jdbc:mysql://127.0.0.1:13306/sme
+    url: jdbc:mysql://127.0.0.1:3306/sme
     username: dev
     password: devpass
     hikari:
       idle-timeout: 10000
+
+  ## MongoDB
+  data:
+    mongodb:
+      uri: mongodb://dev:devpass@127.0.0.1:27017
+
+  ## Restful API endpoints
   jersey:
     type: filter
     applicationPath: '/api'
     uriVersioning: true
 
+## Myabtis settings
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mybatis-mappers/*.xml
 
+
+## Logging settings
+logging.file: /tmp/sme-mts.log
 logging:
-  file: /var/log/sme/mts.log
+  file:
+    max-size: 10MB
+    max-history: 10
+  pattern:
+    console: '[%d{YYYY-MM-dd HH:mm:ss.SSS}][%p][%t][%logger]%m%n'
+    file: '[%d{YYYY-MM-dd HH:mm:ss.SSS}][%p][%t][%logger]%m%n'
+
 ---
 
-## test environment settings
-# TODO
+## Docker profile
+spring:
+  profiles: docker
 
----
+  ## MariaDB
+  datasource:
+    url: jdbc:mysql://mariadb:3306/sme
+    username: dev
+    password: devpass
 
-## For test & production environment settings, please see /etc/sme/application.yml
+  ## MongoDB
+  data:
+    mongodb:
+      uri: mongodb://dev:devpass@mongodb
+
+## Logging settings
+logging.file: /app/log/sme-mts.log

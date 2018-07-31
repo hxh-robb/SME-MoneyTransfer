@@ -120,6 +120,11 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
           <executable>true</executable>
+          <embeddedLaunchScriptProperties>
+            <inlinedConfScript>
+              ${project.basedir}/env.script
+            </inlinedConfScript>
+          </embeddedLaunchScriptProperties>
         </configuration>
       </plugin>
     </plugins>

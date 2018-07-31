@@ -4,6 +4,8 @@ services:
     image: "sme-mts:0.0.0"
     ports:
       - "18080:8080"
+    volumes:
+      - ".docker/log:/app/log"
     networks:
       - backend
     depends_on:
