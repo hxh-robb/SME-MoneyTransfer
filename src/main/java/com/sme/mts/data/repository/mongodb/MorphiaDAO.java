@@ -1,26 +1,34 @@
 package com.sme.mts.data.repository.mongodb;
 
+import com.mongodb.WriteResult;
 import com.sme.mts.data.Data;
 import com.sme.mts.data.document.Metadata;
 import com.sme.mts.data.repository.DocDAO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
+import org.mongodb.morphia.query.UpdateResults;
 import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MorphiaDAOHelper<D extends Data> {
-    private static final Log logger = LogFactory.getLog(MorphiaDAOHelper.class);
+public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
+    private static final Log logger = LogFactory.getLog(MorphiaDAO.class);
     private static final Map<String, Set<Getter>> dict = new ConcurrentHashMap<>();
+
+    @Autowired
+    private Datastore datastore;
 
     static {
         Reflections reflections = new Reflections("com.sme.mts.data.document");
@@ -39,6 +47,8 @@ public class MorphiaDAOHelper<D extends Data> {
 
         System.out.println(dict.get(Metadata.class.getName()));
     }
+
+    protected abstract Class<D> entityClass();
 
     /**
      * Fill Morphia {@link UpdateOperations} with field value of doc
@@ -60,13 +70,14 @@ public class MorphiaDAOHelper<D extends Data> {
      * Fill morphia {@link Query} with filter
      * @param query MongoDB query object
      * @param filter Filter
-     * @return interupted or not
+     * @return interrupted or not
      */
     protected boolean fillQ(Query query, DocDAO.Filter filter) {
         if( null == filter ) return true;
 
         if( null != filter.id ) query.field("id").equal(filter.id);
         if( null != filter.de ) query.field("de").equal(filter.de);
+        filter.matches.forEach( (field,value) -> query.field(field).equal(value));
         return false;
     }
 
@@ -79,5 +90,39 @@ public class MorphiaDAOHelper<D extends Data> {
             this.field = field;
             this.method = method;
         }
+    }
+
+    @Override
+    public boolean create(D data) {
+        datastore.save(data);
+        return true;
+    }
+
+    @Override
+    public int update(Filter filter, D data) {
+        Query<D> q = datastore.createQuery(entityClass());
+        fillQ(q,filter);
+
+        UpdateOperations<D> uo = datastore.createUpdateOperations(entityClass());
+        fillUO(uo,data);
+
+        UpdateResults results = datastore.update(q,uo);
+        return results.getUpdatedCount();
+    }
+
+    @Override
+    public int delete(Filter filter) {
+        Query<D> q = datastore.createQuery(entityClass());
+        fillQ(q,filter);
+
+        WriteResult result = datastore.delete(q);
+        return result.getN();
+    }
+
+    @Override
+    public List<D> list(Filter filter) {
+        Query<D> q = datastore.createQuery(entityClass());
+        fillQ(q,filter);
+        return q.asList();
     }
 }

@@ -1,5 +1,7 @@
 package com.sme.mts.data;
 
+import org.mongodb.morphia.annotations.Id;
+
 /**
  * Data base class
  */
@@ -7,6 +9,7 @@ public abstract class Data {
     /**
      * UUID
      */
+    @Id
     protected String id;
 
     /**

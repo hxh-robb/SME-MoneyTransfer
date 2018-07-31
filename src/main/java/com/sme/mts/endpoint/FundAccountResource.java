@@ -2,6 +2,7 @@ package com.sme.mts.endpoint;
 
 import com.sme.mts.data.entity.FundAccount;
 import com.sme.mts.data.repository.FundAccountDAO;
+import com.sme.mts.data.repository.FundAccountDocDAO;
 import com.sme.mts.extension.jaxrs.MediaType;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,6 +23,9 @@ public class FundAccountResource {
 
     @Autowired
     private FundAccountDAO fundAccountDAO;
+
+    @Autowired
+    private FundAccountDocDAO fundAccountDocDAO;
 
     @GET @Produces({MediaType.APPLICATION_JSON})
     @Tag(name = "用户申请充值") @Tag(name = "资金账号")
@@ -73,6 +77,11 @@ public class FundAccountResource {
         data.setType(0);
         data.setName("Dummy Account");
         fundAccountDAO.create(data);
+
+        com.sme.mts.data.document.FundAccount doc = new com.sme.mts.data.document.FundAccount();
+        doc.setId(data.getId());
+        doc.getFields().put("test", "Robb");
+        fundAccountDocDAO.create(doc);
 
         // @content(json form)
         return Response.status(500, "Not yet implemented").build();
