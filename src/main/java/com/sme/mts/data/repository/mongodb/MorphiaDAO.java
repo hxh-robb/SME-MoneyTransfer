@@ -44,8 +44,6 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
                 logger.error("Failed to get PropertyDescriptors",ex);
             }
         }
-
-        System.out.println(dict.get(Metadata.class.getName()));
     }
 
     protected abstract Class<D> entityClass();

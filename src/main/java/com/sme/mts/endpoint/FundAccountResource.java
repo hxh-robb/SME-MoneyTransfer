@@ -53,7 +53,7 @@ public class FundAccountResource {
         // return Response.ok().entity("TODO").build();
 
         // return Response.status(500, "Not yet implemented").build();
-        return Response.ok().entity(accounts).build();
+        return Response.ok().entity(fundAccountDocDAO.list(null)).build();
     }
 
     @POST @Consumes(MediaType.APPLICATION_JSON) @Produces({MediaType.APPLICATION_JSON})
