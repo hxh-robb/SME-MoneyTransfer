@@ -22,7 +22,7 @@ public class FundAccount extends Data {
      * 资金账户动态字段(各金融机构资金账号的字段定义存在极大差异)
      */
     @DynamicFields
-    protected final HashMap<String, Object> fgit ields = new HashMap<>();
+    protected final HashMap<String, Object> fields = new HashMap<>();
 
     public Map<String, Object> getFields() {
         return fields;
