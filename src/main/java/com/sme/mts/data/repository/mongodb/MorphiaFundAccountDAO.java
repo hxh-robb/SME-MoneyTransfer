@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class MorphiaFundAccountDAO extends MorphiaDAO<FundAccount> implements FundAccountDocDAO {
 
     @Override
-    protected Class<FundAccount> entityClass() {
+    protected Class<FundAccount> entityClass(Filter filter) {
         return FundAccount.class;
     }
 }

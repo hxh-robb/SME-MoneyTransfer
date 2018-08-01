@@ -2,7 +2,6 @@ package com.sme.mts.data.repository.mongodb;
 
 import com.mongodb.WriteResult;
 import com.sme.mts.data.Data;
-import com.sme.mts.data.document.Metadata;
 import com.sme.mts.data.repository.DocDAO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,7 +45,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
         }
     }
 
-    protected abstract Class<D> entityClass();
+    protected abstract Class<D> entityClass(Filter filter);
 
     /**
      * Fill Morphia {@link UpdateOperations} with field value of doc
@@ -98,10 +97,10 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
 
     @Override
     public int update(Filter filter, D data) {
-        Query<D> q = datastore.createQuery(entityClass());
+        Query<D> q = datastore.createQuery(entityClass(filter));
         fillQ(q,filter);
 
-        UpdateOperations<D> uo = datastore.createUpdateOperations(entityClass());
+        UpdateOperations<D> uo = datastore.createUpdateOperations(entityClass(filter));
         fillUO(uo,data);
 
         UpdateResults results = datastore.update(q,uo);
@@ -110,7 +109,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
 
     @Override
     public int delete(Filter filter) {
-        Query<D> q = datastore.createQuery(entityClass());
+        Query<D> q = datastore.createQuery(entityClass(filter));
         fillQ(q,filter);
 
         WriteResult result = datastore.delete(q);
@@ -119,7 +118,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
 
     @Override
     public List<D> list(Filter filter) {
-        Query<D> q = datastore.createQuery(entityClass());
+        Query<D> q = datastore.createQuery(entityClass(filter));
         fillQ(q,filter);
         return q.asList();
     }
