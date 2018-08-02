@@ -10,7 +10,7 @@ cd $DIR
 ./mwb2sql.sh
 
 ## MariaDB custom configuration
-mkdir -p "$DIR/target/docker-config/mariadb"
+#mkdir -p "$DIR/target/docker-config/mariadb"
 #CNF="$DIR/target/docker-config/mariadb/utf8.cnf"
 #echo "[client]" >> "$CNF"
 #echo "default-character-set=utf8mb4" >> "$CNF"
