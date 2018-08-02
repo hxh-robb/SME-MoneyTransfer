@@ -84,7 +84,7 @@ public abstract class MybatisDAO<D extends Data, F extends DataAccessObject.Filt
     }
 
     @Override
-    public <T extends D> List<T> list(F filter) {
+    public List<D> list(F filter) {
         try {
             return sqlSession.selectList(listStatement, filter);
         } catch (Throwable throwable) {

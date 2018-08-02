@@ -13,7 +13,6 @@ export PY_PATH="$DIR/mwb2sql.py"
 export MWB_PATH="$DIR/docs/model/sme-mts.mwb"
 export SQL_PATH="$OUT/00_schema.sql"
 
-
 ## Generate schema creation sql script
 $CMD --version
 #$CMD --quit-when-done --model $MWB_PATH --run-script $PY_PATH

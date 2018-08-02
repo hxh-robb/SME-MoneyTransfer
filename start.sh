@@ -16,4 +16,7 @@ done
 if [ "$APP" != "" ]; then
   ./build.sh
 fi
-sudo docker-compose -p demo -f docker-compose.deps.yaml $APP up -d
+
+echo "Starting docker containers"
+docker-compose -p demo -f docker-compose.deps.yaml $APP up -d
+echo "Docker containers is now started"

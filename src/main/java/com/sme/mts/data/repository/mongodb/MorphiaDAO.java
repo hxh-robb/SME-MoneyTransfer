@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
+public abstract class MorphiaDAO<D extends Data, F extends DocDAO.Filter> implements DocDAO<D, F> {
     private static final Log logger = LogFactory.getLog(MorphiaDAO.class);
     private static final Map<String, Set<Getter>> dict = new ConcurrentHashMap<>();
 
@@ -45,7 +45,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
         }
     }
 
-    protected abstract Class<D> entityClass(Filter filter);
+    protected abstract Class<D> entityClass(F filter);
 
     /**
      * Fill Morphia {@link UpdateOperations} with field value of doc
@@ -69,7 +69,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
      * @param filter Filter
      * @return interrupted or not
      */
-    protected boolean fillQ(Query query, DocDAO.Filter filter) {
+    protected boolean fillQ(Query query, F filter) {
         if( null == filter ) return true;
 
         if( null != filter.id ) query.field("id").equal(filter.id);
@@ -96,7 +96,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
     }
 
     @Override
-    public int update(Filter filter, D data) {
+    public int update(F filter, D data) {
         Query<D> q = datastore.createQuery(entityClass(filter));
         fillQ(q,filter);
 
@@ -108,7 +108,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
     }
 
     @Override
-    public int delete(Filter filter) {
+    public int delete(F filter) {
         Query<D> q = datastore.createQuery(entityClass(filter));
         fillQ(q,filter);
 
@@ -117,7 +117,7 @@ public abstract class MorphiaDAO<D extends Data> implements DocDAO<D> {
     }
 
     @Override
-    public List<D> list(Filter filter) {
+    public List<D> list(F filter) {
         Query<D> q = datastore.createQuery(entityClass(filter));
         fillQ(q,filter);
         return q.asList();

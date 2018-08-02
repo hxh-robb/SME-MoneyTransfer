@@ -35,7 +35,7 @@ public interface DataAccessObject<D extends Data, F extends DataAccessObject.Fil
      * @param filter
      * @return
      */
-    <T extends D> List<T> list(F filter);
+    List<D> list(F filter);
 
     /**
      * Base filter class

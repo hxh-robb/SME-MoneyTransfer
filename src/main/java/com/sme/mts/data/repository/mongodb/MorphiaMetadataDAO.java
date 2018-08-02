@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class MorphiaMetadataDAO extends MorphiaDAO<Metadata> implements MetadataDAO {
+public class MorphiaMetadataDAO extends MorphiaDAO<Metadata, MetadataDAO.Filter> implements MetadataDAO {
     private static final Map<String,Class<? extends Metadata>> subclasses = new HashMap<>();
     static {
         Reflections reflections = new Reflections(Metadata.class.getPackage().getName());
@@ -17,7 +17,7 @@ public class MorphiaMetadataDAO extends MorphiaDAO<Metadata> implements Metadata
     }
 
     @Override
-    protected Class<Metadata> entityClass(Filter filter) {
+    protected Class<Metadata> entityClass(MetadataDAO.Filter filter) {
         if( null == filter ) return Metadata.class;
 
         Class<? extends Metadata> clazz = subclasses.get(filter.matches.get("catalog"));

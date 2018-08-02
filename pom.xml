@@ -23,6 +23,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
     <github.global.server>github</github.global.server>
+    <maven.test.skip>false</maven.test.skip>
   </properties>
 
   <dependencies>
@@ -115,6 +116,49 @@
 
   <build>
     <plugins>
+
+      <plugin> <!-- MariaDB and MongoDB docker containers -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>start-test-prerequisites</id>
+            <phase>test-compile</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <skip>${maven.test.skip}</skip>
+              <basedir>${project.basedir}</basedir>
+              <executable>start.sh</executable>
+              <arguments>
+                <argument>--no-app</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>stop-test-prerequisites</id>
+            <phase>test</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <skip>${maven.test.skip}</skip>
+              <basedir>${project.basedir}</basedir>
+              <executable>stop.sh</executable>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <!--<include>**/MoneyTransferServiceTests.class</include>-->
+            <include>**/suites/**.class</include>
+          </includes>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>

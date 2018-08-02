@@ -1,5 +1,7 @@
 package com.sme.mts.data;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.mongodb.morphia.annotations.Id;
 
 /**
@@ -15,7 +17,7 @@ public abstract class Data {
     /**
      * Deleted flag
      */
-    protected Boolean de;
+    protected Boolean de = false;
 
     public String getId() {
 
@@ -32,5 +34,35 @@ public abstract class Data {
 
     public void setDe(Boolean de) {
         this.de = de;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            "id='" + id + '\'' +
+            ", de=" + de +
+        '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Data data = (Data) o;
+
+        return new EqualsBuilder()
+                .append(id, data.id)
+                .append(de, data.de)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(de)
+                .toHashCode();
     }
 }

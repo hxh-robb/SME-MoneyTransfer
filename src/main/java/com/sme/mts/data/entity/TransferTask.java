@@ -1,5 +1,8 @@
 package com.sme.mts.data.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * 转账任务
  */
@@ -119,5 +122,43 @@ public class TransferTask extends PlatformRelatedEntity {
 
     public void setFundAccount(String fundAccount) {
         this.fundAccount = fundAccount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TransferTask task = (TransferTask) o;
+
+        return new EqualsBuilder()
+                .appendSuper(super.equals(o))
+                .append(type, task.type)
+                .append(beneficiary, task.beneficiary)
+                .append(amount, task.amount)
+                .append(status, task.status)
+                .append(state, task.state)
+                .append(retry, task.retry)
+                .append(fallback, task.fallback)
+                .append(ref, task.ref)
+                .append(fundAccount, task.fundAccount)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .appendSuper(super.hashCode())
+                .append(type)
+                .append(beneficiary)
+                .append(amount)
+                .append(status)
+                .append(state)
+                .append(retry)
+                .append(fallback)
+                .append(ref)
+                .append(fundAccount)
+                .toHashCode();
     }
 }
