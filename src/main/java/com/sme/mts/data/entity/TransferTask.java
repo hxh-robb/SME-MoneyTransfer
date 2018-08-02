@@ -124,6 +124,11 @@ public class TransferTask extends PlatformRelatedEntity {
         this.fundAccount = fundAccount;
     }
 
+    public interface Type {
+        int DEPOSIT = 0;
+        int WITHDRWAL = 1;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
