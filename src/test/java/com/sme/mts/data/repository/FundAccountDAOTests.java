@@ -1,86 +1,79 @@
 package com.sme.mts.data.repository;
 
-import com.sme.mts.Testcase;
+import com.sme.mts.RepositoryTestcase;
 import com.sme.mts.data.entity.FundAccount;
 import org.apache.commons.lang3.RandomUtils;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class FundAccountDAOTests extends Testcase {
+public class FundAccountDAOTests extends RepositoryTestcase<FundAccount, FundAccountDAO.Filter> {
     private static boolean init = false;
     private static final Map<String, FundAccount> expected = new ConcurrentHashMap<>();
+    private static final String [] titles = new String[]{"中国银行", "中国农业银行", "中国工商银行", "中国建设银行"};
+    private static final String [] names = new String[]{
+        "boc-zhao", "boc-qian", "boc-sun", "boc-li",
+        "abc-zhou", "abc-wu", "abc-zheng", "abc-wang",
+        "icbc-feng", "icbc-chen", "icbc-zhu", "icbc-wei",
+        "ccb-jiang", "ccb-shen", "ccb-hang", "ccb-yang",
+    };
+
+    static final Map<String, FundAccount> dummy = new ConcurrentHashMap<>();
 
     @Autowired
     private FundAccountDAO fundAccountDAO;
 
-    @Before
-    public void init() {
-        if(!init){
-            fundAccountDAO.delete(null);
-            Assert.assertTrue("Cannot clear table data",fundAccountDAO.list(null).isEmpty());
-            init = true;
-        }
+    @Override
+    protected Map<String, FundAccount> expected() {
+        return expected;
     }
 
-    @Test
-    public void t0_createBankAccount(){
-        FundAccount account = new FundAccount();
-        init(account);
-        account.setType(FundAccount.Type.DEPOSIT_ACCOUNT);
-        account.setName("dummy-bank-account");
-        account.setTitle(bankTitles[RandomUtils.nextInt(0,bankTitles.length)]);
-        // account.setIcon("");
-
-        Assert.assertTrue(fundAccountDAO.create(account));
-        expected.put(account.getId(), account);
+    @Override
+    protected boolean isInitialized() {
+        return init;
     }
 
-    @Test
-    public void t1_listBankAccount(){
-        Assert.assertFalse(expected.isEmpty());
-
-        FundAccountDAO.Filter filter = new FundAccountDAO.Filter();
-        filter.id = expected.keySet().toArray(new String[]{})[RandomUtils.nextInt(0,expected.size())];
-        List<FundAccount> accounts = fundAccountDAO.list(filter);
-        Assert.assertEquals(1, accounts.size());
-        Assert.assertEquals(expected.get(filter.id), accounts.get(0));
+    @Override
+    protected void setInitialized(boolean bool) {
+        init = bool;
     }
 
-    @Test
-    public void t2_modifyBankAccount(){
-        FundAccountDAO.Filter filter = new FundAccountDAO.Filter();
-        filter.id = expected.keySet().toArray(new String[]{})[RandomUtils.nextInt(0,expected.size())];
-        FundAccount data = new FundAccount();
+    @Override
+    protected FundAccountDAO dao() {
+        return fundAccountDAO;
+    }
+
+    @Override
+    protected FundAccount newData() {
+        return new FundAccount();
+    }
+
+    @Override
+    protected FundAccountDAO.Filter newFilter() {
+        return new FundAccountDAO.Filter();
+    }
+
+    @Override
+    protected void setupData(FundAccount data) {
+        data.setType(FundAccount.Type.DEPOSIT_ACCOUNT);
+        int titleIdx = RandomUtils.nextInt(0,titles.length);
+        data.setTitle(titles[titleIdx] + "-" + data.getId().split("-")[1]);
+        data.setName("dummy-" + names[RandomUtils.nextInt(titleIdx*4,titleIdx*4+4)] + "-" + data.getId().split("-")[0]);
+    }
+
+    @Override
+    protected void setupModify(FundAccount data) {
         data.setUo("Robb");
-        Assert.assertNotEquals(data.getUo(), expected.get(filter.id).getUo());
-        fundAccountDAO.update(filter, data);
-
-
-        List<FundAccount> accounts = fundAccountDAO.list(filter);
-        Assert.assertEquals(1, accounts.size());
-        expected.get(filter.id).setUo(data.getUo());
-        Assert.assertEquals(expected.get(filter.id), accounts.get(0));
+        data.setDe(true);
     }
 
     @Test
-    public void t3_deleteBankAccount(){
-        int total = fundAccountDAO.list(null).size();
-
-        FundAccountDAO.Filter filter = new FundAccountDAO.Filter();
-        filter.id = expected.keySet().toArray(new String[]{})[RandomUtils.nextInt(0,expected.size())];
-        List<FundAccount> accounts = fundAccountDAO.list(filter);
-        Assert.assertEquals(1, accounts.size());
-
-        Assert.assertEquals(1, fundAccountDAO.delete(filter));
-        Assert.assertEquals(total - 1, fundAccountDAO.list(null).size());
+    public void t0_dummy_data(){
+        generateDummyData(RandomUtils.nextInt(20,100), data -> dummy.put(data.getId(), data));
     }
 }

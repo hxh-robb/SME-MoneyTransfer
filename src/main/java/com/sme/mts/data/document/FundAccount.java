@@ -14,14 +14,15 @@ import java.util.Map;
 @Entity(value = "fund_account", noClassnameStored = true)
 public class FundAccount extends Data {
     /**
-     * 可以处理该资金账号的转账插件,{@link TransferAddon#id}
+     * 可以处理该资金账号的转账插件,{@link TransferAddon#id};
+     * TODO - TransferAddon one-to-one mapping
      */
     protected String addon;
 
     /**
      * 资金账户动态字段(各金融机构资金账号的字段定义存在极大差异)
      */
-    @DynamicFields
+    // @DynamicFields // field name conflict issue
     protected final HashMap<String, Object> fields = new HashMap<>();
 
     public Map<String, Object> getFields() {

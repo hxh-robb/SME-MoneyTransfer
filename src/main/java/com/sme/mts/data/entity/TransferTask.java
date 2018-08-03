@@ -4,7 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * 转账任务
+ * 转账任务;
+ * 匹配规则:ref + fund account + amount + [time range]
  */
 public class TransferTask extends PlatformRelatedEntity {
     /**
@@ -43,7 +44,7 @@ public class TransferTask extends PlatformRelatedEntity {
     protected String fallback;
 
     /**
-     * 与外部系统对接关联的唯一标识
+     * 与外部系统对接关联的唯一标识;
      */
     protected String ref;
 
