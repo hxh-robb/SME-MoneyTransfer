@@ -16,5 +16,5 @@ import org.junit.runners.Suite;
     FundAccountDAOTests.class,
     TransferTaskDAOTests.class
 })
-public class Repository {
+public class RepositoryTests {
 }

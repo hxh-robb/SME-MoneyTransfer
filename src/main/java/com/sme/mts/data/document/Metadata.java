@@ -27,7 +27,15 @@ public class Metadata extends Data {
     /**
      * 元数据分类
      */
-    protected String catalog = this.getClass().getSimpleName();
+    protected final String catalog;
+
+    public Metadata() {
+        catalog = this.getClass().getSimpleName();
+    }
+
+    public Metadata(String catalog) {
+        this.catalog = catalog;
+    }
 
     public String getName() {
         return name;
@@ -55,9 +63,5 @@ public class Metadata extends Data {
 
     public String getCatalog() {
         return catalog;
-    }
-
-    public void setCatalog(String catalog) {
-        this.catalog = catalog;
     }
 }

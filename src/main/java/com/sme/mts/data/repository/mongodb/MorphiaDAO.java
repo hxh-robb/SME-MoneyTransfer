@@ -56,9 +56,11 @@ public abstract class MorphiaDAO<D extends Data, F extends DocDAO.Filter> implem
         Set<Getter> getters = dict.get(doc.getClass().getName());
         getters.forEach(getter -> {
             try {
-                uo.set(getter.field, getter.method.invoke(doc));
+                Object v = getter.method.invoke(doc);
+                if( null == v ) return;
+                uo.set(getter.field, v);
             } catch (Throwable th) {
-                logger.error("Failed to invoke getters",th);
+                logger.error("Failed to invoke getters:" + getter.field,th);
             }
         });
     }

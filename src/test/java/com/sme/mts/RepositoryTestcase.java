@@ -4,6 +4,8 @@ import com.sme.mts.data.Data;
 import com.sme.mts.data.DataAccessObject;
 import com.sme.mts.data.entity.Entity;
 import com.sme.mts.data.entity.PlatformRelatedEntity;
+import com.sme.mts.data.repository.mariadb.MybatisDAO;
+import com.sme.mts.data.repository.mongodb.MorphiaDAO;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -62,6 +64,10 @@ public abstract class RepositoryTestcase<D extends Data,F extends DataAccessObje
     protected abstract void setupData(D data);
     protected abstract void setupModify(D data);
 
+    protected D newDataForModify(D original){
+        return newData();
+    }
+
     @Before
     public void init() {
         if(isInitialized()) {
@@ -107,18 +113,18 @@ public abstract class RepositoryTestcase<D extends Data,F extends DataAccessObje
     public void t2_modify() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
         F filter = newFilter();
         filter.id = expected().keySet().toArray(new String[]{})[RandomUtils.nextInt(0,expected().size())];
-        D data = newData();
+        D expected = expected().get(filter.id);
+
+        D data = newDataForModify(expected);
         data.setDe(null);
         if( data instanceof Entity) {
             ((Entity) data).setUo(operator);
         }
         setupModify(data);
 
-        D expected = expected().get(filter.id);
-
         PropertyDescriptor[] pds = Introspector.getBeanInfo(data.getClass()).getPropertyDescriptors();
         for (PropertyDescriptor pd:pds) {
-            if( null == pd.getReadMethod() || "class".equals(pd.getName()) ) continue;
+            if( null == pd.getReadMethod() || null == pd.getWriteMethod() /*|| "class".equals(pd.getName())*/ ) continue;
             Object fv1 = pd.getReadMethod().invoke(data);
             Object fv2 = pd.getReadMethod().invoke(expected);
 
@@ -128,9 +134,8 @@ public abstract class RepositoryTestcase<D extends Data,F extends DataAccessObje
 
         Assert.assertEquals(1, dao().update(filter, data));
 
-
         List<D> list = dao().list(filter);
-        Assert.assertEquals(1, list.size());
+        Assert.assertEquals("filter:" + filter, 1, list.size());
         setupModify(expected);
         Assert.assertEquals(expected, list.get(0));
     }
@@ -149,8 +154,18 @@ public abstract class RepositoryTestcase<D extends Data,F extends DataAccessObje
     }
 
     protected void generateDummyData(int size,Consumer<D> ... consumers) {
+        long t1 = System.nanoTime();
         for (int i = 0; i < size; i++) {
             doCreate(false,consumers);
         }
+        long used = System.nanoTime() - t1;
+
+        String dataMappingType = newData().getClass().getSimpleName();
+        if(dao() instanceof MybatisDAO) {
+            dataMappingType = "(Mybatis - " + dataMappingType + ")";
+        } else if (dao() instanceof MorphiaDAO) {
+            dataMappingType = "(Morphia - " + dataMappingType + ")";
+        }
+        logger.info("Dummy data generating" + dataMappingType + " - avg used time:" + ( used / size / 1000000 ) + " milliseconds");
     }
 }
