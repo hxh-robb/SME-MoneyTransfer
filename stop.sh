@@ -8,6 +8,9 @@ do
   if [ "$param" = "--rm-docker" ]; then
     RM_DOCKER='sudo rm -rf .docker'
   fi
+  if [ "$param" = "--rm-log" ]; then
+    RM_DOCKER='sudo rm -rf .docker/log'
+  fi
 done
 
 echo "Stopping docker containers"

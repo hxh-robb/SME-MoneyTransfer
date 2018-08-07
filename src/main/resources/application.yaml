@@ -34,6 +34,9 @@ mybatis:
 ## Logging settings
 logging.file: /tmp/sme-mts.log
 logging:
+  level:
+    root: info
+    org.springframework.transaction.interceptor: trace # trace transaction status
   file:
     max-size: 10MB
     max-history: 10
