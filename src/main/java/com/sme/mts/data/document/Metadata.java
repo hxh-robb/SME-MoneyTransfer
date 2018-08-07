@@ -1,13 +1,25 @@
 package com.sme.mts.data.document;
 
+import com.google.common.collect.ImmutableMap;
 import com.sme.mts.data.Data;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.mongodb.morphia.annotations.Entity;
+import org.reflections.Reflections;
+
+import java.util.Map;
 
 /**
  * 元数据基类
  */
 @Entity(value = "metadata", noClassnameStored = true)
 public class Metadata extends Data {
+    public static final Map<String,Class<? extends Metadata>> subclasses;
+    static {
+        ImmutableMap.Builder<String,Class<? extends Metadata>> builder =  ImmutableMap.builder();
+        Reflections reflections = new Reflections(Metadata.class.getPackage().getName());
+        reflections.getSubTypesOf(Metadata.class).forEach(c->builder.put(c.getSimpleName(),c));
+        subclasses = builder.build();
+    }
 
     /**
      * 元数据名称

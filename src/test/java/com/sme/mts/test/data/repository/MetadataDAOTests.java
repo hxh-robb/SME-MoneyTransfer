@@ -21,11 +21,11 @@ public class MetadataDAOTests extends RepositoryTestcase<Metadata, MetadataDAO.F
     private static final Map<String, Metadata> expected = new ConcurrentHashMap<>();
     static final Map<String, Metadata> dummy = new ConcurrentHashMap<>();
 
-    private static final Class<? extends Metadata>[] metadataTypes = new Class[MetadataDAO.subclasses.size() + 1];
+    private static final Class<? extends Metadata>[] metadataTypes = new Class[Metadata.subclasses.size() + 1];
     static {
         metadataTypes[0] = Metadata.class;
         System.arraycopy(
-            MetadataDAO.subclasses.values().toArray(),0,
+            Metadata.subclasses.values().toArray(),0,
             metadataTypes, 1, metadataTypes.length - 1
         );
     }

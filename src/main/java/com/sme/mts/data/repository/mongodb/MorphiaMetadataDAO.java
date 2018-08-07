@@ -2,6 +2,7 @@ package com.sme.mts.data.repository.mongodb;
 
 import com.sme.mts.data.document.Metadata;
 import com.sme.mts.data.repository.MetadataDAO;
+import org.mongodb.morphia.query.Meta;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class MorphiaMetadataDAO extends MorphiaDAO<Metadata, MetadataDAO.Filter>
     protected Class<Metadata> entityClass(MetadataDAO.Filter filter) {
         if( null == filter ) return Metadata.class;
 
-        Class<? extends Metadata> clazz = subclasses.get(filter.matches.get("catalog"));
+        Class<? extends Metadata> clazz = Metadata.subclasses.get(filter.matches.get("catalog"));
         if( null != clazz ){
             return (Class<Metadata>)clazz;
         }
@@ -34,7 +35,7 @@ public class MorphiaMetadataDAO extends MorphiaDAO<Metadata, MetadataDAO.Filter>
             boolean deleteMatch = !filter.matches.containsKey(MetadataDAO.Filter.CATALOG);
 
             // Adapting corresponding subclass
-            for (String clazz : subclasses.keySet()) {
+            for (String clazz : Metadata.subclasses.keySet()) {
                 filter.matches.put(MetadataDAO.Filter.CATALOG, clazz);
                 consumer.accept(filter);
             }
