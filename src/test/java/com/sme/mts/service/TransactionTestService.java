@@ -1,8 +1,7 @@
 package com.sme.mts.service;
 
-import com.sme.mts.service.TransactionalService;
-
-public interface TransactionTestService extends TransactionalService {
+public interface TransactionTestService extends Service {
     void clear();
-    void foobar();
+    void foobar(Runnable ... runs);
+    void list();
 }
