@@ -1,7 +1,7 @@
 package com.sme.mts.test.service;
 
-import com.sme.mts.service.TransactionTestService;
 import com.sme.mts.test.Testcase;
+import com.sme.mts.service.TransactionTestService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

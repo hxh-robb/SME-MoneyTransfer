@@ -1,9 +1,10 @@
 package com.sme.mts.test.data.repository;
 
 import com.sme.mts.test.RepositoryTestcase;
-import com.sme.mts.test.data.document.Addon;
-import com.sme.mts.test.data.document.Metadata;
-import com.sme.mts.test.data.document.TransferAddon;
+import com.sme.mts.data.document.Addon;
+import com.sme.mts.data.document.Metadata;
+import com.sme.mts.data.document.TransferAddon;
+import com.sme.mts.data.repository.MetadataDAO;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

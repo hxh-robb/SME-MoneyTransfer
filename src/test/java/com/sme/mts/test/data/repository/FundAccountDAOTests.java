@@ -1,7 +1,8 @@
 package com.sme.mts.test.data.repository;
 
 import com.sme.mts.test.RepositoryTestcase;
-import com.sme.mts.test.data.entity.FundAccount;
+import com.sme.mts.data.entity.FundAccount;
+import com.sme.mts.data.repository.FundAccountDAO;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

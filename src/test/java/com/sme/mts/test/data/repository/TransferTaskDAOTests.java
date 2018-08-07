@@ -1,8 +1,9 @@
 package com.sme.mts.test.data.repository;
 
 import com.sme.mts.test.RepositoryTestcase;
-import com.sme.mts.test.data.entity.FundAccount;
-import com.sme.mts.test.data.entity.TransferTask;
+import com.sme.mts.data.entity.FundAccount;
+import com.sme.mts.data.entity.TransferTask;
+import com.sme.mts.data.repository.TransferTaskDAO;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TransferTaskDAOTests extends RepositoryTestcase<TransferTask,TransferTaskDAO.Filter> {
+public class TransferTaskDAOTests extends RepositoryTestcase<TransferTask, TransferTaskDAO.Filter> {
     private static boolean init = false;
     private static final Map<String, TransferTask> expected = new ConcurrentHashMap<>();
     private static final String [] beneficiaries = (

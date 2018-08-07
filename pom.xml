@@ -154,7 +154,7 @@
         <configuration>
           <includes>
             <!--<include>**/MoneyTransferServiceTests.class</include>-->
-            <include>**/suites/**.class</include>
+            <include>**/test/suites/**.class</include>
           </includes>
         </configuration>
       </plugin>

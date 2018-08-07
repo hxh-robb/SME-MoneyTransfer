@@ -1,9 +1,11 @@
 package com.sme.mts.test.data.repository;
 
 import com.sme.mts.test.RepositoryTestcase;
-import com.sme.mts.test.data.document.FundAccount;
-import com.sme.mts.test.data.document.Metadata;
-import com.sme.mts.test.data.document.TransferAddon;
+import com.sme.mts.data.entity.FundAccount;
+import com.sme.mts.data.document.Metadata;
+import com.sme.mts.data.document.TransferAddon;
+import com.sme.mts.data.repository.DocDAO;
+import com.sme.mts.data.repository.FundAccountDocDAO;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -19,10 +21,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class FundAccountDocDAOTests extends RepositoryTestcase<FundAccount, DocDAO.Filter> {
+public class FundAccountDocDAOTests extends RepositoryTestcase<com.sme.mts.data.document.FundAccount, DocDAO.Filter> {
     private static boolean init = false;
-    private static final Map<String, FundAccount> expected = new ConcurrentHashMap<>();
-    private static final List<com.sme.mts.test.data.entity.FundAccount> entities = new ArrayList<>();
+    private static final Map<String, com.sme.mts.data.document.FundAccount> expected = new ConcurrentHashMap<>();
+    private static final List<FundAccount> entities = new ArrayList<>();
     private static final Map<String,String> holder = new HashMap<>();
     static {
         holder.put("zhao", "赵倩");
@@ -48,7 +50,7 @@ public class FundAccountDocDAOTests extends RepositoryTestcase<FundAccount, DocD
 
 
     @Override
-    protected Map<String, FundAccount> expected() {
+    protected Map<String, com.sme.mts.data.document.FundAccount> expected() {
         return expected;
     }
 
@@ -68,8 +70,8 @@ public class FundAccountDocDAOTests extends RepositoryTestcase<FundAccount, DocD
     }
 
     @Override
-    protected FundAccount newData() {
-        return new FundAccount();
+    protected com.sme.mts.data.document.FundAccount newData() {
+        return new com.sme.mts.data.document.FundAccount();
     }
 
     @Override
@@ -78,7 +80,7 @@ public class FundAccountDocDAOTests extends RepositoryTestcase<FundAccount, DocD
     }
 
     @Override
-    protected void setupData(FundAccount data) {
+    protected void setupData(com.sme.mts.data.document.FundAccount data) {
         // dummy bank account
         List<Metadata> addons = MetadataDAOTests.dummy.values().stream().filter(m->m instanceof TransferAddon).collect(Collectors.toList());
         if(addons.isEmpty()) {
@@ -91,7 +93,7 @@ public class FundAccountDocDAOTests extends RepositoryTestcase<FundAccount, DocD
 
         if(TransferAddon.Mode.BANK_DEPOSIT.equals(addon.getMode())) {
             // For dummy data
-            com.sme.mts.test.data.entity.FundAccount entity = null;
+            FundAccount entity = null;
             if(!entities.isEmpty()){
                 entity = entities.remove(RandomUtils.nextInt(0,entities.size()));
                 data.setId(entity.getId());
@@ -108,7 +110,7 @@ public class FundAccountDocDAOTests extends RepositoryTestcase<FundAccount, DocD
     }
 
     @Override
-    protected void setupModify(FundAccount data) {
+    protected void setupModify(com.sme.mts.data.document.FundAccount data) {
         data.getFields().put("remark", "集成测试修改");
     }
 

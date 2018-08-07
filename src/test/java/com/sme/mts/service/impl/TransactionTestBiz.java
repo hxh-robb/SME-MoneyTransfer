@@ -1,7 +1,7 @@
 package com.sme.mts.service.impl;
 
-import com.sme.mts.test.data.entity.FundAccount;
-import com.sme.mts.test.data.repository.FundAccountDAO;
+import com.sme.mts.data.entity.FundAccount;
+import com.sme.mts.data.repository.FundAccountDAO;
 import com.sme.mts.service.TransactionTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

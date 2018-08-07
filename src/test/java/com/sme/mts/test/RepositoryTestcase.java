@@ -1,11 +1,11 @@
 package com.sme.mts.test;
 
-import com.sme.mts.test.data.Data;
-import com.sme.mts.test.data.DataAccessObject;
-import com.sme.mts.test.data.entity.Entity;
-import com.sme.mts.test.data.entity.PlatformRelatedEntity;
-import com.sme.mts.test.data.repository.mariadb.MybatisDAO;
-import com.sme.mts.test.data.repository.mongodb.MorphiaDAO;
+import com.sme.mts.data.Data;
+import com.sme.mts.data.DataAccessObject;
+import com.sme.mts.data.entity.Entity;
+import com.sme.mts.data.entity.PlatformRelatedEntity;
+import com.sme.mts.data.repository.mariadb.MybatisDAO;
+import com.sme.mts.data.repository.mongodb.MorphiaDAO;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Before;
