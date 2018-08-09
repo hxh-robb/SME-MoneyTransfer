@@ -1,0 +1,42 @@
+{
+  "type":"object",
+  "properties": {
+    "type":{
+      "title":"资金账号类型",
+      "description":"收款账号/出款账号",
+      "type":"string",
+      "required":true,
+      "enum":[
+        {"text":"收款账号","value":"0"},
+        {"text":"出款账号","value":"1"}
+      ]
+    },
+    "name":{
+      "title":"资金账号名称",
+      "description":"供后台管理员区分识别的名称",
+      "type":"string",
+      "required":true
+    },
+    "title":{
+      "title":"资金账号标题",
+      "description":"供前台门户展示的名称",
+      "type":"string",
+      "required":true
+    },
+    "addon":{
+      "title":"转账处理工具",
+      "description":"处理该账号相关转账任务的工具",
+      "type":"string",
+      "required":true,
+      "enum":[[# th:each="addon,iterStat : ${addons}"]
+    {"text":"[(${addon.name})]","value":"[(${addon.id})]"}[# th:if="!${iterStat.last}"],[/]
+    [/]]
+    }
+  },
+  "appendedProperties":{
+  "dependsOn":"addon",
+  "appendix":{[# th:each="addon,iterStat : ${addons}"]
+    "[(${addon.id})]":[(${addon.schema})][# th:if="!${iterStat.last}"],[/]
+    [/]}
+  }
+}

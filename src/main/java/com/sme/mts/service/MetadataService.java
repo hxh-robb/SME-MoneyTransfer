@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 元数据服务接口
  */
-public interface MetadataService extends Service {
+public interface MetadataService extends TransactionalService {
     /**
      * 资金账号表单规格列表
      * @return

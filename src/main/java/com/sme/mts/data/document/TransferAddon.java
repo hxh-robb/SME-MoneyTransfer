@@ -13,9 +13,9 @@ public class TransferAddon extends Addon {
     protected Mode mode;
 
     /**
-     * 入参表单规格
+     * 入参表单schema
      */
-    protected String spec;
+    protected String schema;
 
     public Mode getMode() {
         return mode;
@@ -25,12 +25,12 @@ public class TransferAddon extends Addon {
         this.mode = mode;
     }
 
-    public String getSpec() {
-        return spec;
+    public String getSchema() {
+        return schema;
     }
 
-    public void setSpec(String spec) {
-        this.spec = spec;
+    public void setSchema(String schema) {
+        this.schema = schema;
     }
 
     /**

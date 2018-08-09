@@ -4,7 +4,7 @@ DIR=`dirname $(readlink -f $0)`
 cd $DIR
 
 ## Build Spring-Boot executable jar
-./mvnw -Dmaven.test.skip=true -DskipTests=true clean package
+./mvnw -Dmaven.test.skip=true -DskipTests clean package
 
 ## Build the schema.sql
 ./mwb2sql.sh

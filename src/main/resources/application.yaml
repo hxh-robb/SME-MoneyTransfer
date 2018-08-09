@@ -14,6 +14,16 @@ spring:
     hikari:
       idle-timeout: 10000
 
+  thymeleaf:
+    cache: true
+    check-template: true
+    check-template-lockation: true
+    content-type: text/html
+    enabled: false
+    encoding: UTF-8
+    mode: HTML
+    templateResolverOrder: 0
+
   ## MongoDB
   data:
     mongodb:
@@ -29,7 +39,6 @@ spring:
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mybatis-mappers/*.xml
-
 
 ## Logging settings
 logging.file: /tmp/sme-mts.log

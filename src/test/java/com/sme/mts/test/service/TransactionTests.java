@@ -13,7 +13,7 @@ public class TransactionTests extends Testcase {
     @Autowired @Qualifier("transfer-task")
     private TransactionTestService transferTask;
 
-    @Test
+    @Test // 2 transactions
     public void testCallSeparately(){
         try {
             transferTask.clear();
@@ -27,7 +27,7 @@ public class TransactionTests extends Testcase {
         }
     }
 
-    @Test
+    @Test // 1 transaction
     public void testCallTogether(){
         try {
             transferTask.clear();

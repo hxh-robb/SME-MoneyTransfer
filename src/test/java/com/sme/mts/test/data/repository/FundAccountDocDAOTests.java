@@ -89,7 +89,10 @@ public class FundAccountDocDAOTests extends RepositoryTestcase<com.sme.mts.data.
 
 
         TransferAddon addon = (TransferAddon)addons.get(0);
-        data.setAddon(addon);
+        // data.setAddon(addon);
+        TransferAddon temp = new TransferAddon();
+        temp.setId(addon.getId());
+        data.setAddon(temp);
 
         if(TransferAddon.Mode.BANK_DEPOSIT.equals(addon.getMode())) {
             // For dummy data

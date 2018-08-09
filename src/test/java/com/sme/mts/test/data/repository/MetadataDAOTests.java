@@ -79,7 +79,7 @@ public class MetadataDAOTests extends RepositoryTestcase<Metadata, MetadataDAO.F
     @Override
     protected void setupData(Metadata data) {
         if( data instanceof TransferAddon ) {
-            data.setName("BankAccountDepositSlipGenerator-" + data.getId().split("-")[1]);
+            data.setName("银行账号存款单生成器-" + data.getId().split("-")[1]);
             data.setDescription("银行账号存款单生成器 - " + data.getId().split("-")[1]);
             data.setValue(data.getId().split("-")[1]);
 
@@ -90,7 +90,9 @@ public class MetadataDAOTests extends RepositoryTestcase<Metadata, MetadataDAO.F
             );
 
             ((TransferAddon) data).setMode(TransferAddon.Mode.BANK_DEPOSIT);
-            ((TransferAddon) data).setSpec("TODO(JsonForms - Bank account)"); // TODO
+            ((TransferAddon) data).setSchema(
+                "{}"
+            ); // TODO
         } else if( data instanceof Addon ) {
             data.setName("DummyAddon-" + data.getId().split("-")[1]);
             data.setDescription("For JUnit testing");
@@ -111,14 +113,14 @@ public class MetadataDAOTests extends RepositoryTestcase<Metadata, MetadataDAO.F
     @Override
     protected void setupModify(Metadata data) {
         if( data instanceof TransferAddon ) {
-            data.setName("HnapayDepositSlipGenerator");
+            data.setName("新生支付存款单生成器");
             data.setDescription("新生支付存款单生成器");
             ((Addon) data).setContent( // TODO
                 "print 'TODO(Hanpay deposit slip generating)'\n" +
                 "pass"
             );
             ((TransferAddon) data).setMode(TransferAddon.Mode.INTERMEDIARY_DEPOSIT);
-            ((TransferAddon) data).setSpec("TODO(JsonForms - Hnapay redirection form)"); // TODO
+            ((TransferAddon) data).setSchema("TODO(JsonForms - Hnapay redirection form)"); // TODO
         } else if( data instanceof Addon ) {
             data.setDescription("JUnit test modify");
             ((Addon) data).setContent(
