@@ -18,4 +18,4 @@ export SQL_PATH="$OUT/00_schema.sql"
 $CMD --version
 #$CMD --quit-when-done --model $MWB_PATH --run-script $PY_PATH
 
-$CMD --model $MWB_PATH --run-python "$(cat $PY_PATH)" --quit-when-done
+$CMD --model $MWB_PATH --run-python "$(cat "$PY_PATH")" --quit-when-done
