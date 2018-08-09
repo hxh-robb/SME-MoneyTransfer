@@ -1,7 +1,8 @@
 #!/bin/bash
 
-DIR=`dirname $(readlink -f $0)`
-cd $DIR
+SCRIPT=$(readlink -f "$0")
+DIR=$(dirname "$SCRIPT")
+cd "$DIR"
 
 ## Build Spring-Boot executable jar
 ./mvnw -Dmaven.test.skip=true -DskipTests clean package

@@ -1,10 +1,11 @@
 #!/bin/bash
 
-export DIR=`dirname $(readlink -f $0)`
+SCRIPT=$(readlink -f "$0")
+DIR=$(dirname "$SCRIPT")
 export OUT="$DIR/target/docker-entrypoint-initdb.d"
 
-cd $DIR
-mkdir -p $OUT
+cd "$DIR"
+mkdir -p "$OUT"
 
 type mysql-workbench 1> /dev/null || exit 1 # MySQL workbench is not installed
 
