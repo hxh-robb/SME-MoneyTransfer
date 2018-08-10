@@ -1,7 +1,4 @@
 ## Local profile
-robb:
-  test: ${JDBC_URL:"jdbc:mysql://mariadb:3306/sme"}
-
 spring:
   profiles:
     active: local
@@ -64,9 +61,9 @@ spring:
 
   ## MariaDB
   datasource:
-    url: ${JDBC_URL:"jdbc:mysql://mariadb:3306/sme"}
-    username: ${JDBC_USER:"dev"}
-    password: ${JDBC_PASS:"devpass"}
+    url: ${JDBC_URL:jdbc:mysql://mariadb:3306/sme}
+    username: ${JDBC_USER:dev}
+    password: ${JDBC_PASS:devpass}
 
   ## MongoDB
   data:
