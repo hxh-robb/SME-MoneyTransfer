@@ -3,9 +3,11 @@ services:
   sme-mts:
     image: "sme-mts:0.0.0"
 #    environment:
-#      - "JDBC_URL=jdbc:mysql://mariadb:3306/platform"
+#      - "JDBC_URL=jdbc:mysql://mariadb:8066/platform"
 #      - "JDBC_USER=puser01"
-#      - "JDBC_PASS=password_1234"
+#      - "JDBC_PASS=Password_1234"
+#    env_file:
+#      - /sme/sme-mts.env
     ports:
       - "18080:8080"
     volumes:
