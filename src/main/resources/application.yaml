@@ -1,4 +1,7 @@
 ## Local profile
+robb:
+  test: ${JDBC_URL:"jdbc:mysql://mariadb:3306/sme"}
+
 spring:
   profiles:
     active: local
@@ -8,7 +11,7 @@ spring:
     name: sme-mts
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/sme??characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/sme?characterEncoding=utf8
     username: dev
     password: devpass
     hikari:
@@ -61,9 +64,9 @@ spring:
 
   ## MariaDB
   datasource:
-    url: jdbc:mysql://mariadb:3306/sme
-    username: dev
-    password: devpass
+    url: ${JDBC_URL:"jdbc:mysql://mariadb:3306/sme"}
+    username: ${JDBC_USER:"dev"}
+    password: ${JDBC_PASS:"devpass"}
 
   ## MongoDB
   data:
