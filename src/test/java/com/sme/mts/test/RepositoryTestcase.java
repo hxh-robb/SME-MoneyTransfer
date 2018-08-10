@@ -40,7 +40,7 @@ public abstract class RepositoryTestcase<D extends Data,F extends DataAccessObje
     private void doInitData(PlatformRelatedEntity data) {
         if( null == data ) return;
         doInitData((Entity)data);
-        data.setPlatform(data.getId().toCharArray()[1]+"");
+        data.setPlatform(RandomUtils.nextLong(1000,10000));
     }
 
     protected void initData(Data data){

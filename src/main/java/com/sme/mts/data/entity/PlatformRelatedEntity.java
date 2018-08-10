@@ -10,13 +10,13 @@ public class PlatformRelatedEntity extends Entity {
     /**
      * 实体所属平台
      */
-    protected String platform;
+    protected Long platform;
 
-    public String getPlatform() {
+    public Long getPlatform() {
         return platform;
     }
 
-    public void setPlatform(String platform) {
+    public void setPlatform(Long platform) {
         this.platform = platform;
     }
 
