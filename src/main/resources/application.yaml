@@ -61,7 +61,7 @@ spring:
 
   ## MariaDB
   datasource:
-    url: ${JDBC_URL:jdbc:mysql://mariadb:3306/sme}
+    url: ${JDBC_URL:jdbc:mysql://mariadb:3306/sme?characterEncoding=utf8}
     username: ${JDBC_USER:dev}
     password: ${JDBC_PASS:devpass}
 
