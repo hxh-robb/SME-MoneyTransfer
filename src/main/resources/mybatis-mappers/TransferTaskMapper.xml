@@ -40,8 +40,8 @@
 
   <insert id="create">
     insert into mts_transfer_task (
-      id, co, uo,
-      platform,
+      <include refid="Common.EntityInsertionColumns" />
+      <include refid="Common.PlatformRelatedEntityInsertionColumns" />
       type, beneficiary, amount, status, state, retry, fallback, ref, fund_account
     ) values (
       #{id}, #{co}, #{uo},

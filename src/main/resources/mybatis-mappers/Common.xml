@@ -16,6 +16,10 @@
     t.id, t.ct, t.ts, t.de, t.co, t.uo
   </sql>
 
+  <sql id="EntityInsertionColumns">
+    id, co, uo,
+  </sql>
+
   <sql id="EntityFilter">
     <!-- Entity filter -->
     <if test="filter.id != null">and t.id = #{filter.id}</if>
@@ -30,20 +34,24 @@
   </sql>
 
   <resultMap id="PlatformRelatedEntity" type="PlatformRelatedEntity" extends="Entity">
-    <result property="platform" column="platform"/>
+    <result property="platform" column="platform_id"/>
   </resultMap>
 
   <sql id="PlatformRelatedEntityColumns">
-    t.platform
+    t.platform_id
+  </sql>
+
+  <sql id="PlatformRelatedEntityInsertionColumns">
+    platform_id,
   </sql>
 
   <sql id="PlatformRelatedEntityFilter">
     <!-- PlatformRelatedEntity filter -->
-    <if test="filter.platform != null">and t.platform = #{filter.platform}</if>
+    <if test="filter.platform != null">and t.platform_id = #{filter.platform}</if>
   </sql>
 
   <sql id="PlatformRelatedEntityUpdateFields">
     <!-- Entity updatable field -->
-    <if test="data.platform != null">platform = #{data.platform},</if>
+    <if test="data.platform != null">platform_id = #{data.platform},</if>
   </sql>
 </mapper>
